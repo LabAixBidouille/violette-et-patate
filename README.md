@@ -18,5 +18,5 @@ Réalisation du livre : L.A.B, Laboratoire d'Aix-périmentation et de Bidouille.
 
 ## Livret imprimé
 
-`python3 source/construire_livret.py` compose le livret (pages de 124 × 186 mm, texte en 11 pt, renvois avec numéros de page) et l'imposition sur A4 paysage pour un cahier agrafé. Les PDF sont écrits dans le dossier `Impression` du livre, hors du dépôt. Il faut Google Chrome, `pdftotext` (poppler-utils) et le module Python `pypdf`.
+`python3 source/construire_livret.py` compose le livret (pages de 124 × 186 mm, texte en 11 pt, renvois avec numéros de page) et l'imposition sur A4 paysage pour un cahier agrafé. Les PDF sont écrits dans le dossier `Impression` du livre, hors du dépôt. `python3 source/construire_de.py` produit à part le dé à fabriquer, sur une page A5. Il faut Google Chrome, `pdftotext` (poppler-utils) et le module Python `pypdf`.
 
