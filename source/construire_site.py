@@ -372,6 +372,8 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   gap: 1.6em;
 }
 .de-texte { flex: 1; min-width: 0; }
+/* Flèche dessinée à la main qui montre le dé */
+.fleche-de { flex: none; width: 3.2em; height: auto; margin-right: -0.6em; transform: translateY(-0.4em); }
 /* Le résultat s'affiche sous le dé sans compter dans la hauteur : le dé reste fixe,
    exactement au milieu du bloc consigne et choix */
 .lancer {
@@ -444,7 +446,8 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   text-align: center;
 }
 @media (max-width: 600px) {
-  .de { gap: 1em; }
+  .de { gap: 0.6em; }
+  .fleche-de { width: 2.2em; }
   .de-virtuel { width: 3.6em; height: 3.6em; padding: 0.4em; }
   .de-virtuel i { width: 0.6em; height: 0.6em; }
   .de-virtuel[data-face="0"]::after { font-size: 2em; }
@@ -605,6 +608,9 @@ SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
 DE_VIRTUEL = (
+    '<svg class="fleche-de" viewBox="0 0 60 40" aria-hidden="true"><g fill="none" stroke="#ff6a00" '
+    'stroke-width="3" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M4 30 C16 34 34 30 48 16"/><path d="M38 14 L49 15 L47 26"/></g></svg>'
     '<div class="lancer"><button class="de-virtuel" type="button" data-face="0" '
     'aria-label="Lancer le dé">' + "<i></i>" * 9 + '</button>'
     '<span class="resultat" aria-live="polite"></span></div>'
@@ -667,6 +673,9 @@ def passage_chapitre(ch):
     if consigne:
         # Sur les vrais tirages, un dé à lancer à droite du bloc consigne et choix ; il montre la face sans choisir
         lancer = DE_VIRTUEL if tirage else ""
+        if tirage:
+            # Sur le site, on lance le dé en cliquant dessus : la consigne le dit, une flèche le montre
+            consigne = consigne.replace("Lance le dé", "Clique sur le dé", 1)
         suite.append(f'<div class="de"><div class="de-texte"><span class="consigne">{consigne}</span>'
                      f'<div class="choix">{"".join(choix)}</div></div>{lancer}</div>')
     elif choix:
