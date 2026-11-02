@@ -101,8 +101,8 @@ tw-passage {
 /* Pages de lecture : le texte à gauche, l'illustration à droite, comme pour La Lune de Rambo */
 .page {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 3.5em;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2em;
   align-items: start;
 }
 .cote {
@@ -361,6 +361,92 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px var(--orange), 0 6px 0 3px var(--violet);
 }
 
+/* Dé à lancer sur le site : à droite du bloc consigne et choix, face blanche, contour violet,
+   points orange ; il montre une face au repos et ne choisit jamais à la place du lecteur */
+.de {
+  display: flex;
+  align-items: center;
+  gap: 1.6em;
+}
+.de-texte { flex: 1; min-width: 0; }
+/* Le résultat s'affiche sous le dé sans compter dans la hauteur : le dé reste fixe,
+   exactement au milieu du bloc consigne et choix */
+.lancer {
+  flex: none;
+  position: relative;
+  display: flex;
+}
+.de-virtuel {
+  width: 4.6em;
+  height: 4.6em;
+  padding: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  background: #ffffff;
+  border: 3px solid var(--violet);
+  border-radius: 0.8em;
+  box-shadow: 0 4px 0 var(--orange);
+  cursor: pointer;
+  transform: rotate(-5deg);
+  transition: transform 0.15s ease;
+}
+.de-virtuel:hover { transform: rotate(5deg); }
+.de-virtuel.roule { animation: roule 0.3s linear infinite; }
+@keyframes roule {
+  0% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(180deg) translateY(-3px); }
+  100% { transform: rotate(360deg) translateY(0); }
+}
+.de-virtuel i {
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 50%;
+  background: var(--orange);
+  place-self: center;
+  visibility: hidden;
+}
+/* Avant le premier lancer : un point d'interrogation orange, centré comme les points */
+.de-virtuel { position: relative; }
+.de-virtuel[data-face="0"]::after {
+  content: "?";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 0.15em;
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-size: 2.6em;
+  line-height: 1;
+  color: var(--orange);
+}
+.de-virtuel[data-face="1"] i:nth-child(5),
+.de-virtuel[data-face="2"] i:is(:nth-child(1), :nth-child(9)),
+.de-virtuel[data-face="3"] i:is(:nth-child(1), :nth-child(5), :nth-child(9)),
+.de-virtuel[data-face="4"] i:is(:nth-child(1), :nth-child(3), :nth-child(7), :nth-child(9)),
+.de-virtuel[data-face="5"] i:is(:nth-child(1), :nth-child(3), :nth-child(5), :nth-child(7), :nth-child(9)),
+.de-virtuel[data-face="6"] i:is(:nth-child(1), :nth-child(3), :nth-child(4), :nth-child(6), :nth-child(7), :nth-child(9)) {
+  visibility: visible;
+}
+.resultat {
+  position: absolute;
+  top: calc(100% + 0.6em);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.1em;
+  color: var(--gris);
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .de { gap: 1em; }
+  .de-virtuel { width: 3.6em; height: 3.6em; padding: 0.4em; }
+  .de-virtuel i { width: 0.6em; height: 0.6em; }
+  .de-virtuel[data-face="0"]::after { font-size: 2em; }
+}
+
 /* Lien de téléchargement du dé */
 .telecharger {
   display: flex;
@@ -538,6 +624,35 @@ def lire_chapitres():
 SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
+DE_VIRTUEL = (
+    '<div class="lancer"><button class="de-virtuel" type="button" data-face="0" '
+    'aria-label="Lancer le dé">' + "<i></i>" * 9 + '</button>'
+    '<span class="resultat" aria-live="polite"></span></div>'
+)
+
+# Script commun à toutes les pages : fait rouler le dé puis affiche la face tirée, sans choisir
+SCRIPT_DE = """
+document.addEventListener('click', function (evenement) {
+  var de = evenement.target.closest('.de-virtuel');
+  if (!de || de.classList.contains('roule')) return;
+  var resultat = de.parentNode.querySelector('.resultat');
+  var face = 1 + Math.floor(Math.random() * 6);
+  var etapes = 0;
+  de.classList.add('roule');
+  resultat.textContent = '';
+  var minuterie = setInterval(function () {
+    de.setAttribute('data-face', 1 + Math.floor(Math.random() * 6));
+    etapes += 1;
+    if (etapes >= 8) {
+      clearInterval(minuterie);
+      de.setAttribute('data-face', face);
+      de.classList.remove('roule');
+      resultat.textContent = 'Le dé affiche ' + face + '.';
+    }
+  }, 75);
+});
+"""
+
 TELECHARGER_DE = (
     '<div class="telecharger"><a href="outils/VioletteEtPatate_De.pdf" target="_blank" download>'
     'Télécharger le dé à fabriquer</a><span>À imprimer avant de partir : une page A5, à découper.</span></div>'
@@ -550,6 +665,7 @@ def lien(texte, cible):
 
 def passage_chapitre(ch):
     corps = []
+    tirage = any(p.startswith("**Lance le dé") for p in ch["paragraphes"])
     consigne = None
     choix = []
     fin = False
@@ -578,8 +694,10 @@ def passage_chapitre(ch):
     if not appel:
         suite.append(SEPARATEUR)
     if consigne:
-        suite.append(f'<div class="de"><span class="consigne">{consigne}</span>'
-                     f'<div class="choix">{"".join(choix)}</div></div>')
+        # Sur les vrais tirages, un dé à lancer à droite du bloc consigne et choix ; il montre la face sans choisir
+        lancer = DE_VIRTUEL if tirage else ""
+        suite.append(f'<div class="de"><div class="de-texte"><span class="consigne">{consigne}</span>'
+                     f'<div class="choix">{"".join(choix)}</div></div>{lancer}</div>')
     elif choix:
         # Un renvoi seul, sans lancer de dé, devient un gros bouton comme « Montre-moi tes bêtises ! »
         suite.append(f'<div class="choix suite elan">{"".join(choix)}</div>')
@@ -685,7 +803,7 @@ def construire():
            f'format="Harlowe" format-version="3.3.9" ifid="{str(uuid.uuid5(uuid.NAMESPACE_URL, TITRE)).upper()}" '
            'options="" tags="" zoom="1" hidden>',
            f'<style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">{CSS}</style>',
-           '<script role="script" id="twine-user-script" type="text/twine-javascript"></script>']
+           '<script role="script" id="twine-user-script" type="text/twine-javascript">' + SCRIPT_DE + '</script>']
     for pid, (nom, tags, contenu) in enumerate(passages, start=1):
         xml.append(f'<tw-passagedata pid="{pid}" name="{e(nom)}" tags="{tags}" '
                    f'position="{pid * 150},0" size="100,100">{e(contenu)}</tw-passagedata>')
