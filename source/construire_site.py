@@ -101,20 +101,27 @@ tw-passage {
   gap: 3.5em;
   align-items: start;
 }
-.illustration {
+.cote {
   position: sticky;
-  top: 2em;
+  top: 1.5em;
   margin-top: 2.5em;
 }
+/* L'image est limitée en hauteur pour que l'illustration et les choix tiennent dans l'écran */
 .illustration img {
   display: block;
   width: 100%;
-  height: auto;
+  max-height: 52vh;
+  object-fit: contain;
   mix-blend-mode: multiply;
 }
+.cote .separateur { margin-top: 0.8em; }
 @media (max-width: 800px) {
   .page { grid-template-columns: minmax(0, 1fr); gap: 1.2em; }
-  .illustration { position: static; order: -1; margin-top: 0; }
+  /* Sur téléphone : l'illustration en haut, le texte, puis les choix */
+  .cote { display: contents; }
+  .illustration { order: -1; }
+  .illustration img { max-height: none; }
+  .suite-page { order: 1; }
 }
 tw-sidebar { display: none; }
 
@@ -513,27 +520,29 @@ def passage_chapitre(ch):
         else:
             corps.append(p)
 
-    morceaux = ['<div class="page"><div class="texte">',
-                f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
-                f'<span class="titre">{ch["titre"]}</span></h1>']
-    morceaux[-1] += "\n\n".join(corps)
-    if not appel:
-        morceaux.append(SEPARATEUR)
-    if consigne:
-        morceaux.append(f'<div class="de"><span class="consigne">{consigne}</span>'
-                        f'<div class="choix">{"".join(choix)}</div></div>')
-    elif choix:
-        # Un renvoi seul, sans lancer de dé, devient un gros bouton comme « Montre-moi tes bêtises ! »
-        morceaux.append(f'<div class="choix suite elan">{"".join(choix)}</div>')
-    if fin:
-        morceaux.append('<div class="fin"><span class="mot-fin">FIN</span>'
-                        f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
-    morceaux.append("</div>")
+    texte = ('<div class="texte">'
+             f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
+             f'<span class="titre">{ch["titre"]}</span></h1>'
+             + "\n\n".join(corps) + "</div>")
+    # Colonne de droite : l'illustration, puis les choix ou la fin, toujours visibles ensemble
+    cote = []
     image = f"images/chapitres/{illustration(ch['nom'])}.jpg"
     if (RACINE / image).exists():
-        morceaux.append(f'<div class="illustration"><img src="{image}" alt="{ch["titre"]}"></div>')
-    morceaux.append("</div>")
-    return morceaux[0] + morceaux[1] + "".join(morceaux[2:])
+        cote.append(f'<div class="illustration"><img src="{image}" alt="{ch["titre"]}"></div>')
+    suite = []
+    if not appel:
+        suite.append(SEPARATEUR)
+    if consigne:
+        suite.append(f'<div class="de"><span class="consigne">{consigne}</span>'
+                     f'<div class="choix">{"".join(choix)}</div></div>')
+    elif choix:
+        # Un renvoi seul, sans lancer de dé, devient un gros bouton comme « Montre-moi tes bêtises ! »
+        suite.append(f'<div class="choix suite elan">{"".join(choix)}</div>')
+    if fin:
+        suite.append('<div class="fin"><span class="mot-fin">FIN</span>'
+                     f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
+    cote.append(f'<div class="suite-page">{"".join(suite)}</div>')
+    return f'<div class="page">{texte}<div class="cote">{"".join(cote)}</div></div>'
 
 
 def illustration(nom):
