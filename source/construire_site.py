@@ -173,14 +173,14 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 }
 .garde-corps {
   display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
   gap: 3em;
   align-items: center;
 }
 .garde-image img {
   display: block;
   width: 100%;
-  max-height: 53vh;
+  max-height: 60vh;
   object-fit: contain;
   height: auto;
   mix-blend-mode: multiply;
@@ -399,13 +399,9 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 
 /* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
 .arbre {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1400px, 96vw);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
-  gap: 2.5em;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+  gap: 3.5em;
   align-items: start;
 }
 .arbre-texte {
@@ -440,10 +436,6 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 
 /* Page de contexte : le texte à gauche, les fiches des autrices à droite */
 .contexte {
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(1180px, 96vw);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   gap: 3em;
@@ -490,6 +482,16 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   tw-story { font-size: 0.98em; }
   .garde .grand-titre { font-size: 2.9em; }
   .chapitre .titre { font-size: 1.7em; }
+}
+
+/* Écrans peu hauts : on resserre le résumé et les espacements pour que tout tienne */
+@media (max-height: 620px) and (min-width: 801px) {
+  tw-story:has(.garde) { padding-top: 0.6em; padding-bottom: 0.6em; }
+  .garde { min-height: calc(100vh - 1.4em); gap: 0.6em; }
+  .garde .synopsis { font-size: 0.84em; line-height: 1.45; }
+  .garde .separateur { margin: 0.5em 0; }
+  .garde .secondaires { margin-top: 0.6em; }
+  .garde-image img { max-height: 54vh; }
 }
 """
 
