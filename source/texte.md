@@ -149,8 +149,8 @@ Je redescends, j'enlève une feuille de mes tresses et je vais jusqu'à son nouv
 
 **Lance le dé pour découvrir la suite de la poursuite :**
 
-- 2, 4 ou 6 : poursuis au chapitre 10. -> 10
-- 1, 3 ou 5 : poursuis au chapitre 9. -> 9
+- Un nombre pair : poursuis au chapitre 10. -> 10
+- Un nombre impair : poursuis au chapitre 9. -> 9
 
 ## Chapitre 9. Encore raté ?
 
