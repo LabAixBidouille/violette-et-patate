@@ -7,7 +7,6 @@ index.html : seules les pages et la feuille de style du livre sont régénérée
 Usage, depuis la racine du dépôt : python3 source/construire_site.py
 """
 import html
-import random
 import re
 import uuid
 from pathlib import Path
@@ -221,36 +220,29 @@ tw-sidebar { display: none; }
   color: var(--encre);
   margin-bottom: 0.5em;
 }
-/* Choix en autocollants : blancs à fin bord orange, légèrement penchés,
-   qui se remplissent d'orange au survol */
+/* Choix en liste à puces, comme pour La Lune de Rambo */
 .choix {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.2em;
+  gap: 0.45em;
+}
+.choix > *::before {
+  content: "•";
+  color: var(--orange);
+  font-weight: 800;
+  margin-right: 0.55em;
 }
 .choix tw-link, .choix .enchantment-link {
-  display: inline-block;
-  font-family: "Luckiest Guy", "Impact", sans-serif;
-  font-weight: 400;
-  font-size: 1.05em;
-  letter-spacing: 0.03em;
-  line-height: 1.3;
   color: var(--violet);
-  background-color: #ffffff;
-  border: 1.5px solid var(--orange);
-  border-radius: 14px;
-  padding: 0.5em 1.1em 0.35em;
-  box-shadow: 2px 3px 0 rgba(43, 47, 58, 0.12);
-  transform: rotate(var(--inclinaison, -1deg));
-  transition: background-color 0.15s ease, color 0.15s ease;
+  font-weight: 700;
+  border-bottom: 1.5px solid rgba(123, 79, 176, 0.35);
 }
-/* Chaque autocollant a son inclinaison, tirée au hasard à la construction ; tous restent alignés à gauche */
 .choix tw-link:hover, .choix .enchantment-link:hover {
-  color: #ffffff;
-  background-color: var(--orange);
-  border-style: solid;
+  color: var(--violet-fonce);
+  border-bottom-color: var(--orange);
 }
+.elan > *::before { content: none; }
 .suite {
   margin-top: 0.8em;
 }
@@ -454,13 +446,6 @@ def lire_chapitres():
 SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
-def autocollant(contenu, graine):
-    """Enveloppe un choix avec une inclinaison propre, stable d'une construction à l'autre."""
-    hasard = random.Random(graine)
-    inclinaison = hasard.choice((-1, 1)) * hasard.uniform(0.5, 1.4)
-    return f'<span class="autocollant" style="--inclinaison: {inclinaison:.1f}deg">{contenu}</span>'
-
-
 def lien(texte, cible):
     return f"[[{texte}->{cible}]]"
 
@@ -476,7 +461,7 @@ def passage_chapitre(ch):
         if p.startswith("- "):
             for ligne in p.split("\n"):
                 texte, cible = ligne[2:].rsplit(" -> ", 1)
-                choix.append(autocollant(lien(texte, f"Chapitre {cible}"), f'{ch["nom"]}-{len(choix)}'))
+                choix.append(lien(texte, f"Chapitre {cible}"))
                 suites.append(texte)
         elif p == "FIN":
             fin = True
