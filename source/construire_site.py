@@ -512,9 +512,7 @@ def passage_contexte():
         + '<div class="visuels">'
         '<img src="images/fiches/fiche_recit.jpg" alt="La fiche récit remplie par Eva et Brune">'
         '<img src="images/fiches/fiche_personnage_violette.jpg" alt="La fiche personnage de Violette">'
-        '<img class="large" src="images/fiches/fiche_personnage_patate.jpg" alt="La fiche personnage de Patate, avec son portrait">'
         '<img class="pleine" src="images/fiches/fiche_situation_4.jpg" alt="La fiche situation n° 4, avec ses choix au dé">'
-        '<img class="pleine" src="images/fiches/fiche_situation_5.jpg" alt="La fiche situation n° 5, avec ses choix au dé">'
         '<span class="legende">Les fiches remplies par Eva et Brune pendant l\'atelier</span></div>\n</div>'
     )
 
