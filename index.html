@@ -75,6 +75,9 @@ tw-passage {
   .suite-page { order: 1; }
 }
 tw-sidebar { display: none; }
+/* Harlowe met « overflow: hidden » sur tw-story, ce qui empêche la colonne de droite de rester
+   visible au défilement ; « clip » coupe pareil sans créer de zone de défilement */
+tw-story { overflow: clip; }
 
 /* Titres de chapitre : le numéro écrit à la main, le titre en lettres de bande dessinée */
 .chapitre {
