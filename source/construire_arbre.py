@@ -18,7 +18,8 @@ TEXTE = RACINE / "source" / "texte.md"
 SORTIE = RACINE / "images" / "arbre.svg"
 POLICE = RACINE / "fonts" / "Nunito.woff2"
 
-ORANGE, ORANGE_CLAIR, BLEU, VERT, ENCRE = "#fd7e14", "#fff1e3", "#356bac", "#6c9e23", "#2b2f3a"
+# Couleurs des illustrations du livre
+CORAIL, JAUNE_CLAIR, VIOLET, MENTHE, ENCRE = "#e8705c", "#fff4cc", "#7b4fb0", "#3f9c80", "#2b2f3a"
 LARGEUR, HAUTEUR = 1200, 2720
 L_CASE, H_CASE = 230, 66
 
@@ -83,7 +84,7 @@ def lire_texte():
     return titres, renvois
 
 
-def couper(texte, largeur=26):
+def couper(texte, largeur=23):
     lignes, ligne = [], ""
     for mot in texte.split():
         if ligne and len(ligne) + 1 + len(mot) > largeur:
@@ -97,42 +98,45 @@ def couper(texte, largeur=26):
 def case(cle, titre):
     cx, haut = CASES[cle]
     x = cx - L_CASE / 2
-    contour = VERT if cle in FINS else BLEU
+    contour = MENTHE if cle in FINS else VIOLET
     svg = [f'<rect x="{x}" y="{haut}" width="{L_CASE}" height="{H_CASE}" rx="12" fill="#fff" stroke="{contour}" stroke-width="2.5"/>']
     lignes = couper(titre)
-    y0 = haut + H_CASE / 2 - (len(lignes) - 1) * 9.5 + 5
+    if len(lignes) > 2:
+        lignes = couper(titre, 27)
+    taille, interligne = (17, 18) if len(lignes) < 3 else (14.5, 15.5)
+    y0 = haut + H_CASE / 2 - (len(lignes) - 1) * interligne / 2 + 6
     for i, l in enumerate(lignes):
-        svg.append(f'<text x="{cx}" y="{y0 + i * 19}" font-size="15" text-anchor="middle" fill="{ENCRE}">{html.escape(l)}</text>')
+        svg.append(f'<text x="{cx}" y="{y0 + i * interligne}" font-size="{taille}" text-anchor="middle" fill="{ENCRE}">{html.escape(l)}</text>')
     etiquette = "Prologue" if cle == "P" else str(cle)
     lb = 76 if cle == "P" else (30 if cle < 10 else 36)
-    svg.append(f'<rect x="{x + 8}" y="{haut - 11}" width="{lb}" height="22" rx="11" fill="{ORANGE}"/>')
+    svg.append(f'<rect x="{x + 8}" y="{haut - 11}" width="{lb}" height="22" rx="11" fill="{CORAIL}"/>')
     svg.append(f'<text x="{x + 8 + lb / 2}" y="{haut + 5}" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">{etiquette}</text>')
     if cle in FINS:
-        svg.append(f'<text x="{cx}" y="{haut + H_CASE + 34}" font-size="24" font-weight="800" text-anchor="middle" fill="{VERT}">FIN</text>')
+        svg.append(f'<text x="{cx}" y="{haut + H_CASE + 34}" font-size="24" font-weight="800" text-anchor="middle" fill="{MENTHE}">FIN</text>')
     return "\n".join(svg)
 
 
 def icone(cle):
     cx, haut = CASES[cle]
     y = haut + H_CASE + 8
-    svg = [f'<line x1="{cx}" y1="{haut + H_CASE}" x2="{cx}" y2="{y}" stroke="{BLEU}" stroke-width="2"/>',
-           f'<rect x="{cx - 13}" y="{y}" width="26" height="26" rx="6" fill="{ORANGE_CLAIR}" stroke="{ORANGE}" stroke-width="2"/>']
+    svg = [f'<line x1="{cx}" y1="{haut + H_CASE}" x2="{cx}" y2="{y}" stroke="{VIOLET}" stroke-width="2"/>',
+           f'<rect x="{cx - 13}" y="{y}" width="26" height="26" rx="6" fill="{JAUNE_CLAIR}" stroke="{CORAIL}" stroke-width="2"/>']
     if ICONES[cle] == "de":
         for dx, dy in ((-6, -6), (0, 0), (6, 6)):
-            svg.append(f'<circle cx="{cx + dx}" cy="{y + 13 + dy}" r="2.6" fill="{ORANGE}"/>')
+            svg.append(f'<circle cx="{cx + dx}" cy="{y + 13 + dy}" r="2.6" fill="{CORAIL}"/>')
     else:
-        svg.append(f'<text x="{cx}" y="{y + 19}" font-size="17" font-weight="800" text-anchor="middle" fill="{ORANGE}">?</text>')
-    svg.append(f'<line x1="{cx}" y1="{y + 26}" x2="{cx}" y2="{y + 36}" stroke="{BLEU}" stroke-width="2"/>')
+        svg.append(f'<text x="{cx}" y="{y + 19}" font-size="17" font-weight="800" text-anchor="middle" fill="{CORAIL}">?</text>')
+    svg.append(f'<line x1="{cx}" y1="{y + 26}" x2="{cx}" y2="{y + 36}" stroke="{VIOLET}" stroke-width="2"/>')
     return "\n".join(svg)
 
 
 def fleche(points, etiquettes):
     trace = " ".join(f"{x},{y}" for x, y in points)
-    svg = [f'<polyline points="{trace}" fill="none" stroke="{BLEU}" stroke-width="2" marker-end="url(#pointe)"/>']
+    svg = [f'<polyline points="{trace}" fill="none" stroke="{VIOLET}" stroke-width="2" marker-end="url(#pointe)"/>']
     for texte, x, y in etiquettes:
-        largeur = 7.4 * len(texte) + 18
-        svg.append(f'<rect x="{x - largeur / 2}" y="{y - 11}" width="{largeur}" height="22" rx="11" fill="#fff" stroke="{BLEU}" stroke-width="1.5"/>')
-        svg.append(f'<text x="{x}" y="{y + 4.5}" font-size="13" text-anchor="middle" fill="{BLEU}">{html.escape(texte)}</text>')
+        largeur = 8.2 * len(texte) + 18
+        svg.append(f'<rect x="{x - largeur / 2}" y="{y - 11}" width="{largeur}" height="22" rx="11" fill="#fff" stroke="{VIOLET}" stroke-width="1.5"/>')
+        svg.append(f'<text x="{x}" y="{y + 5}" font-size="15" text-anchor="middle" fill="{VIOLET}">{html.escape(texte)}</text>')
     return "\n".join(svg)
 
 
@@ -145,7 +149,7 @@ def construire():
     police = base64.b64encode(POLICE.read_bytes()).decode()
     svg = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {LARGEUR} {HAUTEUR}" width="{LARGEUR}" height="{HAUTEUR}" font-family="Nunito, sans-serif">',
            f'<defs><style>@font-face{{font-family:"Nunito";font-weight:400 800;src:url(data:font/woff2;base64,{police}) format("woff2");}}</style>',
-           f'<marker id="pointe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{BLEU}"/></marker></defs>']
+           f'<marker id="pointe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{VIOLET}"/></marker></defs>']
     svg += [fleche(t, e) for _, _, t, e in FLECHES]
     svg += [icone(c) for c in ICONES]
     svg += [case(c, titres[c]) for c in CASES]
