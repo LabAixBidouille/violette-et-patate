@@ -447,28 +447,6 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   .de-virtuel[data-face="0"]::after { font-size: 2em; }
 }
 
-/* Lien de téléchargement du dé */
-.telecharger {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 0.5em 1em;
-  margin: 0 0 1em;
-}
-.telecharger a {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 0.9em;
-  color: var(--violet);
-  border: 2px solid var(--violet);
-  border-radius: 999px;
-  padding: 0.3em 1em;
-  text-decoration: none;
-}
-.telecharger a::before { content: "⬇ "; }
-.telecharger a:hover { background-color: var(--violet); color: #ffffff; }
-.telecharger span { font-size: 0.85em; font-style: italic; color: var(--gris); }
-
 /* Fins */
 .fin {
   margin-top: 0.6em;
@@ -653,12 +631,6 @@ document.addEventListener('click', function (evenement) {
 });
 """
 
-TELECHARGER_DE = (
-    '<div class="telecharger"><a href="outils/VioletteEtPatate_De.pdf" target="_blank" download>'
-    'Télécharger le dé à fabriquer</a><span>À imprimer avant de partir : une page A5, à découper.</span></div>'
-)
-
-
 def lien(texte, cible):
     return f"[[{texte}->{cible}]]"
 
@@ -686,9 +658,6 @@ def passage_chapitre(ch):
                 appel = True
         else:
             corps.append(p)
-            # Là où Violette parle du dé, on propose de le télécharger
-            if "lance le dé qui se trouve" in p:
-                corps.append(TELECHARGER_DE)
 
     suite = []
     if not appel:

@@ -4,7 +4,7 @@
 Patron de cube en croix, faces de 29 mm : deux faces opposées font toujours 7. Les traits pleins
 se découpent, les pointillés se plient, les languettes lavande se collent.
 
-Produit Impression/VioletteEtPatate_De.pdf et sa copie outils/ pour le site. Nécessite Google Chrome.
+Produit Impression/VioletteEtPatate_De.pdf, pour accompagner le livret (le site a son dé à lancer). Nécessite Google Chrome.
 Usage, depuis la racine du dépôt : python3 source/construire_de.py
 """
 import sys
@@ -17,7 +17,6 @@ from construire_site import AUTRICES, TITRE  # noqa: E402
 
 RACINE = Path(__file__).resolve().parent.parent
 SORTIE = RACINE.parent / "Impression" / "VioletteEtPatate_De.pdf"
-EN_LIGNE = RACINE / "outils" / "VioletteEtPatate_De.pdf"
 
 FACE = 29          # côté d'une face, en mm
 LANGUETTE = 7      # profondeur des languettes, en mm
@@ -115,9 +114,6 @@ h1 { font-family: "Luckiest Guy"; font-weight: 400; font-size: 22pt; color: #7b4
         source = Path(dossier) / "de.html"
         source.write_text(page, encoding="utf-8")
         imprimer(source, SORTIE)
-    # Copie servie par le site (bouton « Télécharger le dé à fabriquer » du chapitre 1)
-    EN_LIGNE.parent.mkdir(exist_ok=True)
-    EN_LIGNE.write_bytes(SORTIE.read_bytes())
     print(SORTIE)
 
 
