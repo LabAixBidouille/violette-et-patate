@@ -21,7 +21,7 @@
 :root {
   --violet: #7b4fb0;
   --violet-fonce: #5b3590;
-  --corail: #e8705c;
+  --corail: #e0442f;
   --menthe: #3f9c80;
   --menthe-clair: #a8dcc9;
   --jaune: #f4c430;
@@ -188,16 +188,16 @@ tw-sidebar { display: none; }
   gap: 0.7em;
   margin: 1.5em 0 1em;
 }
+.separateur::after { transform: scaleX(-1); }
 .separateur::before, .separateur::after {
   content: "";
-  width: 3.5em;
-  height: 2px;
-  border-radius: 2px;
-  background-color: var(--menthe-clair);
+  width: 6.5em;
+  height: 22px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22'%3E%3Cpath d='M0 16 C8 16 16 14 16 8 C16 2 9 2 9 8 C9 14 17 16 26 16' fill='none' stroke='%233f9c80' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left center;
 }
 .separateur .lunettes {
-  width: 2.6em;
-  height: 1em;
+  width: 3.2em;
+  height: 1.25em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%237b3fa0' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
 .garde .separateur { margin: 1em 0 0; }
@@ -267,13 +267,20 @@ tw-sidebar { display: none; }
   color: var(--gris);
 }
 
-/* Page de l'arbre, plus large que le texte */
+/* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
 .arbre {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1100px, 94vw);
-  text-align: center;
+  width: min(1400px, 96vw);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+  gap: 2.5em;
+  align-items: start;
+}
+.arbre-texte {
+  position: sticky;
+  top: 2em;
 }
 .arbre h1 {
   font-family: "Luckiest Guy", "Impact", sans-serif;
@@ -289,28 +296,37 @@ tw-sidebar { display: none; }
   font-family: "Gochi Hand", cursive;
   font-size: 1.3em;
   color: var(--gris);
-  margin: 0.2em 0 1em;
-}
-.arbre .intro-arbre {
-  max-width: 40em;
-  margin: 0 auto;
+  margin: 0.3em 0 1em;
 }
 .arbre img {
   display: block;
   width: 100%;
-  max-width: 1100px;
   height: auto;
-  margin: 1.5em auto 0.5em;
+}
+@media (max-width: 800px) {
+  .arbre { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1.5em; }
+  .arbre-texte { position: static; }
 }
 
-/* Fiches des autrices sur la page de contexte */
-.visuels {
-  margin-top: 2em;
+/* Page de contexte : le texte à gauche, les fiches des autrices à droite */
+.contexte {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1180px, 96vw);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 3em;
+  align-items: start;
+}
+.visuels {
+  margin-top: 4em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1em;
 }
-.visuels .pleine { grid-column: 1 / -1; }
+.visuels .pleine, .visuels .legende { grid-column: 1 / -1; }
+.visuels .large { grid-column: 1 / -1; width: 55%; margin: 0 auto; }
 .visuels img {
   display: block;
   width: 100%;
@@ -319,17 +335,17 @@ tw-sidebar { display: none; }
   box-shadow: 0 2px 10px rgba(43, 47, 58, 0.15);
 }
 .visuels img:nth-child(1) { transform: rotate(-1.5deg); }
-.visuels img:nth-child(3) { transform: rotate(1.5deg); }
+.visuels img:nth-child(2) { transform: rotate(1.5deg); }
 .legende {
   display: block;
-  margin-top: 0.6em;
   font-family: "Gochi Hand", cursive;
   font-size: 1.15em;
   color: var(--gris);
   text-align: center;
 }
-@media (max-width: 600px) {
-  .visuels { grid-template-columns: 1fr 1fr; }
+@media (max-width: 800px) {
+  .contexte { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1em; }
+  .visuels { margin-top: 0; }
 }
 
 /* Liens dans le texte */
@@ -345,7 +361,7 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   .garde .grand-titre { font-size: 2.9em; }
   .chapitre .titre { font-size: 1.7em; }
 }
-</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Bouton couverture" tags="header" position="150,0" size="100,100">(unless: (passage:)&#x27;s name is &quot;Page de garde&quot;)[&lt;div class=&quot;retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;]</tw-passagedata><tw-passagedata pid="2" name="Page de garde" tags="" position="300,0" size="100,100">&lt;div class=&quot;garde&quot;&gt;&lt;span class=&quot;surtitre&quot;&gt;Une histoire dont le lecteur est le héros&lt;/span&gt;&lt;div class=&quot;grand-titre&quot;&gt;Violette et Patate&lt;/div&gt;&lt;span class=&quot;nom-auteur&quot;&gt;Eva et Brune&lt;/span&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;synopsis&quot;&gt;Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Elle s&#x27;en sert pour faire des bêtises, surtout pour faire brûler les tartes de toute la ville. Ce matin, elle part dans la forêt attraper un corbeau. Mais elle a oublié ses lunettes, le corbeau bouge dans le temps arrêté, et un bébé venu de la Lune lui a volé ses diamants. Qui va gagner : la farceuse ou le bébé ?&lt;/div&gt;&lt;div class=&quot;commencer&quot;&gt;[[Commencer l&#x27;histoire-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]] [[L&#x27;arbre de l&#x27;histoire-&gt;L&#x27;arbre de l&#x27;histoire]]&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Comment est née cette histoire" tags="" position="450,0" size="100,100">&lt;div class=&quot;contexte&quot;&gt;
+</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="Bouton couverture" tags="header" position="150,0" size="100,100">(unless: (passage:)&#x27;s name is &quot;Page de garde&quot;)[&lt;div class=&quot;retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;]</tw-passagedata><tw-passagedata pid="2" name="Page de garde" tags="" position="300,0" size="100,100">&lt;div class=&quot;garde&quot;&gt;&lt;span class=&quot;surtitre&quot;&gt;Une histoire dont le lecteur est le héros&lt;/span&gt;&lt;div class=&quot;grand-titre&quot;&gt;Violette et Patate&lt;/div&gt;&lt;span class=&quot;nom-auteur&quot;&gt;Eva et Brune&lt;/span&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;synopsis&quot;&gt;Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Elle s&#x27;en sert pour faire des bêtises, surtout pour faire brûler les tartes de toute la ville. Ce matin, elle part dans la forêt attraper un corbeau. Mais elle a oublié ses lunettes, le corbeau bouge dans le temps arrêté, et un bébé venu de la Lune lui a volé ses diamants. Qui va gagner : la farceuse ou le bébé ?&lt;/div&gt;&lt;div class=&quot;commencer&quot;&gt;[[Commencer l&#x27;histoire-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]] [[L&#x27;arbre de l&#x27;histoire-&gt;L&#x27;arbre de l&#x27;histoire]]&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Comment est née cette histoire" tags="" position="450,0" size="100,100">&lt;div class=&quot;contexte&quot;&gt;&lt;div class=&quot;contexte-texte&quot;&gt;
 &lt;h1&gt;Comment est née cette histoire&lt;/h1&gt;Le mardi 27 octobre 2026, pendant les vacances d&#x27;automne, le L.A.B a animé l&#x27;atelier « Le livre dont tu es le héros » à la bibliothèque des Deux Ormes, l&#x27;une des bibliothèques Méjanes d&#x27;Aix-en-Provence. Huit enfants de 8 à 12 ans y ont inventé une histoire qui change selon les choix du lecteur, en l&#x27;écrivant situation par situation sur des fiches où chaque lancer de dé renvoie vers une autre situation. L&#x27;atelier est issu du projet européen Robots Meet Arts : derrière le récit, il s&#x27;agit de découvrir sans écran les notions qui structurent un programme informatique. Chaque lancer de dé est une condition, qui décide de la suite de l&#x27;histoire. Chaque choix ouvre un embranchement, et un chemin qui ramène à une situation déjà écrite forme une boucle.
 
 Écrire une telle histoire demande un travail créatif considérable. Il faut inventer un personnage et une quête, mais aussi penser l&#x27;histoire comme un réseau : prévoir à chaque étape plusieurs suites possibles, numéroter les situations, s&#x27;assurer que chaque chemin mène quelque part, et faire tenir tous ces fils ensemble sans perdre le sens du récit.
@@ -358,8 +374,8 @@ Pour offrir à chaque enfant un livre achevé, dont il ou elle puisse être fier
 
 &lt;span class=&quot;credits&quot;&gt;Une histoire d&#x27;Eva et Brune. Réalisation du livre : L.A.B, Laboratoire d&#x27;Aix-périmentation et de Bidouille.&lt;/span&gt;
 
-&lt;div class=&quot;secondaires&quot;&gt;[[Commencer le livre-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;visuels&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;La fiche récit remplie par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_violette.jpg&quot; alt=&quot;La fiche personnage de Violette&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_patate.jpg&quot; alt=&quot;La fiche personnage de Patate, avec son portrait&quot;&gt;&lt;img class=&quot;pleine&quot; src=&quot;images/fiches/fiche_situation_3.jpg&quot; alt=&quot;La fiche situation n° 3, avec ses choix au dé&quot;&gt;&lt;/div&gt;&lt;span class=&quot;legende&quot;&gt;Les fiches remplies par Eva et Brune pendant l&#x27;atelier&lt;/span&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="L&#x27;arbre de l&#x27;histoire" tags="" position="600,0" size="100,100">&lt;div class=&quot;arbre&quot;&gt;&lt;h1&gt;Violette et Patate&lt;/h1&gt;&lt;span class=&quot;arbre-sous-titre&quot;&gt;Tous les chemins de l&#x27;histoire imaginée par Eva et Brune&lt;/span&gt;&lt;div class=&quot;intro-arbre&quot;&gt;Un arbre de décision est un schéma qui montre toutes les suites possibles d&#x27;une histoire, ou d&#x27;un programme informatique. Chaque case est une étape, ici un chapitre, et chaque flèche part d&#x27;une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les flèches, on vérifie qu&#x27;aucun chemin ne mène nulle part : c&#x27;est grâce à cet outil que chaque parcours de //Violette et Patate// conduit bien à une fin.&lt;/div&gt;&lt;img src=&quot;images/arbre.svg&quot; alt=&quot;L&#x27;arbre de toutes les branches de l&#x27;histoire&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Prologue" tags="" position="750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Prologue&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Moi, Violette, apprentie farceuse&lt;/span&gt;&lt;/h1&gt;Bonjour, moi c&#x27;est Violette.
+&lt;div class=&quot;secondaires&quot;&gt;[[Commencer le livre-&gt;Prologue]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;visuels&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;La fiche récit remplie par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_violette.jpg&quot; alt=&quot;La fiche personnage de Violette&quot;&gt;&lt;img class=&quot;large&quot; src=&quot;images/fiches/fiche_personnage_patate.jpg&quot; alt=&quot;La fiche personnage de Patate, avec son portrait&quot;&gt;&lt;img class=&quot;pleine&quot; src=&quot;images/fiches/fiche_situation_4.jpg&quot; alt=&quot;La fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;img class=&quot;pleine&quot; src=&quot;images/fiches/fiche_situation_5.jpg&quot; alt=&quot;La fiche situation n° 5, avec ses choix au dé&quot;&gt;&lt;span class=&quot;legende&quot;&gt;Les fiches remplies par Eva et Brune pendant l&#x27;atelier&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="L&#x27;arbre de l&#x27;histoire" tags="" position="600,0" size="100,100">&lt;div class=&quot;arbre&quot;&gt;&lt;div class=&quot;arbre-texte&quot;&gt;&lt;h1&gt;Violette et Patate&lt;/h1&gt;&lt;span class=&quot;arbre-sous-titre&quot;&gt;Tous les chemins de l&#x27;histoire imaginée par Eva et Brune&lt;/span&gt;&lt;div class=&quot;intro-arbre&quot;&gt;Un arbre de décision est un schéma qui montre toutes les suites possibles d&#x27;une histoire, ou d&#x27;un programme informatique. Chaque case est une étape, ici un chapitre, et chaque flèche part d&#x27;une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les flèches, on vérifie qu&#x27;aucun chemin ne mène nulle part : c&#x27;est grâce à cet outil que chaque parcours de //Violette et Patate// conduit bien à une fin.&lt;/div&gt;&lt;/div&gt;&lt;img src=&quot;images/arbre.svg&quot; alt=&quot;L&#x27;arbre de toutes les branches de l&#x27;histoire&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Prologue" tags="" position="750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Prologue&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Moi, Violette, apprentie farceuse&lt;/span&gt;&lt;/h1&gt;Bonjour, moi c&#x27;est Violette.
 
 J&#x27;ai dix ans, deux tresses, un sweat, un jean, des baskets et des lunettes. Pas n&#x27;importe quelles lunettes : quand je les remonte sur mon nez, clac, le temps s&#x27;arrête. Les gens restent figés, les oiseaux restent collés au ciel, et moi, je fais ce que je veux.
 

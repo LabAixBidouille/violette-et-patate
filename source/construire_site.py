@@ -70,7 +70,7 @@ CSS = """
 :root {
   --violet: #7b4fb0;
   --violet-fonce: #5b3590;
-  --corail: #e8705c;
+  --corail: #e0442f;
   --menthe: #3f9c80;
   --menthe-clair: #a8dcc9;
   --jaune: #f4c430;
@@ -237,16 +237,16 @@ tw-sidebar { display: none; }
   gap: 0.7em;
   margin: 1.5em 0 1em;
 }
+.separateur::after { transform: scaleX(-1); }
 .separateur::before, .separateur::after {
   content: "";
-  width: 3.5em;
-  height: 2px;
-  border-radius: 2px;
-  background-color: var(--menthe-clair);
+  width: 6.5em;
+  height: 22px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='22'%3E%3Cpath d='M0 16 C8 16 16 14 16 8 C16 2 9 2 9 8 C9 14 17 16 26 16' fill='none' stroke='%233f9c80' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left center;
 }
 .separateur .lunettes {
-  width: 2.6em;
-  height: 1em;
+  width: 3.2em;
+  height: 1.25em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%237b3fa0' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
 .garde .separateur { margin: 1em 0 0; }
@@ -316,13 +316,20 @@ tw-sidebar { display: none; }
   color: var(--gris);
 }
 
-/* Page de l'arbre, plus large que le texte */
+/* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
 .arbre {
   position: relative;
   left: 50%;
   transform: translateX(-50%);
-  width: min(1100px, 94vw);
-  text-align: center;
+  width: min(1400px, 96vw);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.6fr);
+  gap: 2.5em;
+  align-items: start;
+}
+.arbre-texte {
+  position: sticky;
+  top: 2em;
 }
 .arbre h1 {
   font-family: "Luckiest Guy", "Impact", sans-serif;
@@ -338,28 +345,37 @@ tw-sidebar { display: none; }
   font-family: "Gochi Hand", cursive;
   font-size: 1.3em;
   color: var(--gris);
-  margin: 0.2em 0 1em;
-}
-.arbre .intro-arbre {
-  max-width: 40em;
-  margin: 0 auto;
+  margin: 0.3em 0 1em;
 }
 .arbre img {
   display: block;
   width: 100%;
-  max-width: 1100px;
   height: auto;
-  margin: 1.5em auto 0.5em;
+}
+@media (max-width: 800px) {
+  .arbre { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1.5em; }
+  .arbre-texte { position: static; }
 }
 
-/* Fiches des autrices sur la page de contexte */
-.visuels {
-  margin-top: 2em;
+/* Page de contexte : le texte à gauche, les fiches des autrices à droite */
+.contexte {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1180px, 96vw);
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 3em;
+  align-items: start;
+}
+.visuels {
+  margin-top: 4em;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1em;
 }
-.visuels .pleine { grid-column: 1 / -1; }
+.visuels .pleine, .visuels .legende { grid-column: 1 / -1; }
+.visuels .large { grid-column: 1 / -1; width: 55%; margin: 0 auto; }
 .visuels img {
   display: block;
   width: 100%;
@@ -368,17 +384,17 @@ tw-sidebar { display: none; }
   box-shadow: 0 2px 10px rgba(43, 47, 58, 0.15);
 }
 .visuels img:nth-child(1) { transform: rotate(-1.5deg); }
-.visuels img:nth-child(3) { transform: rotate(1.5deg); }
+.visuels img:nth-child(2) { transform: rotate(1.5deg); }
 .legende {
   display: block;
-  margin-top: 0.6em;
   font-family: "Gochi Hand", cursive;
   font-size: 1.15em;
   color: var(--gris);
   text-align: center;
 }
-@media (max-width: 600px) {
-  .visuels { grid-template-columns: 1fr 1fr; }
+@media (max-width: 800px) {
+  .contexte { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1em; }
+  .visuels { margin-top: 0; }
 }
 
 /* Liens dans le texte */
@@ -482,29 +498,30 @@ def passage_garde():
 
 def passage_contexte():
     return (
-        '<div class="contexte">\n<h1>Comment est née cette histoire</h1>'
+        '<div class="contexte"><div class="contexte-texte">\n<h1>Comment est née cette histoire</h1>'
         + "\n\n".join(CONTEXTE)
         + f'\n\n<span class="credits">Une histoire d\'{AUTRICES}. Réalisation du livre : L.A.B, '
         "Laboratoire d'Aix-périmentation et de Bidouille.</span>\n\n"
-        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div>'
+        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div></div>'
         + '<div class="visuels">'
         '<img src="images/fiches/fiche_recit.jpg" alt="La fiche récit remplie par Eva et Brune">'
         '<img src="images/fiches/fiche_personnage_violette.jpg" alt="La fiche personnage de Violette">'
-        '<img src="images/fiches/fiche_personnage_patate.jpg" alt="La fiche personnage de Patate, avec son portrait">'
-        '<img class="pleine" src="images/fiches/fiche_situation_3.jpg" alt="La fiche situation n° 3, avec ses choix au dé">'
-        '</div><span class="legende">Les fiches remplies par Eva et Brune pendant l\'atelier</span>\n</div>'
+        '<img class="large" src="images/fiches/fiche_personnage_patate.jpg" alt="La fiche personnage de Patate, avec son portrait">'
+        '<img class="pleine" src="images/fiches/fiche_situation_4.jpg" alt="La fiche situation n° 4, avec ses choix au dé">'
+        '<img class="pleine" src="images/fiches/fiche_situation_5.jpg" alt="La fiche situation n° 5, avec ses choix au dé">'
+        '<span class="legende">Les fiches remplies par Eva et Brune pendant l\'atelier</span></div>\n</div>'
     )
 
 
 def passage_arbre():
     return (
-        f'<div class="arbre"><h1>{TITRE}</h1>'
+        f'<div class="arbre"><div class="arbre-texte"><h1>{TITRE}</h1>'
         f'<span class="arbre-sous-titre">Tous les chemins de l\'histoire imaginée par {AUTRICES}</span>'
         '<div class="intro-arbre">Un arbre de décision est un schéma qui montre toutes les suites possibles '
         "d'une histoire, ou d'un programme informatique. Chaque case est une étape, ici un chapitre, et chaque "
         "flèche part d'une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les "
         "flèches, on vérifie qu'aucun chemin ne mène nulle part : c'est grâce à cet outil que chaque parcours "
-        f"de //{TITRE}// conduit bien à une fin.</div>"
+        f"de //{TITRE}// conduit bien à une fin.</div></div>"
         '<img src="images/arbre.svg" alt="L\'arbre de toutes les branches de l\'histoire"></div>'
     )
 
