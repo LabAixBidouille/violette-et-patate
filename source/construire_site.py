@@ -65,12 +65,12 @@ CSS = """
 @font-face { font-family: "Nunito"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/Nunito-italique.woff2") format("woff2"); }
 @font-face { font-family: "Gochi Hand"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/GochiHand.woff2") format("woff2"); }
 
-/* Couleurs des illustrations : violet du sweat et des lunettes, corail de la table,
+/* Couleurs des illustrations : violet du sweat et des lunettes, orange vif pour les accents,
    menthe du bol, jaune de l'étoile, fond lavande */
 :root {
   --violet: #7b4fb0;
   --violet-fonce: #5b3590;
-  --corail: #e0442f;
+  --orange: #ff6a00;
   --menthe: #3f9c80;
   --menthe-clair: #a8dcc9;
   --jaune: #f4c430;
@@ -107,7 +107,7 @@ tw-sidebar { display: none; }
   font-family: "Gochi Hand", cursive;
   font-size: 1.35em;
   color: #ffffff;
-  background-color: var(--corail);
+  background-color: var(--orange);
   padding: 0.05em 0.6em 0.1em;
   border-radius: 0.4em;
   transform: rotate(-3deg);
@@ -120,7 +120,7 @@ tw-sidebar { display: none; }
   font-size: 2.1em;
   letter-spacing: 0.02em;
   color: var(--violet);
-  text-shadow: 3px 3px 0 var(--lavande);
+  text-shadow: 2px 2px 0 var(--orange);
 }
 
 /* Page de garde */
@@ -140,8 +140,8 @@ tw-sidebar { display: none; }
   font-family: "Luckiest Guy", "Impact", sans-serif;
   font-size: 4.2em;
   line-height: 1;
-  color: var(--corail);
-  text-shadow: 4px 4px 0 var(--violet);
+  color: var(--violet);
+  text-shadow: 4px 4px 0 var(--orange);
   margin: 0.15em 0 0.1em;
   transform: rotate(-2deg);
 }
@@ -161,7 +161,7 @@ tw-sidebar { display: none; }
   font-size: 1.5em;
   letter-spacing: 0.03em;
   color: #ffffff;
-  background-color: var(--corail);
+  background-color: var(--orange);
   border: none;
   border-radius: 999px;
   padding: 0.45em 1.4em 0.3em;
@@ -262,7 +262,7 @@ tw-sidebar { display: none; }
   font-size: 1.45em;
   letter-spacing: 0.03em;
   color: #ffffff;
-  background-color: var(--corail);
+  background-color: var(--orange);
   border: none;
   border-radius: 999px;
   padding: 0.45em 1.3em 0.3em;
@@ -271,7 +271,7 @@ tw-sidebar { display: none; }
 }
 .elan tw-link:hover, .elan .enchantment-link:hover {
   color: #ffffff;
-  background-color: var(--corail);
+  background-color: var(--orange);
   transform: rotate(2deg) scale(1.05);
 }
 
@@ -299,7 +299,7 @@ tw-sidebar { display: none; }
 .appel {
   font-family: "Gochi Hand", cursive;
   font-size: 1.4em;
-  color: var(--corail);
+  color: var(--orange);
 }
 
 /* Page « Comment est née cette histoire » */
@@ -315,6 +315,8 @@ tw-sidebar { display: none; }
   font-size: 0.92em;
   color: var(--gris);
 }
+
+.couverture-arbre { margin-top: 1.4em; }
 
 /* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
 .arbre {
@@ -336,8 +338,8 @@ tw-sidebar { display: none; }
   font-weight: 400;
   font-size: 2.4em;
   line-height: 1.1;
-  color: var(--corail);
-  text-shadow: 3px 3px 0 var(--violet);
+  color: var(--violet);
+  text-shadow: 3px 3px 0 var(--orange);
   margin: 0;
 }
 .arbre .arbre-sous-titre {
@@ -521,7 +523,8 @@ def passage_arbre():
         "d'une histoire, ou d'un programme informatique. Chaque case est une étape, ici un chapitre, et chaque "
         "flèche part d'une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les "
         "flèches, on vérifie qu'aucun chemin ne mène nulle part : c'est grâce à cet outil que chaque parcours "
-        f"de //{TITRE}// conduit bien à une fin.</div></div>"
+        f"de //{TITRE}// conduit bien à une fin.</div>"
+        f'<div class="secondaires couverture-arbre">{lien("Couverture", "Page de garde")}</div></div>'
         '<img src="images/arbre.svg" alt="L\'arbre de toutes les branches de l\'histoire"></div>'
     )
 
@@ -541,7 +544,8 @@ def construire():
 
     passages = [
         ("Bouton couverture", "header",
-         '(unless: (passage:)\'s name is "Page de garde")[<div class="retour">[[Couverture->Page de garde]]</div>]'),
+         '(unless: (a: "Page de garde", "L\'arbre de l\'histoire") contains (passage:)\'s name)'
+         '[<div class="retour">[[Couverture->Page de garde]]</div>]'),
         ("Page de garde", "", passage_garde()),
         ("Comment est née cette histoire", "", passage_contexte()),
         ("L'arbre de l'histoire", "", passage_arbre()),
