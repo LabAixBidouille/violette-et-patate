@@ -90,8 +90,31 @@ tw-story {
   padding: 4em 1.25em 4em;
 }
 tw-passage {
-  max-width: 42em;
+  max-width: 1180px;
   margin: 0 auto;
+}
+
+/* Pages de lecture : le texte à gauche, l'illustration à droite, comme pour La Lune de Rambo */
+.page {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 3.5em;
+  align-items: start;
+}
+.illustration {
+  position: sticky;
+  top: 2em;
+  margin-top: 2.5em;
+}
+.illustration img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+@media (max-width: 800px) {
+  .page { grid-template-columns: minmax(0, 1fr); gap: 1.2em; }
+  .illustration { position: static; order: -1; margin-top: 0; }
 }
 tw-sidebar { display: none; }
 
@@ -125,11 +148,25 @@ tw-sidebar { display: none; }
 
 /* Page de garde */
 .garde {
-  min-height: calc(100vh - 7em);
+  min-height: calc(100vh - 8em);
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 3em;
+  align-items: center;
+}
+.garde-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  mix-blend-mode: multiply;
+}
+.garde-texte {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   text-align: center;
+}
+@media (max-width: 800px) {
+  .garde { grid-template-columns: minmax(0, 1fr); gap: 1em; min-height: 0; }
 }
 .garde .surtitre {
   font-family: "Gochi Hand", cursive;
@@ -197,7 +234,6 @@ tw-sidebar { display: none; }
 /* Lien Couverture : discret, en haut à gauche, au-dessus du numéro de chapitre */
 .retour {
   margin: 0 auto 1.2em;
-  max-width: 42em;
   text-align: left;
 }
 .retour tw-link, .retour .enchantment-link,
@@ -477,7 +513,7 @@ def passage_chapitre(ch):
         else:
             corps.append(p)
 
-    morceaux = ['<div class="page">',
+    morceaux = ['<div class="page"><div class="texte">',
                 f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
                 f'<span class="titre">{ch["titre"]}</span></h1>']
     morceaux[-1] += "\n\n".join(corps)
@@ -493,19 +529,30 @@ def passage_chapitre(ch):
         morceaux.append('<div class="fin"><span class="mot-fin">FIN</span>'
                         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
     morceaux.append("</div>")
+    image = f"images/chapitres/{illustration(ch['nom'])}.jpg"
+    if (RACINE / image).exists():
+        morceaux.append(f'<div class="illustration"><img src="{image}" alt="{ch["titre"]}"></div>')
+    morceaux.append("</div>")
     return morceaux[0] + morceaux[1] + "".join(morceaux[2:])
+
+
+def illustration(nom):
+    """Nom du fichier d'illustration : prologue, chapitre-01, chapitre-02…"""
+    return "prologue" if nom == "Prologue" else f"chapitre-{int(nom.split()[-1]):02d}"
 
 
 def passage_garde():
     return (
-        '<div class="garde"><span class="surtitre">Une histoire dont le lecteur est le héros</span>'
+        '<div class="garde"><div class="garde-image"><img src="images/couverture.jpg" '
+        'alt="Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l\'attend"></div>'
+        '<div class="garde-texte"><span class="surtitre">Une histoire dont le lecteur est le héros</span>'
         f'<div class="grand-titre">{TITRE}</div>'
         f'<span class="nom-auteur">{AUTRICES}</span>{SEPARATEUR}'
         f'<div class="synopsis">{SYNOPSIS}</div>'
         f'<div class="commencer">{lien("Commencer l'histoire", "Prologue")}</div>'
         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")} '
         f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")}</div>'
-        "</div>"
+        "</div></div>"
     )
 
 
