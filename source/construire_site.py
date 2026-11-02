@@ -24,11 +24,11 @@ TITRE = "Violette et Patate"
 AUTRICES = "Eva et Brune"
 
 SYNOPSIS = (
-    "Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Elle s'en sert pour "
-    "faire des bêtises, surtout pour faire brûler les tartes de toute la ville. Ce matin, elle part "
-    "dans la forêt attraper un corbeau. Mais elle a oublié ses lunettes, le corbeau bouge dans le "
-    "temps arrêté, et un bébé venu de la Lune lui a volé ses diamants. Qui va gagner : la farceuse "
-    "ou le bébé ?"
+    "Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Son passe-temps "
+    "préféré ? Faire des bêtises, évidemment !\n\n"
+    "Mais quand elle rencontre un corbeau grincheux et Patate, un bébé venu de la Lune, l'aventure "
+    "prend un drôle de tournant… Entre diamants volés, tartes brûlées et sucette extraordinaire, "
+    "une chose est sûre : le calme n'est pas près de revenir !"
 )
 
 CONTEXTE = [
