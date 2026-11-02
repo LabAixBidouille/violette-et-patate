@@ -15,9 +15,9 @@ RACINE = Path(__file__).resolve().parent.parent
 TEXTE = RACINE / "source" / "texte.md"
 SORTIE = RACINE / "index.html"
 NOINDEX = '<meta name="robots" content="noindex, nofollow, noarchive">'
-# Favicon : les lunettes violettes de Violette
-FAVICON = ('<link rel="icon" type="image/svg+xml" href="images/favicon.svg">'
-           '<link rel="icon" type="image/png" href="images/favicon.png">'
+# Favicon : les lunettes violettes de Violette, dessinées par Manon
+FAVICON = ('<link rel="icon" type="image/png" sizes="48x48" href="images/favicon-48.png">'
+           '<link rel="icon" type="image/png" sizes="180x180" href="images/favicon.png">'
            '<link rel="apple-touch-icon" href="images/favicon.png">')
 
 TITRE = "Violette et Patate"
