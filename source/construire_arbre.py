@@ -19,8 +19,9 @@ SORTIE = RACINE / "images" / "arbre.svg"
 POLICE = RACINE / "fonts" / "Nunito.woff2"
 
 # Couleurs des illustrations du livre
-CORAIL, JAUNE_CLAIR, VIOLET, MENTHE, ENCRE = "#e8705c", "#fff4cc", "#7b4fb0", "#3f9c80", "#2b2f3a"
-LARGEUR, HAUTEUR = 1200, 2720
+CORAIL, JAUNE_CLAIR, VIOLET, MENTHE, ENCRE = "#e0442f", "#fff4cc", "#7b4fb0", "#3f9c80", "#2b2f3a"
+# Cadre resserré sur le dessin, de la boucle de gauche à la case 6
+GAUCHE, LARGEUR, HAUTEUR = 85, 1040, 2720
 L_CASE, H_CASE = 230, 66
 
 # Centre horizontal et haut de chaque case
@@ -147,7 +148,7 @@ def construire():
     assert renvois == dessinees, f"Renvois du texte et flèches de l'arbre différents : {renvois ^ dessinees}"
 
     police = base64.b64encode(POLICE.read_bytes()).decode()
-    svg = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {LARGEUR} {HAUTEUR}" width="{LARGEUR}" height="{HAUTEUR}" font-family="Nunito, sans-serif">',
+    svg = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{GAUCHE} 0 {LARGEUR} {HAUTEUR}" width="{LARGEUR}" height="{HAUTEUR}" font-family="Nunito, sans-serif">',
            f'<defs><style>@font-face{{font-family:"Nunito";font-weight:400 800;src:url(data:font/woff2;base64,{police}) format("woff2");}}</style>',
            f'<marker id="pointe" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="{VIOLET}"/></marker></defs>']
     svg += [fleche(t, e) for _, _, t, e in FLECHES]
