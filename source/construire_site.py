@@ -240,7 +240,8 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   box-shadow: 0 2px 0 var(--violet);
 }
 .garde .secondaires {
-  margin-top: 0;
+  /* compense l'ombre du bouton Commencer, pour que l'écart paraisse le même à l'œil */
+  margin-top: 4px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
