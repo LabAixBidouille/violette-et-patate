@@ -223,7 +223,7 @@ tw-sidebar { display: none; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.9em;
+  gap: 1.2em;
 }
 .choix tw-link, .choix .enchantment-link {
   display: inline-block;
@@ -241,11 +241,7 @@ tw-sidebar { display: none; }
   transform: rotate(var(--inclinaison, -1deg));
   transition: background-color 0.15s ease, color 0.15s ease;
 }
-/* Chaque autocollant a son inclinaison et son décalage, tirés au hasard à la construction */
-.autocollant { margin-left: var(--decalage, 0); }
-@media (max-width: 600px) {
-  .autocollant { margin-left: calc(var(--decalage, 0em) / 3); }
-}
+/* Chaque autocollant a son inclinaison, tirée au hasard à la construction ; tous restent alignés à gauche */
 .choix tw-link:hover, .choix .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
@@ -455,12 +451,10 @@ SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
 def autocollant(contenu, graine):
-    """Enveloppe un choix avec une inclinaison et un décalage propres, stables d'une construction à l'autre."""
+    """Enveloppe un choix avec une inclinaison propre, stable d'une construction à l'autre."""
     hasard = random.Random(graine)
-    inclinaison = hasard.choice((-1, 1)) * hasard.uniform(0.8, 2.6)
-    decalage = hasard.uniform(0, 2.8)
-    return (f'<span class="autocollant" style="--inclinaison: {inclinaison:.1f}deg; '
-            f'--decalage: {decalage:.1f}em">{contenu}</span>')
+    inclinaison = hasard.choice((-1, 1)) * hasard.uniform(0.5, 1.4)
+    return f'<span class="autocollant" style="--inclinaison: {inclinaison:.1f}deg">{contenu}</span>'
 
 
 def lien(texte, cible):
