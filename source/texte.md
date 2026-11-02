@@ -10,6 +10,10 @@ Il y a un an, il m'est arrivé la chose la plus étrange mais aussi la plus gén
 
 Je les ai remontées. Clac ! Le temps s'est arrêté. J'étais la seule à pouvoir bouger. Quand je l'ai relancé, personne ne s'était aperçu de rien. J'ai tout de suite compris que j'allais bien m'amuser.
 
+- Tourne la page. -> 1
+
+## Chapitre 1. Mes petites spécialités
+
 Depuis, j'arrête le temps pour faire des bêtises. Et quand je le relance, les gens ne comprennent pas ce qui leur arrive. À force de chercher des explications, ils finissent par perdre la tête. Moi, je garde la mienne : j'en ai besoin pour inventer ma prochaine farce.
 
 Ma bêtise préférée ? Faire brûler les tartes. Dans ma ville, tout le monde en prépare, tous les jours. Dès que l'une d'elles est au four, clac ! J'arrête le temps. Les cuisiniers se figent, leur minuteur aussi, mais la tarte continue de cuire. Quand tout se remet en marche, ils découvrent qu'elle est noire comme du charbon et se mettent à crier : « VIOLETTE ! » Ils savent très bien que c'est moi, mais ils ne comprennent pas comment je fais. À force, ça les rend fous. Moi, ça me fait beaucoup rire.
@@ -20,9 +24,9 @@ Et je t'emmène avec moi ! Un peu de compagnie, ce sera plus amusant. Tu ne lira
 
 **Tu peux tourner la page. Moi, je suis déjà partie.**
 
-- Tourne la page. -> 1
+- Poursuis au chapitre 2. -> 2
 
-## Chapitre 1. Une tête, deux tresses et zéro lunettes
+## Chapitre 2. Une tête, deux tresses et zéro lunettes
 
 Pour trouver mon corbeau, je quitte ma rue, je traverse le pont et je prends le petit chemin vers la forêt. Petit à petit, les immeubles disparaissent derrière moi. Devant, il y a des arbres. Beaucoup d'arbres. À croire qu'ils se sont tous donné rendez-vous au même endroit.
 
@@ -36,10 +40,10 @@ Bon, pas de panique. Elles ont des pattes, elles peuvent venir toutes seules. Je
 
 **Lance le dé pour aider Violette à retrouver ses lunettes :**
 
-- Un nombre pair : poursuis au chapitre 2. -> 2
-- Un nombre impair : poursuis au chapitre 3. -> 3
+- Un nombre pair : poursuis au chapitre 3. -> 3
+- Un nombre impair : poursuis au chapitre 4. -> 4
 
-## Chapitre 2. Mes lunettes ont des jambes. Et du caractère.
+## Chapitre 3. Mes lunettes ont des jambes. Et du caractère.
 
 Je crie « LUNETTES ! » assez fort pour faire tomber trois feuilles. Un écureuil sort la tête de son trou, me regarde, puis rentre chez lui. Il ne m'aide même pas à les chercher.
 
@@ -53,9 +57,9 @@ Je les pose sur mon nez.
 
 Elles ne répondent pas. Elles boudent. Tant pis, je leur ai dit merci, quand même ! Je quitte le sentier et je m'enfonce dans la forêt. À nous deux, monsieur le corbeau.
 
-- Poursuis au chapitre 6. -> 6
+- Poursuis au chapitre 7. -> 7
 
-## Chapitre 3. Le grand retour de la fille qui oublie tout
+## Chapitre 4. Le grand retour de la fille qui oublie tout
 
 J'appelle mes lunettes. Rien. Elles doivent dormir. Ou bouder. Ou dormir en boudant, ce qui leur ressemble assez.
 
@@ -67,10 +71,10 @@ Me voilà devant chez moi.
 
 **Lance le dé pour découvrir ce qui attend Violette devant chez elle :**
 
-- Un nombre pair : poursuis au chapitre 4. -> 4
-- Un nombre impair : poursuis au chapitre 5. -> 5
+- Un nombre pair : poursuis au chapitre 5. -> 5
+- Un nombre impair : poursuis au chapitre 6. -> 6
 
-## Chapitre 4. Toc, toc. Qui boude ?
+## Chapitre 5. Toc, toc. Qui boude ?
 
 Je fouille une poche. Puis l'autre. J'en sors une vieille noisette, un bout de ficelle et une chaussette. Mais pas de clés.
 
@@ -90,9 +94,9 @@ Long silence. Je crois que mes lunettes réfléchissent à leur vengeance. Enfin
 
 Elles sautent sur mon nez sans un mot. Je récupère mes clés sur la table et je repars vers le pont, puis la forêt. Cette fois, je vérifie que j'ai tout avant de partir. Une fois suffit.
 
-- Poursuis au chapitre 6. -> 6
+- Poursuis au chapitre 7. -> 7
 
-## Chapitre 5. Mirette et l'histoire qui n'en finit pas
+## Chapitre 6. Mirette et l'histoire qui n'en finit pas
 
 J'arrive devant chez moi. Sur le trottoir, une mamie me barre le passage avec un grand sac. Elle a des cheveux gris frisés, un bandeau et un sourire qui prend presque toute la place sur son visage.
 
@@ -104,15 +108,15 @@ Elle me raconte sa naissance, son premier chien, son deuxième chien et les tart
 
 Quand elle arrive à ses vingt ans, il fait nuit. Tant pis pour la forêt, j'irai demain. Justement, mes parents rentrent du travail et nous ouvrent la porte. Je leur présente Mirette. Il est trop tard pour la raccompagner à sa maison de retraite, alors je leur demande si elle peut dormir sur le canapé. Ils sont d'accord. Autant la garder pour la nuit ! À peine installée sur le canapé, Mirette s'endort. Elle ronfle comme une moto. Une très grosse moto.
 
-Le lendemain, je récupère mes lunettes et mes clés sur la table de la cuisine. Mirette dort encore. Je sors sur la pointe des pieds, je ferme la porte à clé et je la laisse dedans.
+Le lendemain, je récupère mes lunettes et mes clés sur la table de la cuisine. Mirette dort encore. Mes parents sont là : je leur demande de lui dire où je suis partie quand elle se réveillera. Puis je sors sur la pointe des pieds.
 
 Bon. Je reviendrai. Sûrement.
 
 Je traverse le pont et je reprends le chemin de la forêt. J'espère que le corbeau n'a pas pris de vacances pendant que Mirette me racontait sa vie.
 
-- Poursuis au chapitre 6. -> 6
+- Poursuis au chapitre 7. -> 7
 
-## Chapitre 6. Ce corbeau refuse de se tenir tranquille
+## Chapitre 7. Ce corbeau refuse de se tenir tranquille
 
 Me voilà dans la forêt, mes lunettes sur le nez. Je cherche entre les branches et, au bout de quelques pas, je le vois enfin : mon corbeau ! Tout noir, tout brillant. Il me regarde comme si c'était moi, l'animal bizarre.
 
@@ -124,16 +128,16 @@ Il bouge. Dans le temps arrêté, il bouge. Ça, ce n'était pas prévu.
 
 Il me fixe de ses petits yeux noirs.
 
-« On m'a déjà volé une fois. Ça suffit. »
+« Tu crois que tu es la seule à avoir rencontré une étoile filante ? La mienne avait un caractère de cochon. Enfin… d'étoile. Et si tu es venue pour me voler, passe ton chemin : on m'a déjà volé une fois. Ça suffit. »
 
 Volé ? Je voudrais bien savoir ce qu'on peut voler à un corbeau. Ses plumes ? Son déjeuner ? Je relance le temps. L'écureuil finit son saut et disparaît dans les fougères.
 
 **Lance le dé pour découvrir comment le corbeau réagit à la présence de Violette :**
 
-- Un nombre pair : poursuis au chapitre 7. -> 7
-- Un nombre impair : poursuis au chapitre 9. -> 9
+- Un nombre pair : poursuis au chapitre 8. -> 8
+- Un nombre impair : poursuis au chapitre 10. -> 10
 
-## Chapitre 7. Branche cassée, dignité envolée
+## Chapitre 8. Branche cassée, dignité envolée
 
 Le corbeau s'envole entre les arbres. Hé ! Je n'ai même pas eu le temps de l'embêter ! Je cours derrière lui. Il ne va pas se débarrasser de moi aussi facilement.
 
@@ -145,19 +149,20 @@ Je redescends, j'enlève une feuille de mes tresses et je vais jusqu'à son nouv
 
 **Lance le dé pour découvrir la suite de la poursuite :**
 
-- 2, 4 ou 6 : poursuis au chapitre 9. -> 9
-- 1, 3 ou 5 : poursuis au chapitre 8. -> 8
+- 2, 4 ou 6 : poursuis au chapitre 10. -> 10
+- 1, 3 ou 5 : poursuis au chapitre 9. -> 9
 
-## Chapitre 8. Encore raté ?
+## Chapitre 9. Encore raté ?
 
 Le corbeau s'envole vers un autre arbre. Je redescends et je le suis. Il est perché là-haut. Je grimpe doucement, sans quitter ses plumes des yeux. Encore un petit effort… Je tends la main.
 
 **Lance le dé pour découvrir la suite de la poursuite :**
 
-- 2, 4 ou 6 : poursuis au chapitre 9. -> 9
-- 1, 3 ou 5 : relis le chapitre 8. -> 8
+- 2, 4 ou 6 : poursuis au chapitre 10. -> 10
+- 1, 3 ou 5 : relis le chapitre 9. -> 9
+- Si tu l'as déjà relu deux fois, poursuis au chapitre 10. -> 10
 
-## Chapitre 9. Un bébé, des diamants et une couche suspecte
+## Chapitre 10. Un bébé, des diamants et une couche suspecte
 
 Le corbeau descend se poser sur une souche, au pied des arbres. Je vais m'asseoir à côté de lui. Voilà, on va pouvoir discuter tranquillement. Enfin, si monsieur arrête de me regarder de travers.
 
@@ -175,10 +180,10 @@ Le corbeau me regarde d'un air méfiant. Il a raison. Je me relève et il s'envo
 
 **Lance le dé pour aider Violette et le corbeau à chercher Patate :**
 
-- Un nombre pair : poursuis au chapitre 10. -> 10
-- Un nombre impair : poursuis au chapitre 11. -> 11
+- Un nombre pair : poursuis au chapitre 11. -> 11
+- Un nombre impair : poursuis au chapitre 12. -> 12
 
-## Chapitre 10. Qui sème des miettes récolte un bébé
+## Chapitre 11. Qui sème des miettes récolte un bébé
 
 On avance entre les arbres et, par terre, je vois des miettes. Des miettes noires, croustillantes, qui sentent le brûlé. Je les reconnaîtrais entre mille : ce sont les miettes de mes tartes.
 
@@ -196,9 +201,9 @@ Il retire sa sucette : elle se transforme en petite cuillère. Il ramasse une mi
 
 Je m'avance vers lui, avec le corbeau sur mes talons. Enfin, presque : il préfère voler.
 
-- Poursuis au chapitre 12. -> 12
+- Poursuis au chapitre 13. -> 13
 
-## Chapitre 11. Une sucette, une cage et beaucoup d'ennuis
+## Chapitre 12. Une sucette, une cage et beaucoup d'ennuis
 
 Avec le corbeau, on avance entre les arbres à la recherche de Patate. Au détour d'un buisson, CLANG ! Une cage dorée tombe sur le corbeau.
 
@@ -212,9 +217,9 @@ Patate me regarde. Je regarde Patate. Il me tire la langue. Sa cage redevient un
 
 Derrière lui, j'aperçois une clairière. Et au milieu : une montagne de diamants ! Je m'avance vers le bébé. Le corbeau me suit, sans quitter la sucette des yeux. Je le comprends un peu.
 
-- Poursuis au chapitre 12. -> 12
+- Poursuis au chapitre 13. -> 13
 
-## Chapitre 12. Saute pour voir !
+## Chapitre 13. Saute pour voir !
 
 Dans la clairière, Patate se plante devant les diamants. Le corbeau me regarde. Patate me regarde. Bon. On dirait que c'est à moi de trouver une idée.
 
@@ -228,10 +233,10 @@ Pour nous échauffer, Patate saute : un, deux, trois… Il est très fort pour u
 
 **Lance le dé pour découvrir comment se termine le concours :**
 
-- Un nombre pair : poursuis au chapitre 14. -> 14
-- Un nombre impair : poursuis au chapitre 13. -> 13
+- Un nombre pair : poursuis au chapitre 15. -> 15
+- Un nombre impair : poursuis au chapitre 14. -> 14
 
-## Chapitre 13. Encore un tour !
+## Chapitre 14. Encore un tour !
 
 Patate se débrouille un peu trop bien à mon goût. Si j'arrêtais le temps juste une seconde ? Le temps de faire quelques sauts de plus, ni vu ni connu…
 
@@ -243,10 +248,11 @@ Je récupère mes lunettes et on recommence. Patate se remet en place, prêt à 
 
 **Lance le dé pour découvrir comment se termine le concours :**
 
-- Un nombre pair : poursuis au chapitre 14. -> 14
-- Un nombre impair : relis le chapitre 13. -> 13
+- Un nombre pair : poursuis au chapitre 15. -> 15
+- Un nombre impair : relis le chapitre 14. -> 14
+- Si tu l'as déjà relu deux fois, poursuis au chapitre 15. -> 15
 
-## Chapitre 14. Une patate sur le dos et deux super gangsters
+## Chapitre 15. Une patate sur le dos et deux super gangsters
 
 Patate saute : un, deux, trois… Au quarante et unième saut, il se prend les pieds dans la corde et tombe sur le dos.
 
@@ -274,9 +280,9 @@ Il hésite. Alors Patate transforme sa sucette en trompette et souffle dedans. U
 
 On remplit un sac pendant que le corbeau range le reste sous son aile.
 
-- Poursuis au chapitre 15. -> 15
+- Poursuis au chapitre 16. -> 16
 
-## Chapitre 15. Une sacrée équipe
+## Chapitre 16. Une sacrée équipe
 
 Patate soulève le sac de diamants comme s'il était rempli de plumes. Je l'aide quand même à le porter. Il ne faudrait pas qu'il tombe encore sur le dos : on y passerait la journée.
 
@@ -304,10 +310,10 @@ Un bébé de la Lune, une fille à lunettes et un sac de diamants : ça fait une
 
 **Lance le dé pour savoir où vont Violette et Patate :**
 
-- Un nombre pair : poursuis au chapitre 17. -> 17
-- Un nombre impair : poursuis au chapitre 16. -> 16
+- Un nombre pair : poursuis au chapitre 18. -> 18
+- Un nombre impair : poursuis au chapitre 17. -> 17
 
-## Chapitre 16. Le tour du monde en quatre-vingts bêtises
+## Chapitre 17. Le tour du monde en quatre-vingts bêtises
 
 Avec un sac de diamants, on peut aller loin. Surtout quand on a un copain dont la sucette se transforme en montgolfière ! On grimpe dans la nacelle et hop, la clairière devient toute petite sous nos pieds.
 
@@ -339,9 +345,9 @@ Patate prend les commandes. Il tourne un bouton, puis un autre. La nacelle fait 
 
 Je crois qu'on a encore quelques détails à régler. Mais pour une première journée de super gangsters, on s'est plutôt bien débrouillés. On atterrit dans la forêt, près du sentier. Il ne nous reste plus qu'à rentrer à pied.
 
-- Poursuis au chapitre 17. -> 17
+- Poursuis au chapitre 18. -> 18
 
-## Chapitre 17. J'ai comme oublié quelqu'un
+## Chapitre 18. J'ai comme oublié quelqu'un
 
 Avec Patate, on reprend le petit sentier dans l'autre sens, notre sac de diamants à la main. Les arbres disparaissent derrière nous et les immeubles réapparaissent. On traverse le pont : on est bientôt chez moi !
 
@@ -361,10 +367,10 @@ Mais au moment d'entrer, je m'arrête. J'ai l'impression d'avoir oublié quelque
 
 **Te souviens-tu de Mirette ?**
 
-- Si tu l'as rencontrée au chapitre 5, poursuis au chapitre 18. -> 18
-- Sinon, poursuis au chapitre 19. -> 19
+- Si tu l'as rencontrée au chapitre 6, poursuis au chapitre 19. -> 19
+- Sinon, poursuis au chapitre 20. -> 20
 
-## Chapitre 18. Trois colocataires et des tartes impossibles
+## Chapitre 19. Trois colocataires et des tartes impossibles
 
 Je pousse la porte. Mirette est toujours là, dans ma cuisine ! Elle n'a pas l'air fâchée. Elle a même eu le temps de préparer des tartes : des dizaines de tartes, sur la table, sur les chaises, jusque sur le bord de l'évier.
 
@@ -394,7 +400,7 @@ On en est à son troisième chien. Je crois qu'on va avoir besoin d'autres tarte
 
 FIN
 
-## Chapitre 19. Deux gangsters et des tartes en danger
+## Chapitre 20. Deux gangsters et des tartes en danger
 
 J'entre, suivie de Patate. Dans la cuisine, mon bol est toujours sur la table et la vaisselle dans l'évier. Tout est comme je l'ai laissé.
 
