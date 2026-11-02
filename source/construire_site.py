@@ -7,6 +7,7 @@ index.html : seules les pages et la feuille de style du livre sont régénérée
 Usage, depuis la racine du dépôt : python3 source/construire_site.py
 """
 import html
+import random
 import re
 import uuid
 from pathlib import Path
@@ -237,11 +238,14 @@ tw-sidebar { display: none; }
   border-radius: 14px;
   padding: 0.5em 1.1em 0.35em;
   box-shadow: 2px 3px 0 rgba(43, 47, 58, 0.12);
-  transform: rotate(-1deg);
+  transform: rotate(var(--inclinaison, -1deg));
   transition: background-color 0.15s ease, color 0.15s ease;
 }
-/* Harlowe enveloppe chaque lien : on penche dans l'autre sens le lien de la deuxième enveloppe */
-.choix > :nth-child(2) tw-link { transform: rotate(1deg); }
+/* Chaque autocollant a son inclinaison et son décalage, tirés au hasard à la construction */
+.autocollant { margin-left: var(--decalage, 0); }
+@media (max-width: 600px) {
+  .autocollant { margin-left: calc(var(--decalage, 0em) / 3); }
+}
 .choix tw-link:hover, .choix .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
@@ -450,6 +454,15 @@ def lire_chapitres():
 SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
+def autocollant(contenu, graine):
+    """Enveloppe un choix avec une inclinaison et un décalage propres, stables d'une construction à l'autre."""
+    hasard = random.Random(graine)
+    inclinaison = hasard.choice((-1, 1)) * hasard.uniform(0.8, 2.6)
+    decalage = hasard.uniform(0, 2.8)
+    return (f'<span class="autocollant" style="--inclinaison: {inclinaison:.1f}deg; '
+            f'--decalage: {decalage:.1f}em">{contenu}</span>')
+
+
 def lien(texte, cible):
     return f"[[{texte}->{cible}]]"
 
@@ -465,7 +478,7 @@ def passage_chapitre(ch):
         if p.startswith("- "):
             for ligne in p.split("\n"):
                 texte, cible = ligne[2:].rsplit(" -> ", 1)
-                choix.append(lien(texte, f"Chapitre {cible}"))
+                choix.append(autocollant(lien(texte, f"Chapitre {cible}"), f'{ch["nom"]}-{len(choix)}'))
                 suites.append(texte)
         elif p == "FIN":
             fin = True
