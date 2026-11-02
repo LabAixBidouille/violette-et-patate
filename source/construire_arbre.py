@@ -19,7 +19,7 @@ SORTIE = RACINE / "images" / "arbre.svg"
 POLICE = RACINE / "fonts" / "Nunito.woff2"
 
 # Couleurs des illustrations du livre
-CORAIL, JAUNE_CLAIR, VIOLET, MENTHE, ENCRE = "#e0442f", "#fff4cc", "#7b4fb0", "#3f9c80", "#2b2f3a"
+ORANGE, JAUNE_CLAIR, VIOLET, MENTHE, ENCRE = "#ff6a00", "#fff4cc", "#7b4fb0", "#3f9c80", "#2b2f3a"
 # Cadre resserré sur le dessin, de la boucle de gauche à la case 6
 GAUCHE, LARGEUR, HAUTEUR = 85, 1040, 2720
 L_CASE, H_CASE = 230, 66
@@ -110,7 +110,7 @@ def case(cle, titre):
         svg.append(f'<text x="{cx}" y="{y0 + i * interligne}" font-size="{taille}" text-anchor="middle" fill="{ENCRE}">{html.escape(l)}</text>')
     etiquette = "Prologue" if cle == "P" else str(cle)
     lb = 76 if cle == "P" else (30 if cle < 10 else 36)
-    svg.append(f'<rect x="{x + 8}" y="{haut - 11}" width="{lb}" height="22" rx="11" fill="{CORAIL}"/>')
+    svg.append(f'<rect x="{x + 8}" y="{haut - 11}" width="{lb}" height="22" rx="11" fill="{ORANGE}"/>')
     svg.append(f'<text x="{x + 8 + lb / 2}" y="{haut + 5}" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">{etiquette}</text>')
     if cle in FINS:
         svg.append(f'<text x="{cx}" y="{haut + H_CASE + 34}" font-size="24" font-weight="800" text-anchor="middle" fill="{MENTHE}">FIN</text>')
@@ -121,12 +121,12 @@ def icone(cle):
     cx, haut = CASES[cle]
     y = haut + H_CASE + 8
     svg = [f'<line x1="{cx}" y1="{haut + H_CASE}" x2="{cx}" y2="{y}" stroke="{VIOLET}" stroke-width="2"/>',
-           f'<rect x="{cx - 13}" y="{y}" width="26" height="26" rx="6" fill="{JAUNE_CLAIR}" stroke="{CORAIL}" stroke-width="2"/>']
+           f'<rect x="{cx - 13}" y="{y}" width="26" height="26" rx="6" fill="{JAUNE_CLAIR}" stroke="{ORANGE}" stroke-width="2"/>']
     if ICONES[cle] == "de":
         for dx, dy in ((-6, -6), (0, 0), (6, 6)):
-            svg.append(f'<circle cx="{cx + dx}" cy="{y + 13 + dy}" r="2.6" fill="{CORAIL}"/>')
+            svg.append(f'<circle cx="{cx + dx}" cy="{y + 13 + dy}" r="2.6" fill="{ORANGE}"/>')
     else:
-        svg.append(f'<text x="{cx}" y="{y + 19}" font-size="17" font-weight="800" text-anchor="middle" fill="{CORAIL}">?</text>')
+        svg.append(f'<text x="{cx}" y="{y + 19}" font-size="17" font-weight="800" text-anchor="middle" fill="{ORANGE}">?</text>')
     svg.append(f'<line x1="{cx}" y1="{y + 26}" x2="{cx}" y2="{y + 36}" stroke="{VIOLET}" stroke-width="2"/>')
     return "\n".join(svg)
 

@@ -75,162 +75,162 @@
 <rect x="660.5" y="2509" width="59.0" height="22" rx="11" fill="#fff" stroke="#7b4fb0" stroke-width="1.5"/>
 <text x="690" y="2525" font-size="15" text-anchor="middle" fill="#7b4fb0">sinon</text>
 <line x1="560" y1="386" x2="560" y2="394" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="394" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="554" cy="401" r="2.6" fill="#e0442f"/>
-<circle cx="560" cy="407" r="2.6" fill="#e0442f"/>
-<circle cx="566" cy="413" r="2.6" fill="#e0442f"/>
+<rect x="547" y="394" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="554" cy="401" r="2.6" fill="#ff6a00"/>
+<circle cx="560" cy="407" r="2.6" fill="#ff6a00"/>
+<circle cx="566" cy="413" r="2.6" fill="#ff6a00"/>
 <line x1="560" y1="420" x2="560" y2="430" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="860" y1="546" x2="860" y2="554" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="847" y="554" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="854" cy="561" r="2.6" fill="#e0442f"/>
-<circle cx="860" cy="567" r="2.6" fill="#e0442f"/>
-<circle cx="866" cy="573" r="2.6" fill="#e0442f"/>
+<rect x="847" y="554" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="854" cy="561" r="2.6" fill="#ff6a00"/>
+<circle cx="860" cy="567" r="2.6" fill="#ff6a00"/>
+<circle cx="866" cy="573" r="2.6" fill="#ff6a00"/>
 <line x1="860" y1="580" x2="860" y2="590" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="560" y1="866" x2="560" y2="874" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="874" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="554" cy="881" r="2.6" fill="#e0442f"/>
-<circle cx="560" cy="887" r="2.6" fill="#e0442f"/>
-<circle cx="566" cy="893" r="2.6" fill="#e0442f"/>
+<rect x="547" y="874" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="554" cy="881" r="2.6" fill="#ff6a00"/>
+<circle cx="560" cy="887" r="2.6" fill="#ff6a00"/>
+<circle cx="566" cy="893" r="2.6" fill="#ff6a00"/>
 <line x1="560" y1="900" x2="560" y2="910" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="260" y1="1026" x2="260" y2="1034" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="247" y="1034" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="254" cy="1041" r="2.6" fill="#e0442f"/>
-<circle cx="260" cy="1047" r="2.6" fill="#e0442f"/>
-<circle cx="266" cy="1053" r="2.6" fill="#e0442f"/>
+<rect x="247" y="1034" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="254" cy="1041" r="2.6" fill="#ff6a00"/>
+<circle cx="260" cy="1047" r="2.6" fill="#ff6a00"/>
+<circle cx="266" cy="1053" r="2.6" fill="#ff6a00"/>
 <line x1="260" y1="1060" x2="260" y2="1070" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="260" y1="1186" x2="260" y2="1194" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="247" y="1194" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="254" cy="1201" r="2.6" fill="#e0442f"/>
-<circle cx="260" cy="1207" r="2.6" fill="#e0442f"/>
-<circle cx="266" cy="1213" r="2.6" fill="#e0442f"/>
+<rect x="247" y="1194" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="254" cy="1201" r="2.6" fill="#ff6a00"/>
+<circle cx="260" cy="1207" r="2.6" fill="#ff6a00"/>
+<circle cx="266" cy="1213" r="2.6" fill="#ff6a00"/>
 <line x1="260" y1="1220" x2="260" y2="1230" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="560" y1="1356" x2="560" y2="1364" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="1364" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="554" cy="1371" r="2.6" fill="#e0442f"/>
-<circle cx="560" cy="1377" r="2.6" fill="#e0442f"/>
-<circle cx="566" cy="1383" r="2.6" fill="#e0442f"/>
+<rect x="547" y="1364" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="554" cy="1371" r="2.6" fill="#ff6a00"/>
+<circle cx="560" cy="1377" r="2.6" fill="#ff6a00"/>
+<circle cx="566" cy="1383" r="2.6" fill="#ff6a00"/>
 <line x1="560" y1="1390" x2="560" y2="1400" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="560" y1="1676" x2="560" y2="1684" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="1684" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="554" cy="1691" r="2.6" fill="#e0442f"/>
-<circle cx="560" cy="1697" r="2.6" fill="#e0442f"/>
-<circle cx="566" cy="1703" r="2.6" fill="#e0442f"/>
+<rect x="547" y="1684" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="554" cy="1691" r="2.6" fill="#ff6a00"/>
+<circle cx="560" cy="1697" r="2.6" fill="#ff6a00"/>
+<circle cx="566" cy="1703" r="2.6" fill="#ff6a00"/>
 <line x1="560" y1="1710" x2="560" y2="1720" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="260" y1="1836" x2="260" y2="1844" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="247" y="1844" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="254" cy="1851" r="2.6" fill="#e0442f"/>
-<circle cx="260" cy="1857" r="2.6" fill="#e0442f"/>
-<circle cx="266" cy="1863" r="2.6" fill="#e0442f"/>
+<rect x="247" y="1844" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="254" cy="1851" r="2.6" fill="#ff6a00"/>
+<circle cx="260" cy="1857" r="2.6" fill="#ff6a00"/>
+<circle cx="266" cy="1863" r="2.6" fill="#ff6a00"/>
 <line x1="260" y1="1870" x2="260" y2="1880" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="560" y1="2156" x2="560" y2="2164" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="2164" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<circle cx="554" cy="2171" r="2.6" fill="#e0442f"/>
-<circle cx="560" cy="2177" r="2.6" fill="#e0442f"/>
-<circle cx="566" cy="2183" r="2.6" fill="#e0442f"/>
+<rect x="547" y="2164" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<circle cx="554" cy="2171" r="2.6" fill="#ff6a00"/>
+<circle cx="560" cy="2177" r="2.6" fill="#ff6a00"/>
+<circle cx="566" cy="2183" r="2.6" fill="#ff6a00"/>
 <line x1="560" y1="2190" x2="560" y2="2200" stroke="#7b4fb0" stroke-width="2"/>
 <line x1="560" y1="2476" x2="560" y2="2484" stroke="#7b4fb0" stroke-width="2"/>
-<rect x="547" y="2484" width="26" height="26" rx="6" fill="#fff4cc" stroke="#e0442f" stroke-width="2"/>
-<text x="560" y="2503" font-size="17" font-weight="800" text-anchor="middle" fill="#e0442f">?</text>
+<rect x="547" y="2484" width="26" height="26" rx="6" fill="#fff4cc" stroke="#ff6a00" stroke-width="2"/>
+<text x="560" y="2503" font-size="17" font-weight="800" text-anchor="middle" fill="#ff6a00">?</text>
 <line x1="560" y1="2510" x2="560" y2="2520" stroke="#7b4fb0" stroke-width="2"/>
 <rect x="445.0" y="60" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="90.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Moi, Violette,</text>
 <text x="560" y="108.0" font-size="17" text-anchor="middle" fill="#2b2f3a">apprentie farceuse</text>
-<rect x="453.0" y="49" width="76" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="49" width="76" height="22" rx="11" fill="#ff6a00"/>
 <text x="491.0" y="65" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">Prologue</text>
 <rect x="445.0" y="190" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="229.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Mes petites spécialités</text>
-<rect x="453.0" y="179" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="179" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="468.0" y="195" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">1</text>
 <rect x="445.0" y="320" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="350.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Une tête, deux tresses</text>
 <text x="560" y="368.0" font-size="17" text-anchor="middle" fill="#2b2f3a">et zéro lunettes</text>
-<rect x="453.0" y="309" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="309" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="468.0" y="325" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">2</text>
 <rect x="145.0" y="480" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="260" y="510.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Mes lunettes ont des</text>
 <text x="260" y="528.0" font-size="17" text-anchor="middle" fill="#2b2f3a">jambes. Et du caractère.</text>
-<rect x="153.0" y="469" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="153.0" y="469" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="168.0" y="485" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">3</text>
 <rect x="745.0" y="480" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="860" y="510.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Le grand retour de la</text>
 <text x="860" y="528.0" font-size="17" text-anchor="middle" fill="#2b2f3a">fille qui oublie tout</text>
-<rect x="753.0" y="469" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="753.0" y="469" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="768.0" y="485" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">4</text>
 <rect x="625.0" y="640" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="740" y="679.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Toc, toc. Qui boude ?</text>
-<rect x="633.0" y="629" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="633.0" y="629" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="648.0" y="645" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">5</text>
 <rect x="885.0" y="640" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="1000" y="670.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Mirette et l&#x27;histoire</text>
 <text x="1000" y="688.0" font-size="17" text-anchor="middle" fill="#2b2f3a">qui n&#x27;en finit pas</text>
-<rect x="893.0" y="629" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="893.0" y="629" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="908.0" y="645" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">6</text>
 <rect x="445.0" y="800" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="830.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Ce corbeau refuse de se</text>
 <text x="560" y="848.0" font-size="17" text-anchor="middle" fill="#2b2f3a">tenir tranquille</text>
-<rect x="453.0" y="789" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="789" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="468.0" y="805" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">7</text>
 <rect x="145.0" y="960" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="260" y="990.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Branche cassée, dignité</text>
 <text x="260" y="1008.0" font-size="17" text-anchor="middle" fill="#2b2f3a">envolée</text>
-<rect x="153.0" y="949" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="153.0" y="949" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="168.0" y="965" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">8</text>
 <rect x="145.0" y="1120" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="260" y="1159.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Encore raté ?</text>
-<rect x="153.0" y="1109" width="30" height="22" rx="11" fill="#e0442f"/>
+<rect x="153.0" y="1109" width="30" height="22" rx="11" fill="#ff6a00"/>
 <text x="168.0" y="1125" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">9</text>
 <rect x="445.0" y="1290" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="1320.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Un bébé, des diamants</text>
 <text x="560" y="1338.0" font-size="17" text-anchor="middle" fill="#2b2f3a">et une couche suspecte</text>
-<rect x="453.0" y="1279" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="1279" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="471.0" y="1295" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">10</text>
 <rect x="185.0" y="1450" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="300" y="1480.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Qui sème des miettes</text>
 <text x="300" y="1498.0" font-size="17" text-anchor="middle" fill="#2b2f3a">récolte un bébé</text>
-<rect x="193.0" y="1439" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="193.0" y="1439" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="211.0" y="1455" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">11</text>
 <rect x="705.0" y="1450" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="820" y="1480.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Une sucette, une cage</text>
 <text x="820" y="1498.0" font-size="17" text-anchor="middle" fill="#2b2f3a">et beaucoup d&#x27;ennuis</text>
-<rect x="713.0" y="1439" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="713.0" y="1439" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="731.0" y="1455" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">12</text>
 <rect x="445.0" y="1610" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="1649.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Saute pour voir !</text>
-<rect x="453.0" y="1599" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="1599" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="471.0" y="1615" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">13</text>
 <rect x="145.0" y="1770" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="260" y="1809.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Encore un tour !</text>
-<rect x="153.0" y="1759" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="153.0" y="1759" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="171.0" y="1775" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">14</text>
 <rect x="445.0" y="1930" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="1960.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Une patate sur le dos</text>
 <text x="560" y="1978.0" font-size="17" text-anchor="middle" fill="#2b2f3a">et deux super gangsters</text>
-<rect x="453.0" y="1919" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="1919" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="471.0" y="1935" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">15</text>
 <rect x="445.0" y="2090" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="2129.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Une sacrée équipe</text>
-<rect x="453.0" y="2079" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="2079" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="471.0" y="2095" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">16</text>
 <rect x="145.0" y="2250" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="260" y="2280.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Le tour du monde en</text>
 <text x="260" y="2298.0" font-size="17" text-anchor="middle" fill="#2b2f3a">quatre-vingts bêtises</text>
-<rect x="153.0" y="2239" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="153.0" y="2239" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="171.0" y="2255" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">17</text>
 <rect x="445.0" y="2410" width="230" height="66" rx="12" fill="#fff" stroke="#7b4fb0" stroke-width="2.5"/>
 <text x="560" y="2440.0" font-size="17" text-anchor="middle" fill="#2b2f3a">J&#x27;ai comme oublié</text>
 <text x="560" y="2458.0" font-size="17" text-anchor="middle" fill="#2b2f3a">quelqu&#x27;un</text>
-<rect x="453.0" y="2399" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="453.0" y="2399" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="471.0" y="2415" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">18</text>
 <rect x="185.0" y="2570" width="230" height="66" rx="12" fill="#fff" stroke="#3f9c80" stroke-width="2.5"/>
 <text x="300" y="2600.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Trois colocataires et</text>
 <text x="300" y="2618.0" font-size="17" text-anchor="middle" fill="#2b2f3a">des tartes impossibles</text>
-<rect x="193.0" y="2559" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="193.0" y="2559" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="211.0" y="2575" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">19</text>
 <text x="300" y="2670" font-size="24" font-weight="800" text-anchor="middle" fill="#3f9c80">FIN</text>
 <rect x="705.0" y="2570" width="230" height="66" rx="12" fill="#fff" stroke="#3f9c80" stroke-width="2.5"/>
 <text x="820" y="2600.0" font-size="17" text-anchor="middle" fill="#2b2f3a">Deux gangsters et des</text>
 <text x="820" y="2618.0" font-size="17" text-anchor="middle" fill="#2b2f3a">tartes en danger</text>
-<rect x="713.0" y="2559" width="36" height="22" rx="11" fill="#e0442f"/>
+<rect x="713.0" y="2559" width="36" height="22" rx="11" fill="#ff6a00"/>
 <text x="731.0" y="2575" font-size="14" font-weight="800" text-anchor="middle" fill="#fff">20</text>
 <text x="820" y="2670" font-size="24" font-weight="800" text-anchor="middle" fill="#3f9c80">FIN</text>
 </svg>
