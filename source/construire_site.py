@@ -238,7 +238,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   box-shadow: 0 2px 0 var(--violet);
 }
 .garde .secondaires {
-  margin-top: clamp(0.8em, 2.5vh, 1.6em);
+  margin-top: clamp(1.5em, 4.5vh, 2.6em);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -490,7 +490,7 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   .garde { min-height: calc(100vh - 1.4em); gap: 0.6em; }
   .garde .synopsis { font-size: 0.95em; line-height: 1.45; }
   .garde .separateur { margin: 0.5em 0; }
-  .garde .secondaires { margin-top: 0.6em; }
+  .garde .secondaires { margin-top: 1.1em; }
   .garde-image img { max-height: 54vh; }
 }
 """
