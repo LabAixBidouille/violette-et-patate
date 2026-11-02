@@ -10,7 +10,7 @@ Il y a un an, il m'est arrivé la chose la plus étrange mais aussi la plus gén
 
 Je les ai remontées. Clac ! Le temps s'est arrêté. J'étais la seule à pouvoir bouger. Quand je l'ai relancé, personne ne s'était aperçu de rien. J'ai tout de suite compris que j'allais bien m'amuser.
 
-- Tourne la page. -> 1
+- Montre-moi tes bêtises ! -> 1
 
 ## Chapitre 1. Mes petites spécialités
 
