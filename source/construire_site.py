@@ -206,7 +206,7 @@ tw-sidebar { display: none; }
   color: var(--encre);
   margin-bottom: 0.5em;
 }
-/* Choix en autocollants : blancs à bord orange en pointillés, légèrement penchés,
+/* Choix en autocollants : blancs à fin bord orange, légèrement penchés,
    qui se remplissent d'orange au survol */
 .choix {
   display: flex;
@@ -223,7 +223,7 @@ tw-sidebar { display: none; }
   line-height: 1.3;
   color: var(--violet);
   background-color: #ffffff;
-  border: 1.5px dashed var(--orange);
+  border: 1.5px solid var(--orange);
   border-radius: 14px;
   padding: 0.5em 1.1em 0.35em;
   box-shadow: 2px 3px 0 rgba(43, 47, 58, 0.12);
