@@ -160,15 +160,27 @@ tw-story { overflow: clip; }
 tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .garde {
   min-height: calc(100vh - 2.2em);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.8em, 3vh, 2em);
+}
+.garde-entete {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.garde-corps {
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   gap: 3em;
   align-items: center;
 }
 .garde-image img {
   display: block;
   width: 100%;
-  max-height: calc(100vh - 2.2em);
+  max-height: 53vh;
   object-fit: contain;
   height: auto;
   mix-blend-mode: multiply;
@@ -179,7 +191,9 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   text-align: center;
 }
 @media (max-width: 800px) {
-  .garde { grid-template-columns: minmax(0, 1fr); gap: 1em; min-height: 0; }
+  .garde { min-height: 0; }
+  .garde-corps { grid-template-columns: minmax(0, 1fr); gap: 1em; }
+  .garde-image img { max-height: none; }
 }
 .garde .surtitre {
   font-family: "Gochi Hand", cursive;
@@ -201,7 +215,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   color: var(--orange);
 }
 .garde .synopsis {
-  margin: clamp(0.5em, 2vh, 1.4em) auto clamp(0.7em, 2.5vh, 1.6em);
+  margin: 0 auto;
   max-width: 34em;
   font-size: 0.95em;
   line-height: 1.6;
@@ -317,7 +331,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   height: 1.25em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%237b3fa0' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
-.garde .separateur { margin: clamp(0.4em, 1.5vh, 1em) 0 0; }
+.garde .separateur { margin: clamp(0.8em, 2.5vh, 1.6em) 0; }
 
 /* Bouton d'élan, quand Violette entraîne le lecteur */
 .elan {
@@ -558,16 +572,18 @@ def illustration(nom):
 
 def passage_garde():
     return (
-        '<div class="garde"><div class="garde-image"><img src="images/couverture.jpg" '
-        'alt="Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l\'attend"></div>'
-        '<div class="garde-texte"><span class="surtitre">Une histoire dont le lecteur est le héros</span>'
+        # En haut, centrés : surtitre, titre et autrices ; dessous, l'image à gauche et le texte à droite
+        '<div class="garde"><div class="garde-entete">'
+        '<span class="surtitre">Une histoire dont le lecteur est le héros</span>'
         f'<div class="grand-titre">{TITRE}</div>'
-        f'<span class="nom-auteur">{AUTRICES}</span>{SEPARATEUR}'
-        f'<div class="synopsis">{SYNOPSIS}</div>'
+        f'<span class="nom-auteur">{AUTRICES}</span></div>'
+        '<div class="garde-corps"><div class="garde-image"><img src="images/couverture.jpg" '
+        'alt="Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l\'attend"></div>'
+        f'<div class="garde-texte"><div class="synopsis">{SYNOPSIS}</div>{SEPARATEUR}'
         f'<div class="commencer">{lien("Commencer l'histoire", "Prologue")}</div>'
         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")} '
         f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")}</div>'
-        "</div></div>"
+        "</div></div></div>"
     )
 
 
