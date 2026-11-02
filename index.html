@@ -237,11 +237,14 @@ tw-sidebar { display: none; }
   padding: 0.45em 1.3em 0.3em;
   box-shadow: 0 4px 0 var(--violet);
   transform: rotate(-2deg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
+/* Au survol : il bascule, grossit un peu, et un liseré blanc puis orange apparaît autour */
 .elan tw-link:hover, .elan .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
   transform: rotate(2deg) scale(1.05);
+  box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px var(--orange), 0 6px 0 3px var(--violet);
 }
 
 /* Fins */
