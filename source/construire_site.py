@@ -194,14 +194,7 @@ tw-sidebar { display: none; }
   text-align: right;
 }
 
-/* Le lancer de dé, dans un encadré */
-.de {
-  margin: 0.8em 0 0;
-  padding: 1em 1.2em 1.1em;
-  background-color: var(--orange-clair);
-  border: 2px dashed var(--orange);
-  border-radius: 14px;
-}
+/* Le lancer de dé */
 .de .consigne {
   display: block;
   font-family: "Gochi Hand", cursive;
@@ -209,10 +202,6 @@ tw-sidebar { display: none; }
   line-height: 1.25;
   color: var(--encre);
   margin-bottom: 0.5em;
-}
-.de .consigne::before {
-  content: "⚄ ";
-  color: var(--orange);
 }
 .choix {
   display: flex;
@@ -237,30 +226,27 @@ tw-sidebar { display: none; }
   margin-top: 0.8em;
 }
 
-/* Séparateur : deux traits ondulés et trois points aux couleurs du LAB */
+/* Séparateur : les lunettes de Violette entre deux traits */
 .separateur {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.45em;
-  margin: 1.6em 0 0.4em;
+  gap: 0.7em;
+  margin: 1.5em 0 1em;
 }
 .separateur::before, .separateur::after {
   content: "";
-  flex: 1;
-  max-width: 9em;
-  height: 12px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 6 Q6 0 12 6 T24 6' fill='none' stroke='%23fd7e14' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x center;
+  width: 3.5em;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--orange);
 }
-.separateur .point {
-  width: 0.55em;
-  height: 0.55em;
-  border-radius: 50%;
+.separateur .lunettes {
+  width: 2.6em;
+  height: 1em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%23356bac' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
-.separateur .point:nth-child(1) { background-color: var(--orange); }
-.separateur .point:nth-child(2) { background-color: var(--bleu); transform: translateY(-0.25em); }
-.separateur .point:nth-child(3) { background-color: var(--vert); }
-.garde .separateur { margin: 1em auto 0; width: 100%; }
+.garde .separateur { margin: 1em 0 0; }
 
 /* Bouton d'élan, quand Violette entraîne le lecteur */
 .elan {
@@ -425,8 +411,7 @@ def lire_chapitres():
     return chapitres
 
 
-SEPARATEUR = ('<div class="separateur"><span class="point"></span><span class="point"></span>'
-              '<span class="point"></span></div>')
+SEPARATEUR = '<div class="separateur"><span class="lunettes"></span></div>'
 
 
 def lien(texte, cible):
@@ -439,6 +424,7 @@ def passage_chapitre(ch):
     choix = []
     suites = []
     fin = False
+    appel = False
     for p in ch["paragraphes"]:
         if p.startswith("- "):
             for ligne in p.split("\n"):
@@ -452,7 +438,8 @@ def passage_chapitre(ch):
             if interieur.startswith("Lance le dé") or interieur.startswith("Te souviens-tu"):
                 consigne = interieur
             else:
-                corps.append(f'<span class="appel">{interieur}</span>')
+                corps.append(SEPARATEUR + f'<span class="appel">{interieur}</span>')
+                appel = True
         else:
             corps.append(p)
 
@@ -460,7 +447,8 @@ def passage_chapitre(ch):
                 f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
                 f'<span class="titre">{ch["titre"]}</span></h1>']
     morceaux[-1] += "\n\n".join(corps)
-    morceaux.append(SEPARATEUR)
+    if not appel:
+        morceaux.append(SEPARATEUR)
     if consigne:
         morceaux.append(f'<div class="de"><span class="consigne">{consigne}</span>'
                         f'<div class="choix">{"".join(choix)}</div></div>')
