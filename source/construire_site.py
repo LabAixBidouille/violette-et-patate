@@ -188,6 +188,8 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .garde-texte {
   display: flex;
   flex-direction: column;
+  /* Même écart entre le résumé, le séparateur, le bouton Commencer et les deux petits boutons */
+  gap: clamp(1.2em, 3.6vh, 2.1em);
   text-align: center;
 }
 @media (max-width: 800px) {
@@ -238,7 +240,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   box-shadow: 0 2px 0 var(--violet);
 }
 .garde .secondaires {
-  margin-top: clamp(1.5em, 4.5vh, 2.6em);
+  margin-top: 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -331,7 +333,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   height: 1.25em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%237b3fa0' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
-.garde .separateur { margin: clamp(0.8em, 2.5vh, 1.6em) 0; }
+.garde .separateur { margin: 0; }
 
 /* Bouton d'élan, quand Violette entraîne le lecteur */
 .elan {
@@ -575,8 +577,7 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   tw-story:has(.garde) { padding-top: 0.6em; padding-bottom: 0.6em; }
   .garde { min-height: calc(100vh - 1.4em); gap: 0.6em; }
   .garde .synopsis { font-size: 0.95em; line-height: 1.45; }
-  .garde .separateur { margin: 0.5em 0; }
-  .garde .secondaires { margin-top: 1.1em; }
+  .garde-texte { gap: 0.85em; }
   .garde-image img { max-height: 54vh; }
 }
 """
