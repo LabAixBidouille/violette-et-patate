@@ -272,7 +272,7 @@ tw-sidebar { display: none; }
 /* Bouton d'élan, quand Violette entraîne le lecteur */
 .elan {
   align-items: center;
-  margin-top: 1.2em;
+  margin-top: 2.2em;
 }
 .elan tw-link, .elan .enchantment-link {
   display: inline-block;
@@ -289,19 +289,12 @@ tw-sidebar { display: none; }
   transform: rotate(-2deg);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-/* Au survol : il rebondit en basculant, grossit, et un liseré blanc puis orange apparaît autour */
+/* Au survol : il bascule, grossit un peu, et un liseré blanc puis orange apparaît autour */
 .elan tw-link:hover, .elan .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
-  transform: rotate(3deg) scale(1.1);
+  transform: rotate(2deg) scale(1.06);
   box-shadow: 0 0 0 3px #ffffff, 0 0 0 5px var(--orange), 0 6px 0 3px var(--violet);
-  animation: rebond 0.5s ease-out;
-}
-@keyframes rebond {
-  0% { transform: rotate(-2deg) scale(1); }
-  35% { transform: rotate(7deg) scale(1.16); }
-  65% { transform: rotate(0deg) scale(1.06); }
-  100% { transform: rotate(3deg) scale(1.1); }
 }
 
 /* Fins */
