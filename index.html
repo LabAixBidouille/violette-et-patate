@@ -157,14 +157,15 @@ tw-sidebar { display: none; }
   color: var(--encre);
   margin-bottom: 0.5em;
 }
+/* Choix côte à côte, avec assez d'écart pour que le bouton survolé ne chevauche pas son voisin */
 .choix {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12.5em, 1fr));
+  align-items: stretch;
+  gap: 1em 1.4em;
 }
-.choix {
-  gap: 0.8em;
+.choix.suite {
+  display: flex;
 }
 /* Boutons de choix animés, comme le bouton d'élan, penchés tour à tour d'un côté et de l'autre */
 .choix tw-link, .choix .enchantment-link {
@@ -177,8 +178,12 @@ tw-sidebar { display: none; }
   color: #ffffff;
   background-color: var(--orange);
   border: none;
-  border-radius: 999px;
-  padding: 0.45em 1.2em 0.3em;
+  border-radius: 1.2em;
+  padding: 0.5em 1.1em 0.35em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: 0 4px 0 var(--violet);
   transform: rotate(-1.5deg);
   transition: transform 0.15s ease;
