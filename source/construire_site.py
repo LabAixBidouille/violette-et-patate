@@ -108,7 +108,7 @@ tw-sidebar { display: none; }
   padding: 0.05em 0.6em 0.1em;
   border-radius: 0.4em;
   transform: rotate(-3deg);
-  margin-bottom: 0.35em;
+  margin-bottom: 0.75em;
 }
 .chapitre .titre {
   display: block;
@@ -196,7 +196,7 @@ tw-sidebar { display: none; }
 
 /* Le lancer de dé, dans un encadré */
 .de {
-  margin: 1.2em 0 0;
+  margin: 0.8em 0 0;
   padding: 1em 1.2em 1.1em;
   background-color: var(--orange-clair);
   border: 2px dashed var(--orange);
@@ -234,12 +234,61 @@ tw-sidebar { display: none; }
   color: #ffffff;
 }
 .suite {
-  margin-top: 1.4em;
+  margin-top: 0.8em;
+}
+
+/* Séparateur : deux traits ondulés et trois points aux couleurs du LAB */
+.separateur {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45em;
+  margin: 1.6em 0 0.4em;
+}
+.separateur::before, .separateur::after {
+  content: "";
+  flex: 1;
+  max-width: 9em;
+  height: 12px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12'%3E%3Cpath d='M0 6 Q6 0 12 6 T24 6' fill='none' stroke='%23fd7e14' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x center;
+}
+.separateur .point {
+  width: 0.55em;
+  height: 0.55em;
+  border-radius: 50%;
+}
+.separateur .point:nth-child(1) { background-color: var(--orange); }
+.separateur .point:nth-child(2) { background-color: var(--bleu); transform: translateY(-0.25em); }
+.separateur .point:nth-child(3) { background-color: var(--vert); }
+.garde .separateur { margin: 1em auto 0; width: 100%; }
+
+/* Bouton d'élan, quand Violette entraîne le lecteur */
+.elan {
+  align-items: center;
+  margin-top: 1.2em;
+}
+.elan tw-link, .elan .enchantment-link {
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-weight: 400;
+  font-size: 1.45em;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  background-color: var(--orange);
+  border: none;
+  border-radius: 999px;
+  padding: 0.45em 1.3em 0.3em;
+  box-shadow: 0 4px 0 var(--bleu);
+  transform: rotate(-2deg);
+}
+.elan tw-link:hover, .elan .enchantment-link:hover {
+  color: #ffffff;
+  background-color: var(--orange);
+  transform: rotate(2deg) scale(1.05);
 }
 
 /* Fins */
 .fin {
-  margin-top: 1.6em;
+  margin-top: 0.6em;
   text-align: center;
 }
 .fin .mot-fin {
@@ -278,6 +327,71 @@ tw-sidebar { display: none; }
   color: var(--gris);
 }
 
+/* Page de l'arbre, plus large que le texte */
+.arbre {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(1100px, 94vw);
+  text-align: center;
+}
+.arbre h1 {
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-weight: 400;
+  font-size: 2.4em;
+  line-height: 1.1;
+  color: var(--orange);
+  text-shadow: 3px 3px 0 var(--bleu);
+  margin: 0;
+}
+.arbre .arbre-sous-titre {
+  display: block;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.3em;
+  color: var(--gris);
+  margin: 0.2em 0 1em;
+}
+.arbre .intro-arbre {
+  max-width: 40em;
+  margin: 0 auto;
+}
+.arbre img {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  margin: 1.5em auto 0.5em;
+}
+
+/* Fiches des autrices sur la page de contexte */
+.visuels {
+  margin-top: 2em;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1em;
+}
+.visuels .pleine { grid-column: 1 / -1; }
+.visuels img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(43, 47, 58, 0.15);
+}
+.visuels img:nth-child(1) { transform: rotate(-1.5deg); }
+.visuels img:nth-child(3) { transform: rotate(1.5deg); }
+.legende {
+  display: block;
+  margin-top: 0.6em;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.15em;
+  color: var(--gris);
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .visuels { grid-template-columns: 1fr 1fr; }
+}
+
 /* Liens dans le texte */
 tw-link, .enchantment-link {
   color: var(--bleu);
@@ -311,6 +425,10 @@ def lire_chapitres():
     return chapitres
 
 
+SEPARATEUR = ('<div class="separateur"><span class="point"></span><span class="point"></span>'
+              '<span class="point"></span></div>')
+
+
 def lien(texte, cible):
     return f"[[{texte}->{cible}]]"
 
@@ -319,12 +437,14 @@ def passage_chapitre(ch):
     corps = []
     consigne = None
     choix = []
+    suites = []
     fin = False
     for p in ch["paragraphes"]:
         if p.startswith("- "):
             for ligne in p.split("\n"):
                 texte, cible = ligne[2:].rsplit(" -> ", 1)
                 choix.append(lien(texte, f"Chapitre {cible}"))
+                suites.append(texte)
         elif p == "FIN":
             fin = True
         elif p.startswith("**") and p.endswith("**"):
@@ -340,11 +460,14 @@ def passage_chapitre(ch):
                 f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
                 f'<span class="titre">{ch["titre"]}</span></h1>']
     morceaux[-1] += "\n\n".join(corps)
+    morceaux.append(SEPARATEUR)
     if consigne:
         morceaux.append(f'<div class="de"><span class="consigne">{consigne}</span>'
                         f'<div class="choix">{"".join(choix)}</div></div>')
     elif choix:
-        morceaux.append(f'<div class="choix suite">{"".join(choix)}</div>')
+        # Un renvoi qui n'est pas « Poursuis au chapitre… » est un élan de Violette : bouton amusant
+        classe = "choix suite" if suites[0].startswith("Poursuis") else "choix suite elan"
+        morceaux.append(f'<div class="{classe}">{"".join(choix)}</div>')
     if fin:
         morceaux.append('<div class="fin"><span class="mot-fin">FIN</span>'
                         '<span class="autre-fin">Il existe une autre fin à cette histoire.</span>'
@@ -357,10 +480,11 @@ def passage_garde():
     return (
         '<div class="garde"><span class="surtitre">Une histoire dont le lecteur est le héros</span>'
         f'<div class="grand-titre">{TITRE}</div>'
-        f'<span class="nom-auteur">{AUTRICES}</span>'
+        f'<span class="nom-auteur">{AUTRICES}</span>{SEPARATEUR}'
         f'<div class="synopsis">{SYNOPSIS}</div>'
         f'<div class="commencer">{lien("Commencer l'histoire", "Prologue")}</div>'
-        f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div>'
+        f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")} '
+        f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")}</div>'
         "</div>"
     )
 
@@ -371,7 +495,26 @@ def passage_contexte():
         + "\n\n".join(CONTEXTE)
         + f'\n\n<span class="credits">Une histoire d\'{AUTRICES}. Réalisation du livre : L.A.B, '
         "Laboratoire d'Aix-périmentation et de Bidouille.</span>\n\n"
-        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div>\n</div>'
+        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div>'
+        + '<div class="visuels">'
+        '<img src="images/fiches/fiche_recit.jpg" alt="La fiche récit remplie par Eva et Brune">'
+        '<img src="images/fiches/fiche_personnage_violette.jpg" alt="La fiche personnage de Violette">'
+        '<img src="images/fiches/fiche_personnage_patate.jpg" alt="La fiche personnage de Patate, avec son portrait">'
+        '<img class="pleine" src="images/fiches/fiche_situation_3.jpg" alt="La fiche situation n° 3, avec ses choix au dé">'
+        '</div><span class="legende">Les fiches remplies par Eva et Brune pendant l\'atelier</span>\n</div>'
+    )
+
+
+def passage_arbre():
+    return (
+        f'<div class="arbre"><h1>{TITRE}</h1>'
+        f'<span class="arbre-sous-titre">Tous les chemins de l\'histoire imaginée par {AUTRICES}</span>'
+        '<div class="intro-arbre">Un arbre de décision est un schéma qui montre toutes les suites possibles '
+        "d'une histoire, ou d'un programme informatique. Chaque case est une étape, ici un chapitre, et chaque "
+        "flèche part d'une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les "
+        "flèches, on vérifie qu'aucun chemin ne mène nulle part : c'est grâce à cet outil que chaque parcours "
+        f"de //{TITRE}// conduit bien à une fin.</div>"
+        '<img src="images/arbre.svg" alt="L\'arbre de toutes les branches de l\'histoire"></div>'
     )
 
 
@@ -393,6 +536,7 @@ def construire():
          '(unless: (passage:)\'s name is "Page de garde")[<div class="retour">[[Couverture->Page de garde]]</div>]'),
         ("Page de garde", "", passage_garde()),
         ("Comment est née cette histoire", "", passage_contexte()),
+        ("L'arbre de l'histoire", "", passage_arbre()),
     ]
     for ch in lire_chapitres():
         passages.append((ch["nom"], "", passage_chapitre(ch)))
