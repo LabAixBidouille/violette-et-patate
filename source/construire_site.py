@@ -454,7 +454,6 @@ def passage_chapitre(ch):
     corps = []
     consigne = None
     choix = []
-    suites = []
     fin = False
     appel = False
     for p in ch["paragraphes"]:
@@ -462,7 +461,6 @@ def passage_chapitre(ch):
             for ligne in p.split("\n"):
                 texte, cible = ligne[2:].rsplit(" -> ", 1)
                 choix.append(lien(texte, f"Chapitre {cible}"))
-                suites.append(texte)
         elif p == "FIN":
             fin = True
         elif p.startswith("**") and p.endswith("**"):
@@ -485,9 +483,8 @@ def passage_chapitre(ch):
         morceaux.append(f'<div class="de"><span class="consigne">{consigne}</span>'
                         f'<div class="choix">{"".join(choix)}</div></div>')
     elif choix:
-        # Un renvoi qui n'est pas « Poursuis au chapitre… » est un élan de Violette : bouton amusant
-        classe = "choix suite" if suites[0].startswith("Poursuis") else "choix suite elan"
-        morceaux.append(f'<div class="{classe}">{"".join(choix)}</div>')
+        # Un renvoi seul, sans lancer de dé, devient un gros bouton comme « Montre-moi tes bêtises ! »
+        morceaux.append(f'<div class="choix suite elan">{"".join(choix)}</div>')
     if fin:
         morceaux.append('<div class="fin"><span class="mot-fin">FIN</span>'
                         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
