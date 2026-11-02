@@ -6,7 +6,7 @@ Le site est en ligne sur https://labaixbidouille.github.io/violette-et-patate/. 
 
 ## Modifier le livre
 
-Le texte se trouve dans `source/texte.md`. Chaque chapitre commence par `## Chapitre n. Titre`, les choix s'écrivent `- texte du lien -> n` et une fin se termine par `FIN`. La couverture, la page « Comment est née cette histoire » et la mise en forme sont dans `source/construire_site.py`.
+Le texte se trouve dans `source/texte.md`. Chaque chapitre commence par `## Chapitre n. Titre`, les choix s'écrivent `- texte du lien -> n` et une fin se termine par `FIN`. La couverture, la page « Comment est née cette histoire » et la mise en forme sont dans `source/construire_site.py`. Les illustrations sont dans `images/chapitres/` (`prologue.jpg`, `chapitre-01.jpg`…, en 1200 pixels de large au plus) et la couverture dans `images/couverture.jpg` ; une page sans image s'affiche sur une seule colonne. L'arbre se redessine avec `python3 source/construire_arbre.py`.
 
 Après une modification, reconstruire la page puis publier :
 
