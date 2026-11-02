@@ -87,7 +87,7 @@ tw-story {
   font-family: "Nunito", "Trebuchet MS", sans-serif;
   font-size: 1.02em;
   line-height: 1.7;
-  padding: 2.5em 1.25em 4em;
+  padding: 4em 1.25em 4em;
 }
 tw-passage {
   max-width: 42em;
@@ -192,7 +192,7 @@ tw-sidebar { display: none; }
 
 /* Lien Couverture : discret, en haut à gauche, au-dessus du numéro de chapitre */
 .retour {
-  margin: -1.2em auto 1.2em;
+  margin: 0 auto 1.2em;
   max-width: 42em;
   text-align: left;
 }
