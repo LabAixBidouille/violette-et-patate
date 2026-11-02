@@ -163,18 +163,36 @@ tw-sidebar { display: none; }
   align-items: flex-start;
   gap: 0.5em;
 }
+.choix {
+  gap: 0.8em;
+}
+/* Boutons de choix animés, comme le bouton d'élan, penchés tour à tour d'un côté et de l'autre */
 .choix tw-link, .choix .enchantment-link {
   display: inline-block;
-  color: var(--violet-fonce);
-  background-color: #ffffff;
-  border: 2px solid var(--violet);
-  border-radius: 10px;
-  padding: 0.3em 0.9em;
-  font-weight: 700;
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-weight: 400;
+  font-size: 1.05em;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+  color: #ffffff;
+  background-color: var(--orange);
+  border: none;
+  border-radius: 999px;
+  padding: 0.45em 1.2em 0.3em;
+  box-shadow: 0 4px 0 var(--violet);
+  transform: rotate(-1.5deg);
+  transition: transform 0.15s ease;
+}
+.choix tw-link:nth-of-type(even), .choix .enchantment-link:nth-of-type(even) {
+  transform: rotate(1.5deg);
 }
 .choix tw-link:hover, .choix .enchantment-link:hover {
-  background-color: var(--violet);
   color: #ffffff;
+  background-color: var(--orange);
+  transform: rotate(2deg) scale(1.05);
+}
+.choix tw-link:nth-of-type(even):hover, .choix .enchantment-link:nth-of-type(even):hover {
+  transform: rotate(-2deg) scale(1.05);
 }
 .suite {
   margin-top: 0.8em;
