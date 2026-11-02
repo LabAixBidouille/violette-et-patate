@@ -176,9 +176,8 @@ tw-sidebar { display: none; }
   margin-top: 1.4em;
 }
 
-/* Petits boutons secondaires et bouton Couverture */
-.secondaires tw-link, .secondaires .enchantment-link,
-.retour tw-link, .retour .enchantment-link {
+/* Petits boutons secondaires */
+.secondaires tw-link, .secondaires .enchantment-link {
   display: inline-block;
   font-size: 0.85em;
   color: var(--violet);
@@ -186,16 +185,27 @@ tw-sidebar { display: none; }
   border-radius: 999px;
   padding: 0.3em 1em;
 }
-.secondaires tw-link:hover, .secondaires .enchantment-link:hover,
-.retour tw-link:hover, .retour .enchantment-link:hover {
+.secondaires tw-link:hover, .secondaires .enchantment-link:hover {
   background-color: var(--violet);
   color: #ffffff;
 }
+
+/* Lien Couverture : discret, en haut à gauche, au-dessus du numéro de chapitre */
 .retour {
-  margin: -1.2em auto 1em;
+  margin: -1.2em auto 1.2em;
   max-width: 42em;
-  text-align: right;
+  text-align: left;
 }
+.retour tw-link, .retour .enchantment-link,
+.lien-retour tw-link, .lien-retour .enchantment-link {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--gris);
+}
+.retour tw-link::before, .lien-retour tw-link::before { content: "← "; }
+.retour tw-link:hover, .retour .enchantment-link:hover,
+.lien-retour tw-link:hover, .lien-retour .enchantment-link:hover { color: var(--violet); }
+.contexte .lien-retour { display: block; margin-bottom: 1em; }
 
 /* Le lancer de dé */
 .de .consigne {
@@ -504,7 +514,7 @@ def passage_garde():
 
 def passage_contexte():
     return (
-        '<div class="contexte"><div class="contexte-texte">\n<h1>Comment est née cette histoire</h1>'
+        '<div class="contexte"><div class="contexte-texte"><span class="lien-retour">[[Couverture->Page de garde]]</span>\n<h1>Comment est née cette histoire</h1>'
         + "\n\n".join(CONTEXTE)
         + f'\n\n<span class="credits">Une histoire d\'{AUTRICES}. Réalisation du livre : L.A.B, '
         "Laboratoire d'Aix-périmentation et de Bidouille.</span>\n\n"
@@ -526,7 +536,7 @@ def passage_arbre():
         "flèche part d'une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les "
         "flèches, on vérifie qu'aucun chemin ne mène nulle part : c'est grâce à cet outil que chaque parcours "
         f"de //{TITRE}// conduit bien à une fin.</div>"
-        f'<div class="secondaires couverture-arbre">{lien("Couverture", "Page de garde")}</div></div>'
+        f'<div class="lien-retour couverture-arbre">{lien("Couverture", "Page de garde")}</div></div>'
         '<img src="images/arbre.svg" alt="L\'arbre de toutes les branches de l\'histoire"></div>'
     )
 
@@ -546,7 +556,7 @@ def construire():
 
     passages = [
         ("Bouton couverture", "header",
-         '(unless: (a: "Page de garde", "L\'arbre de l\'histoire") contains (passage:)\'s name)'
+         '(unless: (a: "Page de garde", "L\'arbre de l\'histoire", "Comment est née cette histoire") contains (passage:)\'s name)'
          '[<div class="retour">[[Couverture->Page de garde]]</div>]'),
         ("Page de garde", "", passage_garde()),
         ("Comment est née cette histoire", "", passage_contexte()),
