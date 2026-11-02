@@ -206,17 +206,14 @@ tw-sidebar { display: none; }
   color: var(--encre);
   margin-bottom: 0.5em;
 }
-/* Choix côte à côte, avec assez d'écart pour que le bouton survolé ne chevauche pas son voisin */
+/* Choix en escalier, comme les marches d'un saut à la corde ; au survol, le bouton gigote
+   sur place au lieu de grossir, pour ne pas chevaucher son voisin */
 .choix {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12.5em, 1fr));
-  align-items: stretch;
-  gap: 1em 1.4em;
-}
-.choix.suite {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1em;
 }
-/* Boutons de choix animés, comme le bouton d'élan, penchés tour à tour d'un côté et de l'autre */
 .choix tw-link, .choix .enchantment-link {
   display: inline-block;
   font-family: "Luckiest Guy", "Impact", sans-serif;
@@ -227,26 +224,27 @@ tw-sidebar { display: none; }
   color: #ffffff;
   background-color: var(--orange);
   border: none;
-  border-radius: 1.2em;
-  padding: 0.5em 1.1em 0.35em;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 999px;
+  padding: 0.45em 1.2em 0.3em;
   box-shadow: 0 4px 0 var(--violet);
   transform: rotate(-1.5deg);
-  transition: transform 0.15s ease;
 }
-.choix tw-link:nth-of-type(even), .choix .enchantment-link:nth-of-type(even) {
-  transform: rotate(1.5deg);
-}
+/* Harlowe enveloppe chaque lien : on décale donc l'enveloppe, et on penche le lien qu'elle contient */
+.choix > :nth-child(2) { margin-left: 2.2em; }
+.choix > :nth-child(3) { margin-left: 4.4em; }
+.choix > :nth-child(2) tw-link { transform: rotate(1.5deg); }
 .choix tw-link:hover, .choix .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
-  transform: rotate(2deg) scale(1.05);
+  animation: gigote 0.35s ease-in-out infinite alternate;
 }
-.choix tw-link:nth-of-type(even):hover, .choix .enchantment-link:nth-of-type(even):hover {
-  transform: rotate(-2deg) scale(1.05);
+@keyframes gigote {
+  from { transform: rotate(-3deg); }
+  to { transform: rotate(3deg); }
+}
+@media (max-width: 600px) {
+  .choix > :nth-child(2) { margin-left: 1em; }
+  .choix > :nth-child(3) { margin-left: 2em; }
 }
 .suite {
   margin-top: 0.8em;
@@ -309,13 +307,6 @@ tw-sidebar { display: none; }
   font-size: 2.6em;
   color: var(--menthe);
   transform: rotate(-3deg);
-}
-.fin .autre-fin {
-  display: block;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.25em;
-  color: var(--gris);
-  margin: 0.2em 0 0.9em;
 }
 
 /* Phrase mise en avant dans le texte */
@@ -502,7 +493,6 @@ def passage_chapitre(ch):
         morceaux.append(f'<div class="{classe}">{"".join(choix)}</div>')
     if fin:
         morceaux.append('<div class="fin"><span class="mot-fin">FIN</span>'
-                        '<span class="autre-fin">Il existe une autre fin à cette histoire.</span>'
                         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
     morceaux.append("</div>")
     return morceaux[0] + morceaux[1] + "".join(morceaux[2:])
