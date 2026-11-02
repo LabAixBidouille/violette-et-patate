@@ -157,13 +157,13 @@ tw-sidebar { display: none; }
   color: var(--encre);
   margin-bottom: 0.5em;
 }
-/* Choix en escalier, comme les marches d'un saut à la corde ; au survol, le bouton gigote
-   sur place au lieu de grossir, pour ne pas chevaucher son voisin */
+/* Choix en autocollants : blancs à bord orange en pointillés, légèrement penchés,
+   qui se remplissent d'orange au survol */
 .choix {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 1.1em;
+  gap: 0.9em;
 }
 .choix tw-link, .choix .enchantment-link {
   display: inline-block;
@@ -172,30 +172,21 @@ tw-sidebar { display: none; }
   font-size: 1.05em;
   letter-spacing: 0.03em;
   line-height: 1.3;
-  color: #ffffff;
-  background-color: var(--orange);
-  border: none;
-  border-radius: 999px;
-  padding: 0.45em 1.2em 0.3em;
-  box-shadow: 0 4px 0 var(--violet);
-  transform: rotate(-1.5deg);
+  color: var(--violet);
+  background-color: #ffffff;
+  border: 2.5px dashed var(--orange);
+  border-radius: 14px;
+  padding: 0.5em 1.1em 0.35em;
+  box-shadow: 2px 3px 0 rgba(43, 47, 58, 0.12);
+  transform: rotate(-1deg);
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
-/* Harlowe enveloppe chaque lien : on décale donc l'enveloppe, et on penche le lien qu'elle contient */
-.choix > :nth-child(2) { margin-left: 2.2em; }
-.choix > :nth-child(3) { margin-left: 4.4em; }
-.choix > :nth-child(2) tw-link { transform: rotate(1.5deg); }
+/* Harlowe enveloppe chaque lien : on penche dans l'autre sens le lien de la deuxième enveloppe */
+.choix > :nth-child(2) tw-link { transform: rotate(1deg); }
 .choix tw-link:hover, .choix .enchantment-link:hover {
   color: #ffffff;
   background-color: var(--orange);
-  animation: gigote 0.35s ease-in-out infinite alternate;
-}
-@keyframes gigote {
-  from { transform: rotate(-3deg); }
-  to { transform: rotate(3deg); }
-}
-@media (max-width: 600px) {
-  .choix > :nth-child(2) { margin-left: 1em; }
-  .choix > :nth-child(3) { margin-left: 2em; }
+  border-style: solid;
 }
 .suite {
   margin-top: 0.8em;
