@@ -15,6 +15,10 @@ RACINE = Path(__file__).resolve().parent.parent
 TEXTE = RACINE / "source" / "texte.md"
 SORTIE = RACINE / "index.html"
 NOINDEX = '<meta name="robots" content="noindex, nofollow, noarchive">'
+# Favicon : les lunettes violettes de Violette
+FAVICON = ('<link rel="icon" type="image/svg+xml" href="images/favicon.svg">'
+           '<link rel="icon" type="image/png" href="images/favicon.png">'
+           '<link rel="apple-touch-icon" href="images/favicon.png">')
 
 TITRE = "Violette et Patate"
 AUTRICES = "Eva et Brune"
@@ -106,22 +110,17 @@ tw-passage {
   top: 1.5em;
   margin-top: 2.5em;
 }
-/* L'image est limitée en hauteur pour que l'illustration et les choix tiennent dans l'écran */
 .illustration img {
   display: block;
   width: 100%;
-  max-height: 52vh;
+  max-height: 85vh;
   object-fit: contain;
   mix-blend-mode: multiply;
 }
-.cote .separateur { margin-top: 0.8em; }
 @media (max-width: 800px) {
   .page { grid-template-columns: minmax(0, 1fr); gap: 1.2em; }
-  /* Sur téléphone : l'illustration en haut, le texte, puis les choix */
-  .cote { display: contents; }
-  .illustration { order: -1; }
-  .illustration img { max-height: none; }
-  .suite-page { order: 1; }
+  /* Sur téléphone : l'illustration au-dessus du texte */
+  .cote { position: static; order: -1; margin-top: 0; }
 }
 tw-sidebar { display: none; }
 /* Harlowe met « overflow: hidden » sur tw-story, ce qui empêche la colonne de droite de rester
@@ -157,8 +156,10 @@ tw-story { overflow: clip; }
 }
 
 /* Page de garde */
+/* La couverture tient dans l'écran : marges réduites et tailles qui suivent la hauteur de l'écran */
+tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .garde {
-  min-height: calc(100vh - 8em);
+  min-height: calc(100vh - 2.2em);
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
   gap: 3em;
@@ -167,6 +168,8 @@ tw-story { overflow: clip; }
 .garde-image img {
   display: block;
   width: 100%;
+  max-height: calc(100vh - 2.2em);
+  object-fit: contain;
   height: auto;
   mix-blend-mode: multiply;
 }
@@ -185,7 +188,7 @@ tw-story { overflow: clip; }
 }
 .garde .grand-titre {
   font-family: "Luckiest Guy", "Impact", sans-serif;
-  font-size: 4.2em;
+  font-size: clamp(2.2em, 7vh, 4.2em);
   line-height: 1;
   color: var(--violet);
   text-shadow: 4px 4px 0 var(--orange);
@@ -194,13 +197,14 @@ tw-story { overflow: clip; }
 }
 .garde .nom-auteur {
   font-family: "Gochi Hand", cursive;
-  font-size: 2em;
+  font-size: clamp(1.4em, 4vh, 2em);
   color: var(--orange);
 }
 .garde .synopsis {
-  margin: 1.4em auto 1.6em;
+  margin: clamp(0.5em, 2vh, 1.4em) auto clamp(0.7em, 2.5vh, 1.6em);
   max-width: 34em;
-  font-size: 0.98em;
+  font-size: 0.95em;
+  line-height: 1.6;
 }
 .garde .commencer tw-link, .garde .commencer .enchantment-link {
   display: inline-block;
@@ -220,7 +224,7 @@ tw-story { overflow: clip; }
   box-shadow: 0 2px 0 var(--violet);
 }
 .garde .secondaires {
-  margin-top: 1.6em;
+  margin-top: clamp(0.8em, 2.5vh, 1.6em);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -313,7 +317,7 @@ tw-story { overflow: clip; }
   height: 1.25em;
   background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 24'%3E%3Cg fill='none' stroke='%237b3fa0' stroke-width='3' stroke-linecap='round'%3E%3Ccircle cx='17' cy='14' r='8'/%3E%3Ccircle cx='47' cy='14' r='8'/%3E%3Cpath d='M25 13 Q32 8 39 13'/%3E%3Cpath d='M9 12 L3 6'/%3E%3Cpath d='M55 12 L61 6'/%3E%3C/g%3E%3C/svg%3E") no-repeat center / contain;
 }
-.garde .separateur { margin: 1em 0 0; }
+.garde .separateur { margin: clamp(0.4em, 1.5vh, 1em) 0 0; }
 
 /* Bouton d'élan, quand Violette entraîne le lecteur */
 .elan {
@@ -523,15 +527,6 @@ def passage_chapitre(ch):
         else:
             corps.append(p)
 
-    texte = ('<div class="texte">'
-             f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
-             f'<span class="titre">{ch["titre"]}</span></h1>'
-             + "\n\n".join(corps) + "</div>")
-    # Colonne de droite : l'illustration, puis les choix ou la fin, toujours visibles ensemble
-    cote = []
-    image = f"images/chapitres/{illustration(ch['nom'])}.jpg"
-    if (RACINE / image).exists():
-        cote.append(f'<div class="illustration"><img src="{image}" alt="{ch["titre"]}"></div>')
     suite = []
     if not appel:
         suite.append(SEPARATEUR)
@@ -544,8 +539,16 @@ def passage_chapitre(ch):
     if fin:
         suite.append('<div class="fin"><span class="mot-fin">FIN</span>'
                      f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")}</div></div>')
-    cote.append(f'<div class="suite-page">{"".join(suite)}</div>')
-    return f'<div class="page">{texte}<div class="cote">{"".join(cote)}</div></div>'
+    texte = ('<div class="texte">'
+             f'<h1 class="chapitre"><span class="numero">{ch["numero"]}</span>'
+             f'<span class="titre">{ch["titre"]}</span></h1>'
+             + "\n\n".join(corps) + "".join(suite) + "</div>")
+    # Colonne de droite : l'illustration, qui suit la lecture au défilement
+    image = f"images/chapitres/{illustration(ch['nom'])}.jpg"
+    cote = ""
+    if (RACINE / image).exists():
+        cote = f'<div class="cote"><div class="illustration"><img src="{image}" alt="{ch["titre"]}"></div></div>'
+    return f'<div class="page">{texte}{cote}</div>'
 
 
 def illustration(nom):
@@ -603,7 +606,10 @@ def construire():
     moteur = modele[modele.index("</tw-storydata>"):]
     if NOINDEX not in debut:
         debut = debut.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + NOINDEX)
-    debut = re.sub(r"<link rel=\"icon\"[^>]*>|<link rel=\"apple-touch-icon\"[^>]*>", "", debut)
+    # Icônes : on retire celles qui traînent (héritées de Rambo ou d'une construction précédente)
+    # puis on remet le favicon du livre
+    debut = re.sub(r"<link rel=\"(?:icon|apple-touch-icon)\"[^>]*>", "", debut)
+    debut = debut.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n' + FAVICON)
     debut = debut.replace("<title>La Lune de Rambo</title>", f"<title>{TITRE}</title>")
     moteur = moteur.replace("JavaScript needs to be enabled to play La Lune de Rambo.",
                             f"JavaScript doit être activé pour lire {TITRE}.")
