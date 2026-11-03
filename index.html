@@ -24,6 +24,8 @@
 
 
 
+
+
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>Violette et Patate</title>
@@ -442,33 +444,99 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   color: var(--orange);
 }
 
-/* Page « Comment est née cette histoire » */
+/* Page « Comment est née cette histoire » : texte court centré, une phrase des autrices, puis leurs
+   fiches posées sur une table, en miniatures cliquables */
+.contexte { font-size: 0.95em; text-align: center; }
+.contexte .lien-retour { text-align: left; }
 .contexte h1 {
   line-height: 1.1;
   font-family: "Luckiest Guy", "Impact", sans-serif;
   font-weight: 400;
-  font-size: 2em;
+  font-size: 2.4em;
   color: var(--violet);
-  margin: 0 0 0.6em;
+  text-shadow: 3px 3px 0 var(--orange);
+  margin: 0.3em 0 0.2em;
 }
-.contexte .credits {
-  font-size: 0.92em;
+.contexte-texte { max-width: 38em; margin: 0 auto; }
+.citation {
+  max-width: 30em;
+  margin: 2em auto;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.55em;
+  line-height: 1.35;
+  color: var(--violet);
+  transform: rotate(-1.5deg);
+}
+.citation .source {
+  display: block;
+  margin-top: 0.4em;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.55em;
   color: var(--gris);
 }
-
-.couverture-arbre { margin-top: 1.4em; }
-
-/* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
-.arbre {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
-  gap: 3.5em;
-  align-items: start;
+.table-fiches {
+  margin: 2.6em auto 0;
+  max-width: 62em;
+  padding: 1.8em 1.5em 1.8em;
+  background: var(--lavande);
+  border-radius: 18px;
 }
-.arbre-texte {
-  position: sticky;
-  top: 2em;
+.table-fiches .titre-table {
+  display: block;
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-size: 1.35em;
+  color: var(--violet);
+  margin-bottom: 1.2em;
 }
+.miniatures {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2.4em;
+}
+.miniatures figure { margin: 0; }
+.miniatures figcaption {
+  margin-top: 0.8em;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.15em;
+  color: var(--gris);
+}
+.miniature { display: block; padding: 0; border: none; background: none; cursor: zoom-in; }
+.miniature img {
+  display: block;
+  height: 16em;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 3px 12px rgba(43, 47, 58, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.miniatures figure:nth-child(1) img { transform: rotate(-3deg); }
+.miniatures figure:nth-child(2) img { transform: rotate(1deg); }
+.miniatures figure:nth-child(3) img { transform: rotate(3deg); }
+.miniatures .miniature:hover img { transform: rotate(0) scale(1.05); box-shadow: 0 0 0 3px var(--orange), 0 8px 20px rgba(43, 47, 58, 0.28); }
+.contexte .credits { display: block; margin-top: 1.6em; font-size: 0.92em; color: var(--gris); }
+.contexte .secondaires { display: flex; justify-content: center; margin-top: 1.4em; }
+/* Fiche ouverte en grand par-dessus la page ; un clic n'importe où la referme */
+.agrandi {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vh 2vw;
+  background: rgba(43, 30, 70, 0.85);
+  cursor: zoom-out;
+}
+.agrandi img { max-width: 100%; max-height: 96vh; border-radius: 4px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+@media (max-width: 600px) {
+  .miniature img { height: 11em; }
+}
+
+/* Page de l'arbre : le titre centré en haut, l'arbre dessous */
+.arbre .lien-retour { display: block; }
+.arbre-tete { text-align: center; margin-bottom: 1.5em; }
 .arbre h1 {
   font-family: "Luckiest Guy", "Impact", sans-serif;
   font-weight: 400;
@@ -485,51 +553,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   color: var(--gris);
   margin: 0.3em 0 1em;
 }
-.arbre img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 800px) {
-  .arbre { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1.5em; }
-  .arbre-texte { position: static; }
-}
-
-/* Page de contexte : le texte à gauche, les fiches des autrices à droite */
-.contexte {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 3em;
-  align-items: start;
-}
-.visuels {
-  margin-top: 4em;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1em;
-}
-.visuels .pleine, .visuels .legende { grid-column: 1 / -1; }
-.visuels .large { grid-column: 1 / -1; width: 55%; margin: 0 auto; }
-.visuels img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(43, 47, 58, 0.15);
-}
-.visuels img:nth-child(1) { transform: rotate(-1.5deg); }
-.visuels img:nth-child(2) { transform: rotate(1.5deg); }
-.legende {
-  display: block;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.15em;
-  color: var(--gris);
-  text-align: center;
-}
-@media (max-width: 800px) {
-  .contexte { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1em; }
-  .visuels { margin-top: 0; }
-}
+.arbre img { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; }
 
 /* Liens dans le texte */
 tw-link, .enchantment-link {
@@ -573,277 +597,291 @@ document.addEventListener('click', function (evenement) {
     }
   }, 75);
 });
-</script><tw-passagedata pid="1" name="Bouton couverture" tags="header" position="150,0" size="100,100">(unless: (a: &quot;Page de garde&quot;, &quot;L&#x27;arbre de l&#x27;histoire&quot;, &quot;Comment est née cette histoire&quot;) contains (passage:)&#x27;s name)[&lt;div class=&quot;retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;]</tw-passagedata><tw-passagedata pid="2" name="Page de garde" tags="" position="300,0" size="100,100">&lt;div class=&quot;garde&quot;&gt;&lt;div class=&quot;garde-entete&quot;&gt;&lt;span class=&quot;surtitre&quot;&gt;Une histoire dont le lecteur est le héros&lt;/span&gt;&lt;div class=&quot;grand-titre&quot;&gt;Violette et Patate&lt;/div&gt;&lt;span class=&quot;nom-auteur&quot;&gt;Eva et Brune&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;garde-corps&quot;&gt;&lt;div class=&quot;garde-image&quot;&gt;&lt;img src=&quot;images/couverture.jpg&quot; alt=&quot;Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l&#x27;attend&quot;&gt;&lt;/div&gt;&lt;div class=&quot;garde-texte&quot;&gt;&lt;div class=&quot;synopsis&quot;&gt;Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Son passe-temps préféré ? Faire des bêtises, évidemment !
 
-Mais quand elle rencontre un corbeau grincheux et Patate, un bébé venu de la Lune, l&#x27;aventure prend un drôle de tournant… Entre diamants volés, tartes brûlées et sucette extraordinaire, une chose est sûre : le calme n&#x27;est pas près de revenir !&lt;/div&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;commencer&quot;&gt;[[Commencer l&#x27;histoire-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]] [[L&#x27;arbre de l&#x27;histoire-&gt;L&#x27;arbre de l&#x27;histoire]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Comment est née cette histoire" tags="" position="450,0" size="100,100">&lt;div class=&quot;contexte&quot;&gt;&lt;div class=&quot;contexte-texte&quot;&gt;&lt;span class=&quot;lien-retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/span&gt;
-&lt;h1&gt;Comment est née cette histoire&lt;/h1&gt;Le mardi 27 octobre 2026, pendant les vacances d&#x27;automne, le L.A.B a animé l&#x27;atelier « Le livre dont tu es le héros » à la bibliothèque des Deux Ormes, l&#x27;une des bibliothèques Méjanes d&#x27;Aix-en-Provence. Huit enfants de 8 à 12 ans y ont inventé une histoire qui change selon les choix du lecteur, en l&#x27;écrivant situation par situation sur des fiches où chaque lancer de dé renvoie vers une autre situation. L&#x27;atelier est issu du projet européen Robots Meet Arts : derrière le récit, il s&#x27;agit de découvrir sans écran les notions qui structurent un programme informatique. Chaque lancer de dé est une condition, qui décide de la suite de l&#x27;histoire. Chaque choix ouvre un embranchement, et un chemin qui ramène à une situation déjà écrite forme une boucle.
+// Page de contexte : une miniature s'ouvre en grand, un clic referme
+document.addEventListener('click', function (evenement) {
+  var ouvert = document.querySelector('.agrandi');
+  if (ouvert) { ouvert.remove(); return; }
+  var miniature = evenement.target.closest('.miniature');
+  if (!miniature) return;
+  var fond = document.createElement('div');
+  fond.className = 'agrandi';
+  var image = document.createElement('img');
+  image.src = miniature.querySelector('img').src;
+  image.alt = miniature.querySelector('img').alt;
+  fond.appendChild(image);
+  document.body.appendChild(fond);
+});
+document.addEventListener('keydown', function (evenement) {
+  var ouvert = document.querySelector('.agrandi');
+  if (ouvert && evenement.key === 'Escape') ouvert.remove();
+});
+</script><tw-passagedata pid="1" name="Bouton couverture" tags="header" position="150,0" size="100,100">(unless: (a: &quot;Page de garde&quot;, &quot;L&#x27;arbre de l&#x27;histoire&quot;, &quot;Comment est née cette histoire&quot;) contains (passage:)&#x27;s name)[&lt;div class=&quot;retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;]</tw-passagedata><tw-passagedata pid="2" name="Page de garde" tags="" position="300,0" size="100,100">&lt;div class=&quot;garde&quot;&gt;&lt;div class=&quot;garde-entete&quot;&gt;&lt;span class=&quot;surtitre&quot;&gt;Une histoire dont le lecteur est le héros&lt;/span&gt;&lt;div class=&quot;grand-titre&quot;&gt;Violette et Patate&lt;/div&gt;&lt;span class=&quot;nom-auteur&quot;&gt;Eva et Brune&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;garde-corps&quot;&gt;&lt;div class=&quot;garde-image&quot;&gt;&lt;img src=&quot;images/couverture.jpg&quot; alt=&quot;Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l&#x27;attend&quot;&gt;&lt;/div&gt;&lt;div class=&quot;garde-texte&quot;&gt;&lt;div class=&quot;synopsis&quot;&gt;Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Son passe-temps préféré ? Faire des bêtises, évidemment !
 
-Écrire une telle histoire demande un travail créatif considérable. Il faut inventer un personnage et une quête, mais aussi penser l&#x27;histoire comme un réseau : prévoir à chaque étape plusieurs suites possibles, numéroter les situations, s&#x27;assurer que chaque chemin mène quelque part, et faire tenir tous ces fils ensemble sans perdre le sens du récit.
+Mais quand elle rencontre un corbeau grincheux et Patate, un bébé venu de la Lune, l&#x27;aventure prend un drôle de tournant… Entre diamants volés, tartes brûlées et sucette extraordinaire, une chose est sûre : le calme n&#x27;est pas près de revenir !&lt;/div&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;commencer&quot;&gt;[[Commencer l&#x27;histoire-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]] [[L&#x27;arbre de l&#x27;histoire-&gt;L&#x27;arbre de l&#x27;histoire]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Comment est née cette histoire" tags="" position="450,0" size="100,100">&lt;div class=&quot;contexte&quot;&gt;&lt;span class=&quot;lien-retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/span&gt;
+&lt;h1&gt;Comment est née cette histoire&lt;/h1&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;contexte-texte&quot;&gt;En octobre 2026, le L.A.B a animé l’atelier « La quête du curry, une histoire dont tu es le héros » dans les bibliothèques Méjanes d’Aix-en-Provence. Les enfants ont été accompagnés dans la création d’un récit complet, depuis l’invention des personnages jusqu’à la construction d’une intrigue reliant les différentes étapes de leur aventure.
 
-Eva et Brune ont relevé ce défi à deux. Elles ont inventé Violette, une fille de dix ans dont les lunettes magiques arrêtent le temps, Patate, un bébé venu de la Lune dont la sucette se transforme en tout ce qu&#x27;il veut, et Mirette, une mamie qui raconte sa vie et prépare des tartes qui se mangent sans cuire. C&#x27;est à elles que l&#x27;on doit les lunettes qui viennent rejoindre Violette à pied, le corbeau qui bouge dans le temps arrêté pour protéger ses diamants, le concours de corde à sauter et ce bébé qui, une fois tombé, ne peut plus se relever, parce que c&#x27;est une patate.
+Nous leur avons proposé d’introduire une part de hasard dans leur récit. Le résultat d’un lancer de dé pouvait modifier le déroulement de certains passages et conduire le lecteur vers un chapitre ou un autre.
 
-Pour leur histoire, Eva et Brune ont choisi l&#x27;humour. Avec //Violette et Patate//, elles vous présentent un récit comique, raconté par une héroïne farceuse qui arrête le temps pour faire des bêtises et finit par trouver, chez un bébé venu de la Lune, le complice idéal.
+Les enfants ont ainsi exploré, sans écran, des notions liées à la pensée computationnelle, une manière de décomposer un problème et d’organiser les étapes pour le résoudre. Ils ont formulé des règles de type « si… alors… », créé des embranchements et réfléchi à la façon dont les chemins se rejoignent pour former une histoire cohérente.
 
-Pour offrir à chaque enfant un livre achevé, dont il ou elle puisse être fier ou fière et avec lequel continuer à jouer, le L.A.B a prolongé chaque histoire à partir des idées de celles et ceux qui l&#x27;ont imaginée, puis l&#x27;a mise en forme, en s&#x27;aidant d&#x27;outils numériques, dont l&#x27;intelligence artificielle. Ce travail ne retire rien à celui des enfants : il s&#x27;appuie entièrement sur la créativité, l&#x27;imaginaire et les récits de celles et ceux qui ont participé à l&#x27;atelier.
+Eva et Brune ont choisi d’inventer une histoire drôle. Un défi pour une histoire à embranchements, puisque les gags doivent rester drôles et les chutes tomber juste, quel que soit le chemin emprunté.&lt;div class=&quot;citation&quot;&gt;« Le corbeau a un pouvoir et quand Violette arrête le temps, il bouge encore pour protéger ses diamants. »&lt;span class=&quot;source&quot;&gt;Eva et Brune, sur leur fiche récit&lt;/span&gt;&lt;/div&gt;Pour donner naissance à ce livre, le L.A.B a prolongé et mis en forme leur récit à l’aide d’outils numériques. L’intelligence artificielle a notamment contribué à produire, dans le temps imparti, une histoire complète et agréable à lire. À son origine, il y a avant tout les idées et les personnages d’Eva et de Brune.&lt;/div&gt;&lt;div class=&quot;table-fiches&quot;&gt;&lt;span class=&quot;titre-table&quot;&gt;Les fiches de l’atelier&lt;/span&gt;&lt;div class=&quot;miniatures&quot;&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche récit, par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;la fiche récit, par Eva et Brune&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Le récit&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche personnage de Patate&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_patate.jpg&quot; alt=&quot;la fiche personnage de Patate&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche personnage&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;img src=&quot;images/fiches/fiche_situation_4.jpg&quot; alt=&quot;la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche à embranchement&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;credits&quot;&gt;Une histoire d’Eva et de Brune.
+Réalisation du livre : Laboratoire d’Aix-périmentation et de Bidouille.&lt;/span&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Commencer le livre-&gt;Prologue]]&lt;/div&gt;
+&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="L&#x27;arbre de l&#x27;histoire" tags="" position="600,0" size="100,100">&lt;div class=&quot;arbre&quot;&gt;&lt;span class=&quot;lien-retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/span&gt;&lt;div class=&quot;arbre-tete&quot;&gt;&lt;h1&gt;Violette et Patate&lt;/h1&gt;&lt;span class=&quot;arbre-sous-titre&quot;&gt;Tous les chemins de l&#x27;histoire imaginée par Eva et Brune&lt;/span&gt;&lt;/div&gt;&lt;img src=&quot;images/arbre.svg&quot; alt=&quot;L&#x27;arbre de toutes les branches de l&#x27;histoire&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Prologue" tags="" position="750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Prologue&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Moi, Violette, apprentie farceuse&lt;/span&gt;&lt;/h1&gt;Bonjour, moi c&#x27;est Violette.
 
-&lt;span class=&quot;credits&quot;&gt;Une histoire d&#x27;Eva et Brune. Réalisation du livre : L.A.B, Laboratoire d&#x27;Aix-périmentation et de Bidouille.&lt;/span&gt;
+J&#x27;ai dix ans, deux tresses, un sweat, un jean, des baskets et des lunettes. Pas n&#x27;importe quelles lunettes : quand je les remonte sur mon nez, clac, le temps s&#x27;arrête. Les gens restent figés, les oiseaux restent collés au ciel, et moi, je fais ce que je veux.
 
-&lt;div class=&quot;secondaires&quot;&gt;[[Commencer le livre-&gt;Prologue]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;visuels&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;La fiche récit remplie par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_violette.jpg&quot; alt=&quot;La fiche personnage de Violette&quot;&gt;&lt;img class=&quot;pleine&quot; src=&quot;images/fiches/fiche_situation_4.jpg&quot; alt=&quot;La fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;span class=&quot;legende&quot;&gt;Les fiches remplies par Eva et Brune pendant l&#x27;atelier&lt;/span&gt;&lt;/div&gt;
-&lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="L&#x27;arbre de l&#x27;histoire" tags="" position="600,0" size="100,100">&lt;div class=&quot;arbre&quot;&gt;&lt;div class=&quot;arbre-texte&quot;&gt;&lt;h1&gt;Violette et Patate&lt;/h1&gt;&lt;span class=&quot;arbre-sous-titre&quot;&gt;Tous les chemins de l&#x27;histoire imaginée par Eva et Brune&lt;/span&gt;&lt;div class=&quot;intro-arbre&quot;&gt;Un arbre de décision est un schéma qui montre toutes les suites possibles d&#x27;une histoire, ou d&#x27;un programme informatique. Chaque case est une étape, ici un chapitre, et chaque flèche part d&#x27;une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les flèches, on vérifie qu&#x27;aucun chemin ne mène nulle part : c&#x27;est grâce à cet outil que chaque parcours de //Violette et Patate// conduit bien à une fin.&lt;/div&gt;&lt;div class=&quot;lien-retour couverture-arbre&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;&lt;/div&gt;&lt;img src=&quot;images/arbre.svg&quot; alt=&quot;L&#x27;arbre de toutes les branches de l&#x27;histoire&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Prologue" tags="" position="750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Prologue&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Moi, Violette, apprentie farceuse&lt;/span&gt;&lt;/h1&gt;Bonjour, moi c&#x27;est Violette.
-
-J&#x27;ai dix ans, deux tresses, un sweat, un jean, des baskets et des lunettes. Pas n&#x27;importe quelles lunettes : quand je les remonte sur mon nez, clac, le temps s&#x27;arrête. Les gens restent figés, les oiseaux restent collés au ciel, et moi, je fais ce que je veux.
-
-Je vis dans le futur. Enfin, dans mon présent à moi. Mais pour toi, c&#x27;est le futur. On s&#x27;y perd, non ? Dans ma ville, les voitures volent entre les immeubles, les robots font le ménage et les distributeurs de goûters parlent. Le mien refuse toujours de me donner une deuxième part de gâteau. Je ne l&#x27;aime pas. On sait aussi tous parler aux animaux. Ça, c&#x27;est quand même la classe !
+Je vis dans le futur. Enfin, dans mon présent à moi. Mais pour toi, c&#x27;est le futur. On s&#x27;y perd, non ? Dans ma ville, les voitures volent entre les immeubles, les robots font le ménage et les distributeurs de goûters parlent. Le mien refuse toujours de me donner une deuxième part de gâteau. Je ne l&#x27;aime pas. On sait aussi tous parler aux animaux. Ça, c&#x27;est quand même la classe !
 
 Il y a un an, il m&#x27;est arrivé la chose la plus étrange mais aussi la plus géniale de ma vie. Le jour de mes neuf ans, une étoile filante a traversé le ciel, a fait un virage au-dessus de ma maison et a atterri pile dans mon bol de céréales. Elle était minuscule, brûlante et de très mauvaise humeur. Quand j&#x27;ai voulu l&#x27;attraper, elle a bondi sur mes lunettes et s&#x27;est glissée dans les verres. Aussitôt, deux petites pattes ont poussé au bout des branches. Elles se sont mises à trottiner, puis ont grimpé sur mon nez.
 
-Je les ai remontées. Clac ! Le temps s&#x27;est arrêté. J&#x27;étais la seule à pouvoir bouger. Quand je l&#x27;ai relancé, personne ne s&#x27;était aperçu de rien. J&#x27;ai tout de suite compris que j&#x27;allais bien m&#x27;amuser.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Montre-moi tes bêtises !-&gt;Chapitre 1]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/prologue.jpg&quot; alt=&quot;Moi, Violette, apprentie farceuse&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Chapitre 1" tags="" position="900,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 1&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mes petites spécialités&lt;/span&gt;&lt;/h1&gt;Depuis, j&#x27;arrête le temps pour faire des bêtises. Et quand je le relance, les gens ne comprennent pas ce qui leur arrive. À force de chercher des explications, ils finissent par perdre la tête. Moi, je garde la mienne : j&#x27;en ai besoin pour inventer ma prochaine farce.
+Je les ai remontées. Clac ! Le temps s&#x27;est arrêté. J&#x27;étais la seule à pouvoir bouger. Quand je l&#x27;ai relancé, personne ne s&#x27;était aperçu de rien. J&#x27;ai tout de suite compris que j&#x27;allais bien m&#x27;amuser.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Montre-moi tes bêtises !-&gt;Chapitre 1]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/prologue.jpg&quot; alt=&quot;Moi, Violette, apprentie farceuse&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="6" name="Chapitre 1" tags="" position="900,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 1&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mes petites spécialités&lt;/span&gt;&lt;/h1&gt;Depuis, j&#x27;arrête le temps pour faire des bêtises. Et quand je le relance, les gens ne comprennent pas ce qui leur arrive. À force de chercher des explications, ils finissent par perdre la tête. Moi, je garde la mienne : j&#x27;en ai besoin pour inventer ma prochaine farce.
 
-Ma bêtise préférée ? Faire brûler les tartes. Dans ma ville, tout le monde en prépare, tous les jours. Dès que l&#x27;une d&#x27;elles est au four, clac ! J&#x27;arrête le temps. Les cuisiniers se figent, leur minuteur aussi, mais la tarte continue de cuire. Quand tout se remet en marche, ils découvrent qu&#x27;elle est noire comme du charbon et se mettent à crier : « VIOLETTE ! » Ils savent très bien que c&#x27;est moi, mais ils ne comprennent pas comment je fais. À force, ça les rend fous. Moi, ça me fait beaucoup rire.
+Ma bêtise préférée ? Faire brûler les tartes. Dans ma ville, tout le monde en prépare, tous les jours. Dès que l&#x27;une d&#x27;elles est au four, clac ! J&#x27;arrête le temps. Les cuisiniers se figent, leur minuteur aussi, mais la tarte continue de cuire. Quand tout se remet en marche, ils découvrent qu&#x27;elle est noire comme du charbon et se mettent à crier : « VIOLETTE ! » Ils savent très bien que c&#x27;est moi, mais ils ne comprennent pas comment je fais. À force, ça les rend fous. Moi, ça me fait beaucoup rire.
 
-Une autre de mes passions, c&#x27;est d&#x27;embêter les animaux. Je sais, ça ne se fait pas. Les animaux sont mignons, il faut les laisser tranquilles, blablabla. D&#x27;ailleurs, les chats du quartier ne veulent plus m&#x27;adresser la parole. Je les ai peut-être un tout petit peu trop embêtés. Un tout petit peu. Alors, ce matin, j&#x27;ai décidé de me trouver un nouveau compagnon de jeu. Dans la forêt, il paraît qu&#x27;il y a un corbeau : un vrai, tout noir, avec un grand bec et un air mystérieux. Je vais l&#x27;attraper, le ramener en ville et lui montrer à quel point je suis amusante. Qu&#x27;il le veuille ou non. En route !
+Une autre de mes passions, c&#x27;est d&#x27;embêter les animaux. Je sais, ça ne se fait pas. Les animaux sont mignons, il faut les laisser tranquilles, blablabla. D&#x27;ailleurs, les chats du quartier ne veulent plus m&#x27;adresser la parole. Je les ai peut-être un tout petit peu trop embêtés. Un tout petit peu. Alors, ce matin, j&#x27;ai décidé de me trouver un nouveau compagnon de jeu. Dans la forêt, il paraît qu&#x27;il y a un corbeau : un vrai, tout noir, avec un grand bec et un air mystérieux. Je vais l&#x27;attraper, le ramener en ville et lui montrer à quel point je suis amusante. Qu&#x27;il le veuille ou non. En route !
 
-Et je t&#x27;emmène avec moi ! Un peu de compagnie, ce sera plus amusant. Tu ne liras pas les chapitres dans l&#x27;ordre : à la fin de certains, lance le dé qui se trouve dans la couverture du livre. Il te dira où poursuivre l&#x27;aventure.
+Et je t&#x27;emmène avec moi ! Un peu de compagnie, ce sera plus amusant. Tu ne liras pas les chapitres dans l&#x27;ordre : à la fin de certains, lance le dé qui se trouve dans la couverture du livre. Il te dira où poursuivre l&#x27;aventure.
 
 &lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;span class=&quot;appel&quot;&gt;Tu peux tourner la page. Moi, je suis déjà partie.&lt;/span&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 2.-&gt;Chapitre 2]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-01.jpg&quot; alt=&quot;Mes petites spécialités&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="7" name="Chapitre 2" tags="" position="1050,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 2&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une tête, deux tresses et zéro lunettes&lt;/span&gt;&lt;/h1&gt;Pour trouver mon corbeau, je quitte ma rue, je traverse le pont et je prends le petit chemin vers la forêt. Petit à petit, les immeubles disparaissent derrière moi. Devant, il y a des arbres. Beaucoup d&#x27;arbres. À croire qu&#x27;ils se sont tous donné rendez-vous au même endroit.
 
 Bon. Pour attraper un corbeau, il me faut un plan. J&#x27;arrête le temps, je le repère et… et après, on verra. C&#x27;est un très bon début de plan.
 
-Je lève la main pour remonter mes lunettes. Mon doigt touche mon nez. Juste mon nez. Attends. Où sont mes lunettes ?
+Je lève la main pour remonter mes lunettes. Mon doigt touche mon nez. Juste mon nez. Attends. Où sont mes lunettes ?
 
-Je fouille mes poches. Pas là non plus. Je les revois sur la table de la cuisine, à côté de mon bol. Oh non. J&#x27;ai déjà fait tout ce chemin !
+Je fouille mes poches. Pas là non plus. Je les revois sur la table de la cuisine, à côté de mon bol. Oh non. J&#x27;ai déjà fait tout ce chemin !
 
-Bon, pas de panique. Elles ont des pattes, elles peuvent venir toutes seules. Je prends une grande inspiration. Avec un peu de chance, elles m&#x27;entendront.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour aider Violette à retrouver ses lunettes :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 3.-&gt;Chapitre 3]][[Un nombre impair : poursuis au chapitre 4.-&gt;Chapitre 4]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-02.jpg&quot; alt=&quot;Une tête, deux tresses et zéro lunettes&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Chapitre 3" tags="" position="1200,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 3&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mes lunettes ont des jambes. Et du caractère.&lt;/span&gt;&lt;/h1&gt;Je crie « LUNETTES ! » assez fort pour faire tomber trois feuilles. Un écureuil sort la tête de son trou, me regarde, puis rentre chez lui. Il ne m&#x27;aide même pas à les chercher.
+Bon, pas de panique. Elles ont des pattes, elles peuvent venir toutes seules. Je prends une grande inspiration. Avec un peu de chance, elles m&#x27;entendront.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour aider Violette à retrouver ses lunettes :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 3.-&gt;Chapitre 3]][[Un nombre impair : poursuis au chapitre 4.-&gt;Chapitre 4]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-02.jpg&quot; alt=&quot;Une tête, deux tresses et zéro lunettes&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="8" name="Chapitre 3" tags="" position="1200,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 3&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mes lunettes ont des jambes. Et du caractère.&lt;/span&gt;&lt;/h1&gt;Je crie « LUNETTES ! » assez fort pour faire tomber trois feuilles. Un écureuil sort la tête de son trou, me regarde, puis rentre chez lui. Il ne m&#x27;aide même pas à les chercher.
 
 J&#x27;attends. Longtemps. L&#x27;écureuil ressort la tête de son trou, juste assez pour voir si je suis encore là. Oui, je suis encore là.
 
-Enfin, un petit bruit monte des fougères : tic, tic, tic. Mes lunettes arrivent au pas, sur leurs petites pattes. Elles ont de la boue sur les branches et l&#x27;air franchement vexé. Apparemment, elles n&#x27;aiment pas qu&#x27;on les oublie sur la table de la cuisine.
+Enfin, un petit bruit monte des fougères : tic, tic, tic. Mes lunettes arrivent au pas, sur leurs petites pattes. Elles ont de la boue sur les branches et l&#x27;air franchement vexé. Apparemment, elles n&#x27;aiment pas qu&#x27;on les oublie sur la table de la cuisine.
 
 Je les pose sur mon nez.
 
-« Merci. »
+« Merci. »
 
-Elles ne répondent pas. Elles boudent. Tant pis, je leur ai dit merci, quand même ! Je quitte le sentier et je m&#x27;enfonce dans la forêt. À nous deux, monsieur le corbeau.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-03.jpg&quot; alt=&quot;Mes lunettes ont des jambes. Et du caractère.&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Chapitre 4" tags="" position="1350,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 4&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Le grand retour de la fille qui oublie tout&lt;/span&gt;&lt;/h1&gt;J&#x27;appelle mes lunettes. Rien. Elles doivent dormir. Ou bouder. Ou dormir en boudant, ce qui leur ressemble assez.
+Elles ne répondent pas. Elles boudent. Tant pis, je leur ai dit merci, quand même ! Je quitte le sentier et je m&#x27;enfonce dans la forêt. À nous deux, monsieur le corbeau.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-03.jpg&quot; alt=&quot;Mes lunettes ont des jambes. Et du caractère.&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="9" name="Chapitre 4" tags="" position="1350,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 4&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Le grand retour de la fille qui oublie tout&lt;/span&gt;&lt;/h1&gt;J&#x27;appelle mes lunettes. Rien. Elles doivent dormir. Ou bouder. Ou dormir en boudant, ce qui leur ressemble assez.
 
-Je fais demi-tour et je refais le chemin à l&#x27;envers : le petit sentier, le pont, puis ma rue, qui sent encore la tarte brûlée. De rien.
+Je fais demi-tour et je refais le chemin à l&#x27;envers : le petit sentier, le pont, puis ma rue, qui sent encore la tarte brûlée. De rien.
 
 Je marche de plus en plus vite. J&#x27;espère que le corbeau m&#x27;attendra dans la forêt. Enfin, il ne sait pas encore qu&#x27;il m&#x27;attend, mais c&#x27;est un détail.
 
-Me voilà devant chez moi.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir ce qui attend Violette devant chez elle :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 5.-&gt;Chapitre 5]][[Un nombre impair : poursuis au chapitre 6.-&gt;Chapitre 6]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-04.jpg&quot; alt=&quot;Le grand retour de la fille qui oublie tout&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Chapitre 5" tags="" position="1500,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 5&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Toc, toc. Qui boude ?&lt;/span&gt;&lt;/h1&gt;Je fouille une poche. Puis l&#x27;autre. J&#x27;en sors une vieille noisette, un bout de ficelle et une chaussette. Mais pas de clés.
+Me voilà devant chez moi.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir ce qui attend Violette devant chez elle :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 5.-&gt;Chapitre 5]][[Un nombre impair : poursuis au chapitre 6.-&gt;Chapitre 6]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-04.jpg&quot; alt=&quot;Le grand retour de la fille qui oublie tout&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="10" name="Chapitre 5" tags="" position="1500,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 5&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Toc, toc. Qui boude ?&lt;/span&gt;&lt;/h1&gt;Je fouille une poche. Puis l&#x27;autre. J&#x27;en sors une vieille noisette, un bout de ficelle et une chaussette. Mais pas de clés.
 
 Je les ai oubliées sur la table de la cuisine, à côté de mes lunettes. Je commence à penser que cette table me vole mes affaires.
 
-Je tape à la porte. Toc, toc, toc. Silence. Puis, de l&#x27;autre côté, une toute petite voix :
+Je tape à la porte. Toc, toc, toc. Silence. Puis, de l&#x27;autre côté, une toute petite voix :
 
-« Qui est là ? »
+« Qui est là ? »
 
-« C&#x27;est moi. Ouvrez. »
+« C&#x27;est moi. Ouvrez. »
 
-« Tu nous as oubliées. »
+« Tu nous as oubliées. »
 
-« Justement, je suis revenue vous chercher. »
+« Justement, je suis revenue vous chercher. »
 
 Long silence. Je crois que mes lunettes réfléchissent à leur vengeance. Enfin, la serrure tourne. Je ne sais pas comment elles font (après tout, ce ne sont que des lunettes) et c&#x27;est peut-être mieux comme ça.
 
-Elles sautent sur mon nez sans un mot. Je récupère mes clés sur la table et je repars vers le pont, puis la forêt. Cette fois, je vérifie que j&#x27;ai tout avant de partir. Une fois suffit.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-05.jpg&quot; alt=&quot;Toc, toc. Qui boude ?&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Chapitre 6" tags="" position="1650,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 6&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mirette et l&#x27;histoire qui n&#x27;en finit pas&lt;/span&gt;&lt;/h1&gt;J&#x27;arrive devant chez moi. Sur le trottoir, une mamie me barre le passage avec un grand sac. Elle a des cheveux gris frisés, un bandeau et un sourire qui prend presque toute la place sur son visage.
+Elles sautent sur mon nez sans un mot. Je récupère mes clés sur la table et je repars vers le pont, puis la forêt. Cette fois, je vérifie que j&#x27;ai tout avant de partir. Une fois suffit.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-05.jpg&quot; alt=&quot;Toc, toc. Qui boude ?&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="11" name="Chapitre 6" tags="" position="1650,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 6&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Mirette et l&#x27;histoire qui n&#x27;en finit pas&lt;/span&gt;&lt;/h1&gt;J&#x27;arrive devant chez moi. Sur le trottoir, une mamie me barre le passage avec un grand sac. Elle a des cheveux gris frisés, un bandeau et un sourire qui prend presque toute la place sur son visage.
 
-« Bonjour ! Je m&#x27;appelle Mirette. Et toi ? »
+« Bonjour ! Je m&#x27;appelle Mirette. Et toi ? »
 
-Je lui dis mon prénom. C&#x27;est ma première erreur. Mirette connaît tout le quartier et elle a beaucoup de choses à raconter. Beaucoup. Elle m&#x27;explique qu&#x27;elle s&#x27;enfuit souvent de sa maison de retraite. Je la comprends : qui voudrait rester là-bas quand on peut se promener ?
+Je lui dis mon prénom. C&#x27;est ma première erreur. Mirette connaît tout le quartier et elle a beaucoup de choses à raconter. Beaucoup. Elle m&#x27;explique qu&#x27;elle s&#x27;enfuit souvent de sa maison de retraite. Je la comprends : qui voudrait rester là-bas quand on peut se promener ?
 
 Elle me raconte sa naissance, son premier chien, son deuxième chien et les tartes qu&#x27;elle prépare. Des tartes qui ne cuisent jamais, mais qui se mangent quand même. J&#x27;essaie de lui parler de mes lunettes. Elle me répond qu&#x27;elle en a eu, elle aussi, quand elle avait sept ans. Et elle continue son histoire.
 
-Quand elle arrive à ses vingt ans, il fait nuit. Tant pis pour la forêt, j&#x27;irai demain. Justement, mes parents rentrent du travail et nous ouvrent la porte. Je leur présente Mirette. Il est trop tard pour la raccompagner à sa maison de retraite, alors je leur demande si elle peut dormir sur le canapé. Ils sont d&#x27;accord. Autant la garder pour la nuit ! À peine installée sur le canapé, Mirette s&#x27;endort. Elle ronfle comme une moto. Une très grosse moto.
+Quand elle arrive à ses vingt ans, il fait nuit. Tant pis pour la forêt, j&#x27;irai demain. Justement, mes parents rentrent du travail et nous ouvrent la porte. Je leur présente Mirette. Il est trop tard pour la raccompagner à sa maison de retraite, alors je leur demande si elle peut dormir sur le canapé. Ils sont d&#x27;accord. Autant la garder pour la nuit ! À peine installée sur le canapé, Mirette s&#x27;endort. Elle ronfle comme une moto. Une très grosse moto.
 
-Le lendemain, je récupère mes lunettes et mes clés sur la table de la cuisine. Mirette dort encore. Mes parents sont là : je leur demande de lui dire où je suis partie quand elle se réveillera. Puis je sors sur la pointe des pieds.
+Le lendemain, je récupère mes lunettes et mes clés sur la table de la cuisine. Mirette dort encore. Mes parents sont là : je leur demande de lui dire où je suis partie quand elle se réveillera. Puis je sors sur la pointe des pieds.
 
 Bon. Je reviendrai. Sûrement.
 
-Je traverse le pont et je reprends le chemin de la forêt. J&#x27;espère que le corbeau n&#x27;a pas pris de vacances pendant que Mirette me racontait sa vie.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-06.jpg&quot; alt=&quot;Mirette et l&#x27;histoire qui n&#x27;en finit pas&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Chapitre 7" tags="" position="1800,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 7&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Ce corbeau refuse de se tenir tranquille&lt;/span&gt;&lt;/h1&gt;Me voilà dans la forêt, mes lunettes sur le nez. Je cherche entre les branches et, au bout de quelques pas, je le vois enfin : mon corbeau ! Tout noir, tout brillant. Il me regarde comme si c&#x27;était moi, l&#x27;animal bizarre.
+Je traverse le pont et je reprends le chemin de la forêt. J&#x27;espère que le corbeau n&#x27;a pas pris de vacances pendant que Mirette me racontait sa vie.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 7.-&gt;Chapitre 7]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-06.jpg&quot; alt=&quot;Mirette et l&#x27;histoire qui n&#x27;en finit pas&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="12" name="Chapitre 7" tags="" position="1800,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 7&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Ce corbeau refuse de se tenir tranquille&lt;/span&gt;&lt;/h1&gt;Me voilà dans la forêt, mes lunettes sur le nez. Je cherche entre les branches et, au bout de quelques pas, je le vois enfin : mon corbeau ! Tout noir, tout brillant. Il me regarde comme si c&#x27;était moi, l&#x27;animal bizarre.
 
-Je remonte mes lunettes. Clac : le temps s&#x27;arrête. Les feuilles restent suspendues dans l&#x27;air et un écureuil se fige en plein saut. Je m&#x27;approche du tronc, prête à grimper, quand le corbeau tourne la tête vers moi.
+Je remonte mes lunettes. Clac : le temps s&#x27;arrête. Les feuilles restent suspendues dans l&#x27;air et un écureuil se fige en plein saut. Je m&#x27;approche du tronc, prête à grimper, quand le corbeau tourne la tête vers moi.
 
 Il bouge. Dans le temps arrêté, il bouge. Ça, ce n&#x27;était pas prévu.
 
-« Toi aussi, tu as un pouvoir ? » je demande.
+« Toi aussi, tu as un pouvoir ? » je demande.
 
 Il me fixe de ses petits yeux noirs.
 
-« Tu crois que tu es la seule à avoir rencontré une étoile filante ? La mienne avait un caractère de cochon. Enfin… d&#x27;étoile. Et si tu es venue pour me voler, passe ton chemin : on m&#x27;a déjà volé une fois. Ça suffit. »
+« Tu crois que tu es la seule à avoir rencontré une étoile filante ? La mienne avait un caractère de cochon. Enfin… d&#x27;étoile. Et si tu es venue pour me voler, passe ton chemin : on m&#x27;a déjà volé une fois. Ça suffit. »
 
-Volé ? Je voudrais bien savoir ce qu&#x27;on peut voler à un corbeau. Ses plumes ? Son déjeuner ? Je relance le temps. L&#x27;écureuil finit son saut et disparaît dans les fougères.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment le corbeau réagit à la présence de Violette :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 8.-&gt;Chapitre 8]][[Un nombre impair : poursuis au chapitre 10.-&gt;Chapitre 10]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-07.jpg&quot; alt=&quot;Ce corbeau refuse de se tenir tranquille&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="Chapitre 8" tags="" position="1950,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 8&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Branche cassée, dignité envolée&lt;/span&gt;&lt;/h1&gt;Le corbeau s&#x27;envole entre les arbres. Hé ! Je n&#x27;ai même pas eu le temps de l&#x27;embêter ! Je cours derrière lui. Il ne va pas se débarrasser de moi aussi facilement.
+Volé ? Je voudrais bien savoir ce qu&#x27;on peut voler à un corbeau. Ses plumes ? Son déjeuner ? Je relance le temps. L&#x27;écureuil finit son saut et disparaît dans les fougères.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment le corbeau réagit à la présence de Violette :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 8.-&gt;Chapitre 8]][[Un nombre impair : poursuis au chapitre 10.-&gt;Chapitre 10]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-07.jpg&quot; alt=&quot;Ce corbeau refuse de se tenir tranquille&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="13" name="Chapitre 8" tags="" position="1950,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 8&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Branche cassée, dignité envolée&lt;/span&gt;&lt;/h1&gt;Le corbeau s&#x27;envole entre les arbres. Hé ! Je n&#x27;ai même pas eu le temps de l&#x27;embêter ! Je cours derrière lui. Il ne va pas se débarrasser de moi aussi facilement.
 
 Il se pose sur la branche d&#x27;un grand chêne. J&#x27;arrive au pied de l&#x27;arbre et je grimpe. J&#x27;arrive presque à sa hauteur quand, craaac, la branche casse sous mes pieds. Je me rattrape de justesse et je reste suspendue au-dessus des fougères.
 
 Le corbeau va tranquillement se poser sur l&#x27;arbre d&#x27;à côté. Il a l&#x27;air de beaucoup s&#x27;amuser. Moi, beaucoup moins.
 
-Je redescends, j&#x27;enlève une feuille de mes tresses et je vais jusqu&#x27;à son nouvel arbre. Cette fois, j&#x27;essaie de grimper sans faire de bruit. Ce qui n&#x27;est pas du tout ma spécialité.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir la suite de la poursuite :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 10.-&gt;Chapitre 10]][[Un nombre impair : poursuis au chapitre 9.-&gt;Chapitre 9]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-08.jpg&quot; alt=&quot;Branche cassée, dignité envolée&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Chapitre 9" tags="" position="2100,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 9&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Encore raté ?&lt;/span&gt;&lt;/h1&gt;Le corbeau s&#x27;envole vers un autre arbre. Je redescends et je le suis. Il est perché là-haut. Je grimpe doucement, sans quitter ses plumes des yeux. Encore un petit effort… Je tends la main.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir la suite de la poursuite :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[2, 4 ou 6 : poursuis au chapitre 10.-&gt;Chapitre 10]][[1, 3 ou 5 : relis le chapitre 9.-&gt;Chapitre 9]][[Si tu l&#x27;as déjà relu deux fois, poursuis au chapitre 10.-&gt;Chapitre 10]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-09.jpg&quot; alt=&quot;Encore raté ?&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="Chapitre 10" tags="" position="2250,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 10&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Un bébé, des diamants et une couche suspecte&lt;/span&gt;&lt;/h1&gt;Le corbeau descend se poser sur une souche, au pied des arbres. Je vais m&#x27;asseoir à côté de lui. Voilà, on va pouvoir discuter tranquillement. Enfin, si monsieur arrête de me regarder de travers.
+Je redescends, j&#x27;enlève une feuille de mes tresses et je vais jusqu&#x27;à son nouvel arbre. Cette fois, j&#x27;essaie de grimper sans faire de bruit. Ce qui n&#x27;est pas du tout ma spécialité.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir la suite de la poursuite :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 10.-&gt;Chapitre 10]][[Un nombre impair : poursuis au chapitre 9.-&gt;Chapitre 9]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-08.jpg&quot; alt=&quot;Branche cassée, dignité envolée&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="14" name="Chapitre 9" tags="" position="2100,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 9&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Encore raté ?&lt;/span&gt;&lt;/h1&gt;Le corbeau s&#x27;envole vers un autre arbre. Je redescends et je le suis. Il est perché là-haut. Je grimpe doucement, sans quitter ses plumes des yeux. Encore un petit effort… Je tends la main.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir la suite de la poursuite :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[2, 4 ou 6 : poursuis au chapitre 10.-&gt;Chapitre 10]][[1, 3 ou 5 : relis le chapitre 9.-&gt;Chapitre 9]][[Si tu l&#x27;as déjà relu deux fois, poursuis au chapitre 10.-&gt;Chapitre 10]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-09.jpg&quot; alt=&quot;Encore raté ?&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="15" name="Chapitre 10" tags="" position="2250,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 10&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Un bébé, des diamants et une couche suspecte&lt;/span&gt;&lt;/h1&gt;Le corbeau descend se poser sur une souche, au pied des arbres. Je vais m&#x27;asseoir à côté de lui. Voilà, on va pouvoir discuter tranquillement. Enfin, si monsieur arrête de me regarder de travers.
 
-« Je gardais des diamants, dit-il. Un tas magnifique, au fond de mon nid. Hier, un bébé est venu les prendre. »
+« Je gardais des diamants, dit-il. Un tas magnifique, au fond de mon nid. Hier, un bébé est venu les prendre. »
 
-« Un bébé ? »
+« Un bébé ? »
 
-« Deux ans à tout casser, une tétine, une mèche en spirale. Il vient de la Lune. Il s&#x27;appelle Patate. Il veut de l&#x27;argent, beaucoup d&#x27;argent, et il cache ses gadgets dans sa couche. »
+« Deux ans à tout casser, une tétine, une mèche en spirale. Il vient de la Lune. Il s&#x27;appelle Patate. Il veut de l&#x27;argent, beaucoup d&#x27;argent, et il cache ses gadgets dans sa couche. »
 
 Je réfléchis. J&#x27;étais venue embêter un corbeau. Mais un bébé de la Lune qui vole des diamants, c&#x27;est beaucoup plus intéressant. Et des diamants, moi aussi, j&#x27;en voudrais bien.
 
-« Je vais t&#x27;aider à le trouver », je dis.
+« Je vais t&#x27;aider à le trouver », je dis.
 
-Le corbeau me regarde d&#x27;un air méfiant. Il a raison. Je me relève et il s&#x27;envole au-dessus de moi. Direction : Patate. Enfin, si on arrive à le trouver dans tous ces arbres.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour aider Violette et le corbeau à chercher Patate :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 11.-&gt;Chapitre 11]][[Un nombre impair : poursuis au chapitre 12.-&gt;Chapitre 12]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-10.jpg&quot; alt=&quot;Un bébé, des diamants et une couche suspecte&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Chapitre 11" tags="" position="2400,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 11&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Qui sème des miettes récolte un bébé&lt;/span&gt;&lt;/h1&gt;On avance entre les arbres et, par terre, je vois des miettes. Des miettes noires, croustillantes, qui sentent le brûlé. Je les reconnaîtrais entre mille : ce sont les miettes de mes tartes.
+Le corbeau me regarde d&#x27;un air méfiant. Il a raison. Je me relève et il s&#x27;envole au-dessus de moi. Direction : Patate. Enfin, si on arrive à le trouver dans tous ces arbres.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour aider Violette et le corbeau à chercher Patate :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 11.-&gt;Chapitre 11]][[Un nombre impair : poursuis au chapitre 12.-&gt;Chapitre 12]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-10.jpg&quot; alt=&quot;Un bébé, des diamants et une couche suspecte&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="16" name="Chapitre 11" tags="" position="2400,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 11&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Qui sème des miettes récolte un bébé&lt;/span&gt;&lt;/h1&gt;On avance entre les arbres et, par terre, je vois des miettes. Des miettes noires, croustillantes, qui sentent le brûlé. Je les reconnaîtrais entre mille : ce sont les miettes de mes tartes.
 
 Enfin, des tartes que j&#x27;ai fait brûler. Je n&#x27;allais quand même pas les préparer moi-même.
 
-Il y a un sacré gourmand dans les parages. Et il n&#x27;a pas pris de serviette !
+Il y a un sacré gourmand dans les parages. Et il n&#x27;a pas pris de serviette !
 
-Le corbeau vole au-dessus de moi et je suis la piste entre les buissons. Les miettes nous conduisent jusqu&#x27;à une clairière. Au milieu, assis sur une montagne de diamants, un bébé tète sa sucette en comptant :
+Le corbeau vole au-dessus de moi et je suis la piste entre les buissons. Les miettes nous conduisent jusqu&#x27;à une clairière. Au milieu, assis sur une montagne de diamants, un bébé tète sa sucette en comptant :
 
-« Un, deux, beaucoup. »
+« Un, deux, beaucoup. »
 
 Ah, le voilà, ce fameux Patate. Pour les calculs, il a encore des progrès à faire. Pour les trésors, il se débrouille très bien.
 
-Il retire sa sucette : elle se transforme en petite cuillère. Il ramasse une miette, puis hop, elle redevient une sucette. Hé, moi aussi, j&#x27;en veux une comme ça !
+Il retire sa sucette : elle se transforme en petite cuillère. Il ramasse une miette, puis hop, elle redevient une sucette. Hé, moi aussi, j&#x27;en veux une comme ça !
 
-Je m&#x27;avance vers lui, avec le corbeau sur mes talons. Enfin, presque : il préfère voler.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 13.-&gt;Chapitre 13]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-11.jpg&quot; alt=&quot;Qui sème des miettes récolte un bébé&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Chapitre 12" tags="" position="2550,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 12&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une sucette, une cage et beaucoup d&#x27;ennuis&lt;/span&gt;&lt;/h1&gt;Avec le corbeau, on avance entre les arbres à la recherche de Patate. Au détour d&#x27;un buisson, CLANG ! Une cage dorée tombe sur le corbeau.
+Je m&#x27;avance vers lui, avec le corbeau sur mes talons. Enfin, presque : il préfère voler.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 13.-&gt;Chapitre 13]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-11.jpg&quot; alt=&quot;Qui sème des miettes récolte un bébé&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="17" name="Chapitre 12" tags="" position="2550,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 12&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une sucette, une cage et beaucoup d&#x27;ennuis&lt;/span&gt;&lt;/h1&gt;Avec le corbeau, on avance entre les arbres à la recherche de Patate. Au détour d&#x27;un buisson, CLANG ! Une cage dorée tombe sur le corbeau.
 
-Derrière un arbre sort un bébé : deux ans, de grands yeux, un petit nez et une mèche en spirale. Ah, le voilà, ce fameux Patate. Sa sucette peut se transformer en tout ce qu&#x27;il veut. Et ce matin, il voulait une cage à corbeau.
+Derrière un arbre sort un bébé : deux ans, de grands yeux, un petit nez et une mèche en spirale. Ah, le voilà, ce fameux Patate. Sa sucette peut se transformer en tout ce qu&#x27;il veut. Et ce matin, il voulait une cage à corbeau.
 
-« Encore toi ! » croasse le corbeau en secouant les barreaux.
+« Encore toi ! » croasse le corbeau en secouant les barreaux.
 
-Pendant que Patate fouille sa couche à la recherche d&#x27;un autre gadget, je remonte mes lunettes. Clac : le temps s&#x27;arrête. J&#x27;ouvre la cage, le corbeau en sort et je relance le temps.
+Pendant que Patate fouille sa couche à la recherche d&#x27;un autre gadget, je remonte mes lunettes. Clac : le temps s&#x27;arrête. J&#x27;ouvre la cage, le corbeau en sort et je relance le temps.
 
 Patate me regarde. Je regarde Patate. Il me tire la langue. Sa cage redevient une sucette, qu&#x27;il remet dans sa bouche.
 
-Derrière lui, j&#x27;aperçois une clairière. Et au milieu : une montagne de diamants ! Je m&#x27;avance vers le bébé. Le corbeau me suit, sans quitter la sucette des yeux. Je le comprends un peu.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 13.-&gt;Chapitre 13]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-12.jpg&quot; alt=&quot;Une sucette, une cage et beaucoup d&#x27;ennuis&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="18" name="Chapitre 13" tags="" position="2700,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 13&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Saute pour voir !&lt;/span&gt;&lt;/h1&gt;Dans la clairière, Patate se plante devant les diamants. Le corbeau me regarde. Patate me regarde. Bon. On dirait que c&#x27;est à moi de trouver une idée.
+Derrière lui, j&#x27;aperçois une clairière. Et au milieu : une montagne de diamants ! Je m&#x27;avance vers le bébé. Le corbeau me suit, sans quitter la sucette des yeux. Je le comprends un peu.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 13.-&gt;Chapitre 13]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-12.jpg&quot; alt=&quot;Une sucette, une cage et beaucoup d&#x27;ennuis&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="18" name="Chapitre 13" tags="" position="2700,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 13&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Saute pour voir !&lt;/span&gt;&lt;/h1&gt;Dans la clairière, Patate se plante devant les diamants. Le corbeau me regarde. Patate me regarde. Bon. On dirait que c&#x27;est à moi de trouver une idée.
 
 Je pourrais arrêter le temps et prendre le trésor. Mais le corbeau, lui, bouge dans le temps arrêté, et ce sont ses diamants. Alors je propose un concours à Patate.
 
-« Corde à sauter. Celui qui fait le plus de sauts gagne les diamants. »
+« Corde à sauter. Celui qui fait le plus de sauts gagne les diamants. »
 
-Patate réfléchit. Ça se voit : il louche. Puis il retire sa sucette. Elle s&#x27;étire, s&#x27;étire… et voilà de quoi sauter ! Le corbeau accepte de compter les points. Il n&#x27;a pas l&#x27;air ravi, mais, lui au moins, il a l&#x27;air de savoir compter.
+Patate réfléchit. Ça se voit : il louche. Puis il retire sa sucette. Elle s&#x27;étire, s&#x27;étire… et voilà de quoi sauter ! Le corbeau accepte de compter les points. Il n&#x27;a pas l&#x27;air ravi, mais, lui au moins, il a l&#x27;air de savoir compter.
 
-Pour nous échauffer, Patate saute : un, deux, trois… Il est très fort pour un bébé. À mon tour : un, deux, trois… Je suis très forte aussi, surtout avec mes baskets qui tiennent à peine en place.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment se termine le concours :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 15.-&gt;Chapitre 15]][[Un nombre impair : poursuis au chapitre 14.-&gt;Chapitre 14]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-13.jpg&quot; alt=&quot;Saute pour voir !&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="Chapitre 14" tags="" position="2850,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 14&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Encore un tour !&lt;/span&gt;&lt;/h1&gt;Patate se débrouille un peu trop bien à mon goût. Si j&#x27;arrêtais le temps juste une seconde ? Le temps de faire quelques sauts de plus, ni vu ni connu…
+Pour nous échauffer, Patate saute : un, deux, trois… Il est très fort pour un bébé. À mon tour : un, deux, trois… Je suis très forte aussi, surtout avec mes baskets qui tiennent à peine en place.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment se termine le concours :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 15.-&gt;Chapitre 15]][[Un nombre impair : poursuis au chapitre 14.-&gt;Chapitre 14]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-13.jpg&quot; alt=&quot;Saute pour voir !&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="19" name="Chapitre 14" tags="" position="2850,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 14&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Encore un tour !&lt;/span&gt;&lt;/h1&gt;Patate se débrouille un peu trop bien à mon goût. Si j&#x27;arrêtais le temps juste une seconde ? Le temps de faire quelques sauts de plus, ni vu ni connu…
 
-Je remonte mes lunettes, mais elles sautent de mon nez et vont bouder sous un champignon. Trahison ! Elles m&#x27;en veulent peut-être encore de les avoir oubliées à la maison.
+Je remonte mes lunettes, mais elles sautent de mon nez et vont bouder sous un champignon. Trahison ! Elles m&#x27;en veulent peut-être encore de les avoir oubliées à la maison.
 
-« Concours nul ! » annonce le corbeau.
+« Concours nul ! » annonce le corbeau.
 
-Je récupère mes lunettes et on recommence. Patate se remet en place, prêt à sauter. Moi, je porte la main à mon nez.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment se termine le concours :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 15.-&gt;Chapitre 15]][[Un nombre impair : relis le chapitre 14.-&gt;Chapitre 14]][[Si tu l&#x27;as déjà relu deux fois, poursuis au chapitre 15.-&gt;Chapitre 15]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-14.jpg&quot; alt=&quot;Encore un tour !&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="Chapitre 15" tags="" position="3000,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 15&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une patate sur le dos et deux super gangsters&lt;/span&gt;&lt;/h1&gt;Patate saute : un, deux, trois… Au quarante et unième saut, il se prend les pieds dans la corde et tombe sur le dos.
+Je récupère mes lunettes et on recommence. Patate se remet en place, prêt à sauter. Moi, je porte la main à mon nez.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour découvrir comment se termine le concours :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 15.-&gt;Chapitre 15]][[Un nombre impair : relis le chapitre 14.-&gt;Chapitre 14]][[Si tu l&#x27;as déjà relu deux fois, poursuis au chapitre 15.-&gt;Chapitre 15]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-14.jpg&quot; alt=&quot;Encore un tour !&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="20" name="Chapitre 15" tags="" position="3000,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 15&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une patate sur le dos et deux super gangsters&lt;/span&gt;&lt;/h1&gt;Patate saute : un, deux, trois… Au quarante et unième saut, il se prend les pieds dans la corde et tombe sur le dos.
 
-Et là, impossible de se relever. Il agite les bras, il agite les jambes, il roule à droite, il roule à gauche. Rien à faire : une fois par terre, Patate est une patate.
+Et là, impossible de se relever. Il agite les bras, il agite les jambes, il roule à droite, il roule à gauche. Rien à faire : une fois par terre, Patate est une patate.
 
-À mon tour ! Je prends la corde et je saute. Quarante-deux sauts ! Le corbeau les a comptés, je n&#x27;invente rien.
+À mon tour ! Je prends la corde et je saute. Quarante-deux sauts ! Le corbeau les a comptés, je n&#x27;invente rien.
 
 Pendant que Patate se débat encore, le corbeau récupère ses diamants. D&#x27;un battement d&#x27;ailes, il les rassemble sous lui. Moi, j&#x27;ai gagné le concours. Je devrais être contente.
 
 Mais Patate se met à rire. Un rire de bébé énorme, qui fait trembler sa mèche en spirale. Et je ris aussi. On rit tellement que j&#x27;en ai mal au ventre.
 
-Je le remets debout. Il me montre sa sucette : elle devient un parapluie, puis un vélo, puis un dinosaure. Je lui montre comment j&#x27;arrête le temps. Patate reste figé, comme tout le monde. Je relance le temps, puis je lui prends la main et j&#x27;essaie encore. Clac ! Cette fois, il me tire la langue. Tant que je lui tiens la main, il peut bouger avec moi !
+Je le remets debout. Il me montre sa sucette : elle devient un parapluie, puis un vélo, puis un dinosaure. Je lui montre comment j&#x27;arrête le temps. Patate reste figé, comme tout le monde. Je relance le temps, puis je lui prends la main et j&#x27;essaie encore. Clac ! Cette fois, il me tire la langue. Tant que je lui tiens la main, il peut bouger avec moi !
 
 Je relance le temps et il me montre ce qu&#x27;il cache dans sa couche. Je préfère ne pas en parler.
 
 On s&#x27;entend parfaitement.
 
-Le corbeau nous regarde, ses diamants sous l&#x27;aile. Il n&#x27;a pas l&#x27;air décidé à les partager. Pourtant, j&#x27;ai gagné le concours !
+Le corbeau nous regarde, ses diamants sous l&#x27;aile. Il n&#x27;a pas l&#x27;air décidé à les partager. Pourtant, j&#x27;ai gagné le concours !
 
-« On pourrait en prendre la moitié, je propose. Et en échange, on te laisse tranquille. »
+« On pourrait en prendre la moitié, je propose. Et en échange, on te laisse tranquille. »
 
-Il hésite. Alors Patate transforme sa sucette en trompette et souffle dedans. Un bruit terrible ! Le corbeau se bouche les oreilles avec ses ailes.
+Il hésite. Alors Patate transforme sa sucette en trompette et souffle dedans. Un bruit terrible ! Le corbeau se bouche les oreilles avec ses ailes.
 
-« D&#x27;accord, d&#x27;accord ! Prenez-en la moitié et partez ! »
+« D&#x27;accord, d&#x27;accord ! Prenez-en la moitié et partez ! »
 
-On remplit un sac pendant que le corbeau range le reste sous son aile.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 16.-&gt;Chapitre 16]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-15.jpg&quot; alt=&quot;Une patate sur le dos et deux super gangsters&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="Chapitre 16" tags="" position="3150,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 16&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une sacrée équipe&lt;/span&gt;&lt;/h1&gt;Patate soulève le sac de diamants comme s&#x27;il était rempli de plumes. Je l&#x27;aide quand même à le porter. Il ne faudrait pas qu&#x27;il tombe encore sur le dos : on y passerait la journée.
+On remplit un sac pendant que le corbeau range le reste sous son aile.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 16.-&gt;Chapitre 16]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-15.jpg&quot; alt=&quot;Une patate sur le dos et deux super gangsters&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="21" name="Chapitre 16" tags="" position="3150,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 16&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Une sacrée équipe&lt;/span&gt;&lt;/h1&gt;Patate soulève le sac de diamants comme s&#x27;il était rempli de plumes. Je l&#x27;aide quand même à le porter. Il ne faudrait pas qu&#x27;il tombe encore sur le dos : on y passerait la journée.
 
-« Tu vas les rapporter sur la Lune ? » je lui demande.
+« Tu vas les rapporter sur la Lune ? » je lui demande.
 
-« Pas question ! Là-bas, tout le monde voudrait me les emprunter. »
+« Pas question ! Là-bas, tout le monde voudrait me les emprunter. »
 
-Il m&#x27;explique que sur la Lune, il n&#x27;y a pas d&#x27;adultes. Les bébés grandissent jusqu&#x27;à dix-huit mois, puis ils arrêtent de grandir. À partir de là, ils sont indépendants : ils conduisent des fusées, inventent des gadgets et font leurs affaires tout seuls.
+Il m&#x27;explique que sur la Lune, il n&#x27;y a pas d&#x27;adultes. Les bébés grandissent jusqu&#x27;à dix-huit mois, puis ils arrêtent de grandir. À partir de là, ils sont indépendants : ils conduisent des fusées, inventent des gadgets et font leurs affaires tout seuls.
 
 Ça explique pourquoi Patate parle aussi bien et pourquoi il est si fort.
 
-« Sur la Lune, tout le monde est très occupé, dit-il. Moi, je voulais découvrir la Terre, devenir riche et trouver quelqu&#x27;un avec qui faire des bêtises. Alors j&#x27;ai pris ma fusée et je suis parti ! »
+« Sur la Lune, tout le monde est très occupé, dit-il. Moi, je voulais découvrir la Terre, devenir riche et trouver quelqu&#x27;un avec qui faire des bêtises. Alors j&#x27;ai pris ma fusée et je suis parti ! »
 
 Il regarde le sac, puis moi.
 
-« J&#x27;ai trouvé les diamants. Mais pour les bêtises, je suis toujours tout seul. »
+« J&#x27;ai trouvé les diamants. Mais pour les bêtises, je suis toujours tout seul. »
 
-« Hé ! Et moi, alors ? Ça te dit qu&#x27;on fasse équipe ? »
+« Hé ! Et moi, alors ? Ça te dit qu&#x27;on fasse équipe ? »
 
-Son sourire devient immense. Il faudra quand même que je demande à mes parents si Patate peut rester avec nous. Mais bon, j&#x27;ai le temps d&#x27;y penser !
+Son sourire devient immense. Il faudra quand même que je demande à mes parents si Patate peut rester avec nous. Mais bon, j&#x27;ai le temps d&#x27;y penser !
 
-Patate transforme sa sucette en chapeau de gangster et me le pose sur la tête. Il me tombe sur les yeux et Patate éclate de rire. Parfait !
+Patate transforme sa sucette en chapeau de gangster et me le pose sur la tête. Il me tombe sur les yeux et Patate éclate de rire. Parfait !
 
-Un bébé de la Lune, une fille à lunettes et un sac de diamants : ça fait une sacrée équipe. Des super gangsters, même ! Mais maintenant, on va où ?&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour savoir où vont Violette et Patate :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 18.-&gt;Chapitre 18]][[Un nombre impair : poursuis au chapitre 17.-&gt;Chapitre 17]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-16.jpg&quot; alt=&quot;Une sacrée équipe&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="Chapitre 17" tags="" position="3300,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 17&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Le tour du monde en quatre-vingts bêtises&lt;/span&gt;&lt;/h1&gt;Avec un sac de diamants, on peut aller loin. Surtout quand on a un copain dont la sucette se transforme en montgolfière ! On grimpe dans la nacelle et hop, la clairière devient toute petite sous nos pieds.
+Un bébé de la Lune, une fille à lunettes et un sac de diamants : ça fait une sacrée équipe. Des super gangsters, même ! Mais maintenant, on va où ?&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Clique sur le dé pour savoir où vont Violette et Patate :&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Un nombre pair : poursuis au chapitre 18.-&gt;Chapitre 18]][[Un nombre impair : poursuis au chapitre 17.-&gt;Chapitre 17]]&lt;/div&gt;&lt;/div&gt;&lt;svg class=&quot;fleche-de&quot; viewBox=&quot;0 0 60 40&quot; aria-hidden=&quot;true&quot;&gt;&lt;g fill=&quot;none&quot; stroke=&quot;#ff6a00&quot; stroke-width=&quot;3&quot; stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot;&gt;&lt;path d=&quot;M4 30 C16 34 34 30 48 16&quot;/&gt;&lt;path d=&quot;M38 14 L49 15 L47 26&quot;/&gt;&lt;/g&gt;&lt;/svg&gt;&lt;div class=&quot;lancer&quot;&gt;&lt;button class=&quot;de-virtuel&quot; type=&quot;button&quot; data-face=&quot;0&quot; aria-label=&quot;Lancer le dé&quot;&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;i&gt;&lt;/i&gt;&lt;/button&gt;&lt;span class=&quot;resultat&quot; aria-live=&quot;polite&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-16.jpg&quot; alt=&quot;Une sacrée équipe&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="22" name="Chapitre 17" tags="" position="3300,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 17&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Le tour du monde en quatre-vingts bêtises&lt;/span&gt;&lt;/h1&gt;Avec un sac de diamants, on peut aller loin. Surtout quand on a un copain dont la sucette se transforme en montgolfière ! On grimpe dans la nacelle et hop, la clairière devient toute petite sous nos pieds.
 
-Notre premier arrêt est une ville au bord de la mer. Il pleut. Je prends la main de Patate et je remonte mes lunettes, clac ! Avec nos mains libres, on retourne tous les parapluies. On remonte dans la nacelle, puis je relance le temps. Les passants lèvent la tête pour comprendre pourquoi ils sont trempés.
+Notre premier arrêt est une ville au bord de la mer. Il pleut. Je prends la main de Patate et je remonte mes lunettes, clac ! Avec nos mains libres, on retourne tous les parapluies. On remonte dans la nacelle, puis je relance le temps. Les passants lèvent la tête pour comprendre pourquoi ils sont trempés.
 
-Prochain arrêt : une ville de montagne. On attache la nacelle et Patate sort un gadget de sa couche. Un petit clic, et les télésièges deviennent des toboggans. Pour descendre, c&#x27;est super. Pour monter, beaucoup moins.
+Prochain arrêt : une ville de montagne. On attache la nacelle et Patate sort un gadget de sa couche. Un petit clic, et les télésièges deviennent des toboggans. Pour descendre, c&#x27;est super. Pour monter, beaucoup moins.
 
-On remonte dans la montgolfière et on s&#x27;arrête dans une grande ville. Sur la place, il y a une immense statue du maire, avec une moustache et un air très sérieux. Je prends la main de Patate et j&#x27;arrête le temps. Avec sa main libre, il fouille dans sa couche et en sort… une couche géante. Ne me demande pas comment elle tenait là-dedans. On la met à la statue et je relance le temps. Un monsieur crie :
+On remonte dans la montgolfière et on s&#x27;arrête dans une grande ville. Sur la place, il y a une immense statue du maire, avec une moustache et un air très sérieux. Je prends la main de Patate et j&#x27;arrête le temps. Avec sa main libre, il fouille dans sa couche et en sort… une couche géante. Ne me demande pas comment elle tenait là-dedans. On la met à la statue et je relance le temps. Un monsieur crie :
 
-« C&#x27;est un scandale ! »
+« C&#x27;est un scandale ! »
 
-À côté de lui, une petite fille pointe le maire du doigt :
+À côté de lui, une petite fille pointe le maire du doigt :
 
-« Maman, je veux la même ! »
+« Maman, je veux la même ! »
 
 Patate et moi, on remonte dans la nacelle avant que quelqu&#x27;un pense à regarder dans notre direction.
 
-En regardant les toits s&#x27;éloigner, je me souviens de quelque chose. Mes parents ! Je devais les appeler. Patate sort un téléphone de sa couche et me le tend.
+En regardant les toits s&#x27;éloigner, je me souviens de quelque chose. Mes parents ! Je devais les appeler. Patate sort un téléphone de sa couche et me le tend.
 
 Je leur raconte que j&#x27;ai rencontré un copain et qu&#x27;on se promène en montgolfière. Pour le maire, j&#x27;attendrai un peu.
 
-« On peut rentrer dîner ? je demande. J&#x27;ai un copain à vous présenter ! »
+« On peut rentrer dîner ? je demande. J&#x27;ai un copain à vous présenter ! »
 
 Ils nous attendent, à condition qu&#x27;on rentre avant que la soupe refroidisse.
 
-« Cap sur ma maison ! » j&#x27;annonce.
+« Cap sur ma maison ! » j&#x27;annonce.
 
-Patate prend les commandes. Il tourne un bouton, puis un autre. La nacelle fait un petit bond et le sac de diamants nous tombe sur les pieds. Aïe !
+Patate prend les commandes. Il tourne un bouton, puis un autre. La nacelle fait un petit bond et le sac de diamants nous tombe sur les pieds. Aïe !
 
-Je crois qu&#x27;on a encore quelques détails à régler. Mais pour une première journée de super gangsters, on s&#x27;est plutôt bien débrouillés. On atterrit dans la forêt, près du sentier. Il ne nous reste plus qu&#x27;à rentrer à pied.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 18.-&gt;Chapitre 18]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-17.jpg&quot; alt=&quot;Le tour du monde en quatre-vingts bêtises&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Chapitre 18" tags="" position="3450,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 18&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;J&#x27;ai comme oublié quelqu&#x27;un&lt;/span&gt;&lt;/h1&gt;Avec Patate, on reprend le petit sentier dans l&#x27;autre sens, notre sac de diamants à la main. Les arbres disparaissent derrière nous et les immeubles réapparaissent. On traverse le pont : on est bientôt chez moi !
+Je crois qu&#x27;on a encore quelques détails à régler. Mais pour une première journée de super gangsters, on s&#x27;est plutôt bien débrouillés. On atterrit dans la forêt, près du sentier. Il ne nous reste plus qu&#x27;à rentrer à pied.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;choix suite elan&quot;&gt;[[Poursuis au chapitre 18.-&gt;Chapitre 18]]&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-17.jpg&quot; alt=&quot;Le tour du monde en quatre-vingts bêtises&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="23" name="Chapitre 18" tags="" position="3450,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 18&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;J&#x27;ai comme oublié quelqu&#x27;un&lt;/span&gt;&lt;/h1&gt;Avec Patate, on reprend le petit sentier dans l&#x27;autre sens, notre sac de diamants à la main. Les arbres disparaissent derrière nous et les immeubles réapparaissent. On traverse le pont : on est bientôt chez moi !
 
 En chemin, Patate s&#x27;arrête trois fois devant des vitrines. Il aime beaucoup sa mèche. Je crois même qu&#x27;il l&#x27;aime plus que les diamants.
 
-Enfin, on arrive dans ma rue. Elle n&#x27;a pas changé : ça sent toujours le brûlé. Devant ma porte, avant que j&#x27;aie le temps de frapper, mes lunettes descendent de mon nez, ouvrent la serrure et remontent à leur place. C&#x27;est pratique, des lunettes à pattes.
+Enfin, on arrive dans ma rue. Elle n&#x27;a pas changé : ça sent toujours le brûlé. Devant ma porte, avant que j&#x27;aie le temps de frapper, mes lunettes descendent de mon nez, ouvrent la serrure et remontent à leur place. C&#x27;est pratique, des lunettes à pattes.
 
 Mes parents sortent du salon pour venir nous accueillir sur le pas de la porte. Je leur présente Patate et je leur demande s&#x27;il peut rester avec nous.
 
-« Un bébé ? demande maman. Et ses parents ? »
+« Un bébé ? demande maman. Et ses parents ? »
 
-« Sur la Lune, les bébés sont indépendants, explique Patate. Et moi, j&#x27;ai trouvé une copine pour faire des bêtises ! »
+« Sur la Lune, les bébés sont indépendants, explique Patate. Et moi, j&#x27;ai trouvé une copine pour faire des bêtises ! »
 
-Mes parents échangent un regard. Je crois que le mot « bêtises » les fait un peu hésiter. Mais Patate transforme sa sucette en bouquet de fleurs et le leur tend. Après quelques questions, ils acceptent qu&#x27;il reste avec nous. Je savais bien qu&#x27;ils l&#x27;aimeraient !
+Mes parents échangent un regard. Je crois que le mot « bêtises » les fait un peu hésiter. Mais Patate transforme sa sucette en bouquet de fleurs et le leur tend. Après quelques questions, ils acceptent qu&#x27;il reste avec nous. Je savais bien qu&#x27;ils l&#x27;aimeraient !
 
-Mais au moment d&#x27;entrer, je m&#x27;arrête. J&#x27;ai l&#x27;impression d&#x27;avoir oublié quelque chose. Ou quelqu&#x27;un.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Te souviens-tu de Mirette ?&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Si tu l&#x27;as rencontrée au chapitre 6, poursuis au chapitre 19.-&gt;Chapitre 19]][[Sinon, poursuis au chapitre 20.-&gt;Chapitre 20]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-18.jpg&quot; alt=&quot;J&#x27;ai comme oublié quelqu&#x27;un&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="Chapitre 19" tags="" position="3600,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 19&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Trois colocataires et des tartes impossibles&lt;/span&gt;&lt;/h1&gt;Je pousse la porte. Mirette est toujours là, dans ma cuisine ! Elle n&#x27;a pas l&#x27;air fâchée. Elle a même eu le temps de préparer des tartes : des dizaines de tartes, sur la table, sur les chaises, jusque sur le bord de l&#x27;évier.
+Mais au moment d&#x27;entrer, je m&#x27;arrête. J&#x27;ai l&#x27;impression d&#x27;avoir oublié quelque chose. Ou quelqu&#x27;un.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;de&quot;&gt;&lt;div class=&quot;de-texte&quot;&gt;&lt;span class=&quot;consigne&quot;&gt;Te souviens-tu de Mirette ?&lt;/span&gt;&lt;div class=&quot;choix&quot;&gt;[[Si tu l&#x27;as rencontrée au chapitre 6, poursuis au chapitre 19.-&gt;Chapitre 19]][[Sinon, poursuis au chapitre 20.-&gt;Chapitre 20]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-18.jpg&quot; alt=&quot;J&#x27;ai comme oublié quelqu&#x27;un&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="24" name="Chapitre 19" tags="" position="3600,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 19&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Trois colocataires et des tartes impossibles&lt;/span&gt;&lt;/h1&gt;Je pousse la porte. Mirette est toujours là, dans ma cuisine ! Elle n&#x27;a pas l&#x27;air fâchée. Elle a même eu le temps de préparer des tartes : des dizaines de tartes, sur la table, sur les chaises, jusque sur le bord de l&#x27;évier.
 
-« Ah, te voilà ! J&#x27;en étais où, dans mon histoire ? »
+« Ah, te voilà ! J&#x27;en étais où, dans mon histoire ? »
 
 Je garde la réponse pour moi. Patate se faufile entre les chaises et plonge les deux mains dans une tarte. Mirette rit. Moi, je remonte mes lunettes par habitude et je cherche le four pour faire brûler toutes ces tartes.
 
-Et là, je me souviens : celles de Mirette ne cuisent jamais. Pas même un tout petit peu. C&#x27;est vraiment pas juste. Je relance le temps. Mirette sourit, comme si elle avait tout prévu.
+Et là, je me souviens : celles de Mirette ne cuisent jamais. Pas même un tout petit peu. C&#x27;est vraiment pas juste. Je relance le temps. Mirette sourit, comme si elle avait tout prévu.
 
 Patate a de la tarte jusque sur le nez et Mirette rit tellement qu&#x27;elle doit s&#x27;appuyer sur la table. Ça me donne une idée.
 
-« Dis, Mirette, ça te dirait de rester avec nous ? »
+« Dis, Mirette, ça te dirait de rester avec nous ? »
 
-« Avec plaisir ! Mais je te préviens : je n&#x27;ai pas fini mon histoire. »
+« Avec plaisir ! Mais je te préviens : je n&#x27;ai pas fini mon histoire. »
 
 Mes parents nous rejoignent dans la cuisine. Je leur demande si Mirette peut rester aussi. Ils se regardent.
 
-« Mais… il faut trouver de la place, dit maman. Et la maison de retraite ? »
+« Mais… il faut trouver de la place, dit maman. Et la maison de retraite ? »
 
-« Je leur expliquerai que je préfère vivre ici », dit Mirette.
+« Je leur expliquerai que je préfère vivre ici », dit Mirette.
 
-Mes parents discutent encore un moment. Je ne vois pas ce qui les inquiète : s&#x27;il y a de la place pour toutes ces tartes et pour un bébé de la Lune indépendant à la couche extraordinaire, il y en a bien pour Mirette !
+Mes parents discutent encore un moment. Je ne vois pas ce qui les inquiète : s&#x27;il y a de la place pour toutes ces tartes et pour un bébé de la Lune indépendant à la couche extraordinaire, il y en a bien pour Mirette !
 
 Finalement, on lui trouve une place et mes parents acceptent. Patate applaudit avec ses mains toutes collantes. Maintenant, j&#x27;ai deux nouveaux copains à la maison. Je peux raconter nos bêtises à Mirette et, en échange, elle nous raconte la suite de sa vie.
 
 On en est à son troisième chien. Je crois qu&#x27;on va avoir besoin d&#x27;autres tartes.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;fin&quot;&gt;&lt;span class=&quot;mot-fin&quot;&gt;FIN&lt;/span&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-19.jpg&quot; alt=&quot;Trois colocataires et des tartes impossibles&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="25" name="Chapitre 20" tags="" position="3750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Chapitre 20&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Deux gangsters et des tartes en danger&lt;/span&gt;&lt;/h1&gt;J&#x27;entre, suivie de Patate. Dans la cuisine, mon bol est toujours sur la table et la vaisselle dans l&#x27;évier. Tout est comme je l&#x27;ai laissé.
 
-Enfin, presque. Maintenant, je suis en coloc avec un bébé venu de la Lune ! Patate choisit mon tiroir à chaussettes pour dormir et cache les diamants dans sa couche. Je ne lui demande jamais de me prêter de l&#x27;argent.
+Enfin, presque. Maintenant, je suis en coloc avec un bébé venu de la Lune ! Patate choisit mon tiroir à chaussettes pour dormir et cache les diamants dans sa couche. Je ne lui demande jamais de me prêter de l&#x27;argent.
 
-Chaque fois qu&#x27;un voisin enfourne une tarte, on part en mission. Je prends la main de Patate et j&#x27;arrête le temps ; avec son autre main, il transforme sa sucette en minuteur et surveille la cuisson avec un air très sérieux. Quand tout se remet en marche, la tarte est noire.
+Chaque fois qu&#x27;un voisin enfourne une tarte, on part en mission. Je prends la main de Patate et j&#x27;arrête le temps ; avec son autre main, il transforme sa sucette en minuteur et surveille la cuisson avec un air très sérieux. Quand tout se remet en marche, la tarte est noire.
 
 Les voisins crient mon nom. Patate et moi, on rigole. C&#x27;est beau, le travail d&#x27;équipe.&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;fin&quot;&gt;&lt;span class=&quot;mot-fin&quot;&gt;FIN&lt;/span&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;cote&quot;&gt;&lt;div class=&quot;illustration&quot;&gt;&lt;img src=&quot;images/chapitres/chapitre-20.jpg&quot; alt=&quot;Deux gangsters et des tartes en danger&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
