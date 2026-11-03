@@ -196,7 +196,7 @@ def document(pages, blanches=0):
     contexte = (
         '<section class="page-seule contexte"><h2>Comment est née cette histoire</h2>'
         + "".join(f"<p>{italique(p).replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>')}</p>" for p in paragraphes)
-        + '<p class="credits">Une histoire d’Eva et de Brune.<br>Réalisation du livre : '
+        + '<p class="credits">Une histoire librement inspirée du récit d’Eva et de Brune.<br>Réalisation du livre : '
           "Laboratoire d’Aix-périmentation et de Bidouille.</p></section>"
         '<section class="page-seule contexte"><h2>Les fiches de l’atelier</h2><div class="fiches">'
         f'<img src="{(fiches / "fiche_recit.jpg").as_uri()}" alt="">'
@@ -208,7 +208,7 @@ def document(pages, blanches=0):
     chapitres = "".join(chapitre(ch, pages) for ch in lire_chapitres())
     vides = '<section class="page-seule sans-numero">&nbsp;</section>' * blanches
     dos = ('<section class="page-seule sans-numero"><div class="dos">'
-           f"<p><b>{e(TITRE)}</b>, une histoire d’Eva et de Brune, imaginée pendant l’atelier "
+           f"<p><b>{e(TITRE)}</b>, une histoire librement inspirée du récit imaginé par Eva et Brune pendant l’atelier "
            "« La quête du curry, une histoire dont tu es le héros », à la bibliothèque des Deux Ormes "
            "(bibliothèques Méjanes, Aix-en-Provence), en octobre 2026.</p>"
            "<p>Réalisation du livre : Laboratoire d’Aix-périmentation et de Bidouille.</p>"
