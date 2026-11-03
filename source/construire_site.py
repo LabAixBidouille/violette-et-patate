@@ -481,6 +481,14 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   margin: 0.3em 0 0.2em;
 }
 .contexte-texte { max-width: 38em; margin: 0 auto; }
+.portraits { display: flex; justify-content: center; align-items: flex-end; gap: 2em; margin-bottom: 0.2em; }
+.portraits figure { margin: 0; }
+.portraits img { display: block; height: 10em; width: auto; margin: 0 auto; }
+.portraits figcaption { font-family: "Gochi Hand", cursive; font-size: 1.15em; color: var(--orange); }
+@media (max-width: 600px) {
+  .portraits { gap: 0.5em; }
+  .portraits img { height: 5.5em; }
+}
 .citation {
   max-width: 30em;
   margin: 2em auto;
@@ -516,7 +524,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 2.4em;
+  gap: 1.8em;
 }
 .miniatures figure { margin: 0; }
 .miniatures figcaption {
@@ -528,7 +536,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .miniature { display: block; padding: 0; border: none; background: none; cursor: zoom-in; }
 .miniature img {
   display: block;
-  height: 16em;
+  height: 12.5em;  /* quatre fiches sur une ligne */
   width: auto;
   border-radius: 4px;
   box-shadow: 0 3px 12px rgba(43, 47, 58, 0.22);
@@ -537,6 +545,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .miniatures figure:nth-child(1) img { transform: rotate(-3deg); }
 .miniatures figure:nth-child(2) img { transform: rotate(1deg); }
 .miniatures figure:nth-child(3) img { transform: rotate(3deg); }
+.miniatures figure:nth-child(4) img { transform: rotate(-1.5deg); }
 .miniatures .miniature:hover img { transform: rotate(0) scale(1.05); box-shadow: 0 0 0 3px var(--orange), 0 8px 20px rgba(43, 47, 58, 0.28); }
 .contexte .credits { display: block; margin-top: 1.6em; font-size: 0.92em; color: var(--gris); }
 .contexte .secondaires { display: flex; justify-content: center; margin-top: 1.4em; }
@@ -759,10 +768,19 @@ def miniature(fichier, legende, description):
             f'<figcaption>{legende}</figcaption></figure>')
 
 
+def portrait(fichier, nom):
+    return (f'<figure><img src="images/portraits/{fichier}" alt="{nom}, dessiné par Eva et Brune">'
+            f'<figcaption>{nom}</figcaption></figure>')
+
+
 def passage_contexte():
     return (
         '<div class="contexte"><span class="lien-retour">[[Couverture->Page de garde]]</span>\n'
-        f'<h1>Comment est née cette histoire</h1>{SEPARATEUR}'
+        # Les personnages dessinés par Eva et Brune sur leur fiche illustration
+        '<div class="portraits">'
+        + portrait("violette.png", "Violette") + portrait("patate.png", "Patate")
+        + portrait("corbeau.png", "Le corbeau") + portrait("mirette.png", "Mirette")
+        + f'</div><h1>Comment est née cette histoire</h1>{SEPARATEUR}'
         '<div class="contexte-texte">'
         + "\n\n".join(CONTEXTE[:4])
         + f'<div class="citation">« {CITATION} »<span class="source">Eva et Brune, sur leur fiche récit</span></div>'
@@ -772,6 +790,7 @@ def passage_contexte():
         + miniature("fiche_recit.jpg", "Le récit", "la fiche récit, par Eva et Brune")
         + miniature("fiche_personnage_patate.jpg", "Une fiche personnage", "la fiche personnage de Patate")
         + miniature("fiche_situation_4.jpg", "Une fiche à embranchement", "la fiche situation n° 4, avec ses choix au dé")
+        + miniature("fiche_illustration.jpg", "La fiche illustration", "la fiche illustration, avec les personnages dessinés par Eva et Brune")
         + '</div></div>'
         + '<span class="credits">Une histoire d’Eva et de Brune.\nRéalisation du livre : '
         "Laboratoire d’Aix-périmentation et de Bidouille.</span>"
