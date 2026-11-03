@@ -793,7 +793,7 @@ def passage_contexte():
         + miniature("fiche_situation_4.jpg", "Une fiche à embranchement", "la fiche situation n° 4, avec ses choix au dé")
         + miniature("fiche_illustration.jpg", "La fiche illustration", "la fiche illustration, avec les personnages dessinés par Eva et Brune")
         + '</div></div>'
-        + '<span class="credits">Une histoire d’Eva et de Brune.\nRéalisation du livre : '
+        + '<span class="credits">Une histoire librement inspirée du récit d’Eva et de Brune.\nRéalisation du livre : '
         "Laboratoire d’Aix-périmentation et de Bidouille.</span>"
         + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div>\n</div>'
     )
