@@ -47,10 +47,11 @@ CONTEXTE = [
     "rejoignent pour former une histoire cohérente.",
     "Eva et Brune ont choisi d’inventer une histoire drôle. Un défi pour une histoire à embranchements, "
     "puisque les gags doivent rester drôles et les chutes tomber juste, quel que soit le chemin emprunté.",
-    "Pour donner naissance à ce livre, le L.A.B a prolongé et mis en forme leur récit à l’aide d’outils "
-    "numériques. L’intelligence artificielle a notamment contribué à produire, dans le temps imparti, une "
-    "histoire complète et agréable à lire. À son origine, il y a avant tout les idées et les personnages "
-    "d’Eva et de Brune.",
+    "L’atelier ne durait que deux heures, mais nous tenions à offrir à chaque enfant un livre "
+    "complet. Le L.A.B a donc prolongé et mis en forme leur récit à l’aide d’outils numériques, "
+    "et l’intelligence artificielle a notamment permis d’aboutir à une histoire achevée et "
+    "agréable à lire. À son origine, il y a avant tout les idées et les personnages d’Eva et de "
+    "Brune.",
 ]
 # Une phrase de leur fiche récit, à peine remise au propre
 CITATION = ("Le corbeau a un pouvoir et quand Violette arrête le temps, il bouge encore pour protéger ses "
