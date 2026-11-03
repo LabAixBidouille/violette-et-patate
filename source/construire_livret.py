@@ -8,7 +8,7 @@ le livret est donc composé deux fois, la seconde avec les bons numéros de page
 Produit trois PDF dans le dossier Impression du livre :
 - VioletteEtPatate_Livret_lecture.pdf : les pages dans l'ordre de lecture, pour relire ;
 - VioletteEtPatate_Livret_A4_bord_court.pdf et _bord_long.pdf : les pages imposées deux par
-  deux sur A4 paysage, avec traits de coupe, pour une impression recto verso pliée en cahier
+  deux sur A4 paysage, avec lignes de coupe et de pliure continues, très claires, pour une impression recto verso pliée en cahier
   (choisir le fichier selon le retournement de l'imprimante).
 
 Nécessite Google Chrome, pdftotext (poppler) et le module Python pypdf.
@@ -181,15 +181,18 @@ def document(pages, blanches=0):
         '<div class="resume">' + "".join(f"<p>{e(p)}</p>" for p in SYNOPSIS.split("\n\n")) + "</div></section>"
     )
     fiches = RACINE / "images" / "fiches"
+    # Texte de Manon, commun aux livres de l'atelier ; seule la phrase finale est en gras
+    paragraphes = [q for p in CONTEXTE for q in p.split("\n\n")]
     contexte = (
         '<section class="page-seule contexte"><h2>Comment est née cette histoire</h2>'
-        + "".join(f"<p>{italique(p)}</p>" for p in CONTEXTE)
-        + f'<p class="credits">Une histoire d\'{e(AUTRICES)}. Réalisation du livre : L.A.B, '
-          "Laboratoire d'Aix-périmentation et de Bidouille.</p></section>"
-        '<section class="page-seule contexte"><h2>Les fiches d\'Eva et Brune</h2><div class="fiches">'
+        + "".join(f"<p>{italique(p).replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>')}</p>" for p in paragraphes)
+        + '<p class="credits">Une histoire d’Eva et de Brune.<br>Réalisation du livre : '
+          "Laboratoire d’Aix-périmentation et de Bidouille.</p></section>"
+        '<section class="page-seule contexte"><h2>Les fiches de l’atelier</h2><div class="fiches">'
         f'<img src="{(fiches / "fiche_recit.jpg").as_uri()}" alt="">'
-        f'<img src="{(fiches / "fiche_personnage_violette.jpg").as_uri()}" alt="">'
-        f'<img class="pleine" src="{(fiches / "fiche_situation_4.jpg").as_uri()}" alt="">'
+        f'<img src="{(fiches / "fiche_personnage_patate.jpg").as_uri()}" alt="">'
+        f'<img src="{(fiches / "fiche_illustration.jpg").as_uri()}" alt="">'
+        f'<img src="{(fiches / "fiche_situation_4.jpg").as_uri()}" alt="">'
         "</div></section>"
     )
     chapitres = "".join(chapitre(ch, pages) for ch in lire_chapitres())
@@ -244,23 +247,21 @@ def composer(dossier):
 
 
 def traits_de_coupe(dossier):
-    """Page A4 paysage avec les traits de coupe des deux pages du livret côte à côte."""
-    x0 = (297 - 2 * LARGEUR_PAGE) / 2
-    y0 = (210 - HAUTEUR_PAGE) / 2
-    traits = []
-    for x in (x0, x0 + LARGEUR_PAGE, x0 + 2 * LARGEUR_PAGE):
-        for y, sens in ((y0, -1), (y0 + HAUTEUR_PAGE, 1)):
-            y1, y2 = (y - 2 - 5, y - 2) if sens < 0 else (y + 2, y + 2 + 5)
-            traits.append(f'<line x1="{x}" y1="{y1}" x2="{x}" y2="{y2}"/>')
-    for y in (y0, y0 + HAUTEUR_PAGE):
-        for x, sens in ((x0, -1), (x0 + 2 * LARGEUR_PAGE, 1)):
-            x1, x2 = (x - 2 - 5, x - 2) if sens < 0 else (x + 2, x + 2 + 5)
-            traits.append(f'<line x1="{x1}" y1="{y}" x2="{x2}" y2="{y}"/>')
+    """Page A4 paysage avec des lignes continues très claires : lignes de coupe sur tout le tour des deux
+    pages côte à côte, prolongées jusqu'aux bords de la feuille pour poser la règle, et ligne de pliure
+    au milieu, d'une autre teinte."""
+    x0, y0 = (297 - 2 * LARGEUR_PAGE) / 2, (210 - HAUTEUR_PAGE) / 2
+    gauche, droite, haut, bas = x0, x0 + 2 * LARGEUR_PAGE, y0, y0 + HAUTEUR_PAGE
+    coupe = [f'<line x1="0" y1="{y}" x2="297" y2="{y}"/>' for y in (haut, bas)]
+    coupe += [f'<line x1="{x}" y1="0" x2="{x}" y2="210"/>' for x in (gauche, droite)]
+    pli = x0 + LARGEUR_PAGE
     source = Path(dossier) / "traits.html"
     source.write_text(
         '<!doctype html><html><head><style>@page { size: 297mm 210mm; margin: 0; } body { margin: 0; }</style></head>'
         '<body><svg xmlns="http://www.w3.org/2000/svg" width="297mm" height="210mm" viewBox="0 0 297 210">'
-        f'<g stroke="#000" stroke-width="0.15">{"".join(traits)}</g></svg></body></html>', encoding="utf-8")
+        f'<g stroke="#c9c9c9" stroke-width="0.2">{"".join(coupe)}</g>'
+        f'<line x1="{pli}" y1="0" x2="{pli}" y2="210" stroke="#b7cbe6" stroke-width="0.2"/>'
+        '</svg></body></html>', encoding="utf-8")
     pdf = Path(dossier) / "traits.pdf"
     imprimer(source, pdf)
     return PdfReader(str(pdf)).pages[0]
