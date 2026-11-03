@@ -198,9 +198,10 @@ def document(pages, blanches=0):
     chapitres = "".join(chapitre(ch, pages) for ch in lire_chapitres())
     vides = '<section class="page-seule sans-numero">&nbsp;</section>' * blanches
     dos = ('<section class="page-seule sans-numero"><div class="dos">'
-           f"<p><b>{e(TITRE)}</b>, une histoire d'{e(AUTRICES)}, imaginée pendant l'atelier "
-           "« Le livre dont tu es le héros » à la bibliothèque des Deux Ormes, Aix-en-Provence, "
-           "en octobre 2026.</p><p>Réalisation du livre : L.A.B, Laboratoire d'Aix-périmentation et de Bidouille.</p>"
+           f"<p><b>{e(TITRE)}</b>, une histoire d’Eva et de Brune, imaginée pendant l’atelier "
+           "« La quête du curry, une histoire dont tu es le héros », à la bibliothèque des Deux Ormes "
+           "(bibliothèques Méjanes, Aix-en-Provence), en octobre 2026.</p>"
+           "<p>Réalisation du livre : Laboratoire d’Aix-périmentation et de Bidouille.</p>"
            "</div></section>")
     return (f'<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>{CSS}</style></head>'
             f"<body>{couverture}{contexte}{chapitres}{vides}{dos}</body></html>")
