@@ -31,37 +31,30 @@ SYNOPSIS = (
     "une chose est sûre : le calme n'est pas près de revenir !"
 )
 
+# Texte écrit par Manon le 03/11/2026, modèle commun aux livres de l'atelier ; seule la phrase sur le
+# genre change d'un livre à l'autre
 CONTEXTE = [
-    "Le mardi 27 octobre 2026, pendant les vacances d'automne, le L.A.B a animé l'atelier « Le livre "
-    "dont tu es le héros » à la bibliothèque des Deux Ormes, l'une des bibliothèques Méjanes "
-    "d'Aix-en-Provence. Huit enfants de 8 à 12 ans y ont inventé une histoire qui change selon les "
-    "choix du lecteur, en l'écrivant situation par situation sur des fiches où chaque lancer de dé "
-    "renvoie vers une autre situation. L'atelier est issu du projet européen Robots Meet Arts : "
-    "derrière le récit, il s'agit de découvrir sans écran les notions qui structurent un programme "
-    "informatique. Chaque lancer de dé est une condition, qui décide de la suite de l'histoire. "
-    "Chaque choix ouvre un embranchement, et un chemin qui ramène à une situation déjà écrite forme "
-    "une boucle.",
-    "Écrire une telle histoire demande un travail créatif considérable. Il faut inventer un "
-    "personnage et une quête, mais aussi penser l'histoire comme un réseau : prévoir à chaque étape "
-    "plusieurs suites possibles, numéroter les situations, s'assurer que chaque chemin mène quelque "
-    "part, et faire tenir tous ces fils ensemble sans perdre le sens du récit.",
-    "Eva et Brune ont relevé ce défi à deux. Elles ont inventé Violette, une fille de dix ans dont "
-    "les lunettes magiques arrêtent le temps, Patate, un bébé venu de la Lune dont la sucette se "
-    "transforme en tout ce qu'il veut, et Mirette, une mamie qui raconte sa vie et prépare des "
-    "tartes qui se mangent sans cuire. C'est à elles que l'on doit les lunettes qui viennent "
-    "rejoindre Violette à pied, le corbeau qui bouge dans le temps arrêté pour protéger ses "
-    "diamants, le concours de corde à sauter et ce bébé qui, une fois tombé, ne peut plus se "
-    "relever, parce que c'est une patate.",
-    "Pour leur histoire, Eva et Brune ont choisi l'humour. Avec //Violette et Patate//, elles vous "
-    "présentent un récit comique, raconté par une héroïne farceuse qui arrête le temps pour faire "
-    "des bêtises et finit par trouver, chez un bébé venu de la Lune, le complice idéal.",
-    "Pour offrir à chaque enfant un livre achevé, dont il ou elle puisse être fier ou fière et avec "
-    "lequel continuer à jouer, le L.A.B a prolongé chaque histoire à partir des idées de celles et "
-    "ceux qui l'ont imaginée, puis l'a mise en forme, en s'aidant d'outils numériques, dont "
-    "l'intelligence artificielle. Ce travail ne retire rien à celui des enfants : il s'appuie "
-    "entièrement sur la créativité, l'imaginaire et les récits de celles et ceux qui ont participé "
-    "à l'atelier.",
+    "En octobre 2026, le L.A.B a animé l’atelier « La quête du curry, une histoire dont tu es le héros » "
+    "dans les bibliothèques Méjanes d’Aix-en-Provence. Les enfants ont été accompagnés dans la création "
+    "d’un récit complet, depuis l’invention des personnages jusqu’à la construction d’une intrigue "
+    "reliant les différentes étapes de leur aventure.",
+    "Nous leur avons proposé d’introduire une part de hasard dans leur récit. Le résultat d’un lancer de "
+    "dé pouvait modifier le déroulement de certains passages et conduire le lecteur vers un chapitre ou "
+    "un autre.",
+    "Les enfants ont ainsi exploré, sans écran, des notions liées à la pensée computationnelle, une "
+    "manière de décomposer un problème et d’organiser les étapes pour le résoudre. Ils ont formulé des "
+    "règles de type « si… alors… », créé des embranchements et réfléchi à la façon dont les chemins se "
+    "rejoignent pour former une histoire cohérente.",
+    "Eva et Brune ont choisi d’inventer une histoire drôle. Un défi pour une histoire à embranchements, "
+    "puisque les gags doivent rester drôles et les chutes tomber juste, quel que soit le chemin emprunté.",
+    "Pour donner naissance à ce livre, le L.A.B a prolongé et mis en forme leur récit à l’aide d’outils "
+    "numériques. L’intelligence artificielle a notamment contribué à produire, dans le temps imparti, une "
+    "histoire complète et agréable à lire. À son origine, il y a avant tout les idées et les personnages "
+    "d’Eva et de Brune.",
 ]
+# Une phrase de leur fiche récit, à peine remise au propre
+CITATION = ("Le corbeau a un pouvoir et quand Violette arrête le temps, il bouge encore pour protéger ses "
+            "diamants.")
 
 CSS = """
 @font-face { font-family: "Luckiest Guy"; font-style: normal; font-weight: 400; font-display: swap; src: url("fonts/LuckiestGuy.woff2") format("woff2"); }
@@ -473,33 +466,99 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   color: var(--orange);
 }
 
-/* Page « Comment est née cette histoire » */
+/* Page « Comment est née cette histoire » : texte court centré, une phrase des autrices, puis leurs
+   fiches posées sur une table, en miniatures cliquables */
+.contexte { font-size: 0.95em; text-align: center; }
+.contexte .lien-retour { text-align: left; }
 .contexte h1 {
   line-height: 1.1;
   font-family: "Luckiest Guy", "Impact", sans-serif;
   font-weight: 400;
-  font-size: 2em;
+  font-size: 2.4em;
   color: var(--violet);
-  margin: 0 0 0.6em;
+  text-shadow: 3px 3px 0 var(--orange);
+  margin: 0.3em 0 0.2em;
 }
-.contexte .credits {
-  font-size: 0.92em;
+.contexte-texte { max-width: 38em; margin: 0 auto; }
+.citation {
+  max-width: 30em;
+  margin: 2em auto;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.55em;
+  line-height: 1.35;
+  color: var(--violet);
+  transform: rotate(-1.5deg);
+}
+.citation .source {
+  display: block;
+  margin-top: 0.4em;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.55em;
   color: var(--gris);
 }
-
-.couverture-arbre { margin-top: 1.4em; }
-
-/* Page de l'arbre : le texte à gauche, l'arbre très vertical à droite */
-.arbre {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
-  gap: 3.5em;
-  align-items: start;
+.table-fiches {
+  margin: 2.6em auto 0;
+  max-width: 62em;
+  padding: 1.8em 1.5em 1.8em;
+  background: var(--lavande);
+  border-radius: 18px;
 }
-.arbre-texte {
-  position: sticky;
-  top: 2em;
+.table-fiches .titre-table {
+  display: block;
+  font-family: "Luckiest Guy", "Impact", sans-serif;
+  font-size: 1.35em;
+  color: var(--violet);
+  margin-bottom: 1.2em;
 }
+.miniatures {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2.4em;
+}
+.miniatures figure { margin: 0; }
+.miniatures figcaption {
+  margin-top: 0.8em;
+  font-family: "Gochi Hand", cursive;
+  font-size: 1.15em;
+  color: var(--gris);
+}
+.miniature { display: block; padding: 0; border: none; background: none; cursor: zoom-in; }
+.miniature img {
+  display: block;
+  height: 16em;
+  width: auto;
+  border-radius: 4px;
+  box-shadow: 0 3px 12px rgba(43, 47, 58, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.miniatures figure:nth-child(1) img { transform: rotate(-3deg); }
+.miniatures figure:nth-child(2) img { transform: rotate(1deg); }
+.miniatures figure:nth-child(3) img { transform: rotate(3deg); }
+.miniatures .miniature:hover img { transform: rotate(0) scale(1.05); box-shadow: 0 0 0 3px var(--orange), 0 8px 20px rgba(43, 47, 58, 0.28); }
+.contexte .credits { display: block; margin-top: 1.6em; font-size: 0.92em; color: var(--gris); }
+.contexte .secondaires { display: flex; justify-content: center; margin-top: 1.4em; }
+/* Fiche ouverte en grand par-dessus la page ; un clic n'importe où la referme */
+.agrandi {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2vh 2vw;
+  background: rgba(43, 30, 70, 0.85);
+  cursor: zoom-out;
+}
+.agrandi img { max-width: 100%; max-height: 96vh; border-radius: 4px; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); }
+@media (max-width: 600px) {
+  .miniature img { height: 11em; }
+}
+
+/* Page de l'arbre : le titre centré en haut, l'arbre dessous */
+.arbre .lien-retour { display: block; }
+.arbre-tete { text-align: center; margin-bottom: 1.5em; }
 .arbre h1 {
   font-family: "Luckiest Guy", "Impact", sans-serif;
   font-weight: 400;
@@ -516,51 +575,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   color: var(--gris);
   margin: 0.3em 0 1em;
 }
-.arbre img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 800px) {
-  .arbre { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1.5em; }
-  .arbre-texte { position: static; }
-}
-
-/* Page de contexte : le texte à gauche, les fiches des autrices à droite */
-.contexte {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: 3em;
-  align-items: start;
-}
-.visuels {
-  margin-top: 4em;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1em;
-}
-.visuels .pleine, .visuels .legende { grid-column: 1 / -1; }
-.visuels .large { grid-column: 1 / -1; width: 55%; margin: 0 auto; }
-.visuels img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 6px;
-  box-shadow: 0 2px 10px rgba(43, 47, 58, 0.15);
-}
-.visuels img:nth-child(1) { transform: rotate(-1.5deg); }
-.visuels img:nth-child(2) { transform: rotate(1.5deg); }
-.legende {
-  display: block;
-  font-family: "Gochi Hand", cursive;
-  font-size: 1.15em;
-  color: var(--gris);
-  text-align: center;
-}
-@media (max-width: 800px) {
-  .contexte { position: static; transform: none; width: auto; grid-template-columns: minmax(0, 1fr); gap: 1em; }
-  .visuels { margin-top: 0; }
-}
+.arbre img { display: block; width: 100%; max-width: 760px; height: auto; margin: 0 auto; }
 
 /* Liens dans le texte */
 tw-link, .enchantment-link {
@@ -636,6 +651,25 @@ document.addEventListener('click', function (evenement) {
       resultat.textContent = 'Le dé affiche ' + face + '.';
     }
   }, 75);
+});
+
+// Page de contexte : une miniature s'ouvre en grand, un clic referme
+document.addEventListener('click', function (evenement) {
+  var ouvert = document.querySelector('.agrandi');
+  if (ouvert) { ouvert.remove(); return; }
+  var miniature = evenement.target.closest('.miniature');
+  if (!miniature) return;
+  var fond = document.createElement('div');
+  fond.className = 'agrandi';
+  var image = document.createElement('img');
+  image.src = miniature.querySelector('img').src;
+  image.alt = miniature.querySelector('img').alt;
+  fond.appendChild(image);
+  document.body.appendChild(fond);
+});
+document.addEventListener('keydown', function (evenement) {
+  var ouvert = document.querySelector('.agrandi');
+  if (ouvert && evenement.key === 'Escape') ouvert.remove();
 });
 """
 
@@ -718,31 +752,38 @@ def passage_garde():
     )
 
 
+def miniature(fichier, legende, description):
+    return (f'<figure><button class="miniature" type="button" aria-label="Agrandir {description}">'
+            f'<img src="images/fiches/{fichier}" alt="{description}"></button>'
+            f'<figcaption>{legende}</figcaption></figure>')
+
+
 def passage_contexte():
     return (
-        '<div class="contexte"><div class="contexte-texte"><span class="lien-retour">[[Couverture->Page de garde]]</span>\n<h1>Comment est née cette histoire</h1>'
-        + "\n\n".join(CONTEXTE)
-        + f'\n\n<span class="credits">Une histoire d\'{AUTRICES}. Réalisation du livre : L.A.B, '
-        "Laboratoire d'Aix-périmentation et de Bidouille.</span>\n\n"
-        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div></div>'
-        + '<div class="visuels">'
-        '<img src="images/fiches/fiche_recit.jpg" alt="La fiche récit remplie par Eva et Brune">'
-        '<img src="images/fiches/fiche_personnage_violette.jpg" alt="La fiche personnage de Violette">'
-        '<img class="pleine" src="images/fiches/fiche_situation_4.jpg" alt="La fiche situation n° 4, avec ses choix au dé">'
-        '<span class="legende">Les fiches remplies par Eva et Brune pendant l\'atelier</span></div>\n</div>'
+        '<div class="contexte"><span class="lien-retour">[[Couverture->Page de garde]]</span>\n'
+        f'<h1>Comment est née cette histoire</h1>{SEPARATEUR}'
+        '<div class="contexte-texte">'
+        + "\n\n".join(CONTEXTE[:4])
+        + f'<div class="citation">« {CITATION} »<span class="source">Eva et Brune, sur leur fiche récit</span></div>'
+        + CONTEXTE[4]
+        + '</div><div class="table-fiches"><span class="titre-table">Les fiches de l’atelier</span>'
+        '<div class="miniatures">'
+        + miniature("fiche_recit.jpg", "Le récit", "la fiche récit, par Eva et Brune")
+        + miniature("fiche_personnage_patate.jpg", "Une fiche personnage", "la fiche personnage de Patate")
+        + miniature("fiche_situation_4.jpg", "Une fiche à embranchement", "la fiche situation n° 4, avec ses choix au dé")
+        + '</div></div>'
+        + '<span class="credits">Une histoire d’Eva et de Brune.\nRéalisation du livre : '
+        "Laboratoire d’Aix-périmentation et de Bidouille.</span>"
+        + f'<div class="secondaires">{lien("Commencer le livre", "Prologue")}</div>\n</div>'
     )
 
 
 def passage_arbre():
+    # Page simple : le titre centré en haut, l'arbre dessous
     return (
-        f'<div class="arbre"><div class="arbre-texte"><h1>{TITRE}</h1>'
-        f'<span class="arbre-sous-titre">Tous les chemins de l\'histoire imaginée par {AUTRICES}</span>'
-        '<div class="intro-arbre">Un arbre de décision est un schéma qui montre toutes les suites possibles '
-        "d'une histoire, ou d'un programme informatique. Chaque case est une étape, ici un chapitre, et chaque "
-        "flèche part d'une condition : le résultat du dé, ou ce dont le lecteur se souvient. En suivant les "
-        "flèches, on vérifie qu'aucun chemin ne mène nulle part : c'est grâce à cet outil que chaque parcours "
-        f"de //{TITRE}// conduit bien à une fin.</div>"
-        f'<div class="lien-retour couverture-arbre">{lien("Couverture", "Page de garde")}</div></div>'
+        f'<div class="arbre"><span class="lien-retour">{lien("Couverture", "Page de garde")}</span>'
+        f'<div class="arbre-tete"><h1>{TITRE}</h1>'
+        f'<span class="arbre-sous-titre">Tous les chemins de l\'histoire imaginée par {AUTRICES}</span></div>'
         '<img src="images/arbre.svg" alt="L\'arbre de toutes les branches de l\'histoire"></div>'
     )
 
@@ -773,6 +814,16 @@ def construire():
     ]
     for ch in lire_chapitres():
         passages.append((ch["nom"], "", passage_chapitre(ch)))
+
+    # Espaces insécables de la typographie française : un guillemet ou un deux-points ne se retrouve
+    # jamais seul en début de ligne
+    insecables = [("« ", "«\u00a0"), (" »", "\u00a0»"), (" :", "\u00a0:"), (" ?", "\u00a0?"),
+                  (" !", "\u00a0!"), (" ;", "\u00a0;")]
+    for i, (nom, tags, contenu) in enumerate(passages):
+        if tags != "header":
+            for avant, apres in insecables:
+                contenu = contenu.replace(avant, apres)
+            passages[i] = (nom, tags, contenu)
 
     noms = {p[0] for p in passages}
     for nom, _, contenu in passages:
