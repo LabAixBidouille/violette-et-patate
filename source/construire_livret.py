@@ -71,6 +71,11 @@ h1 {{ font-family: "Luckiest Guy"; font-weight: 400; font-size: 17pt; line-heigh
   text-shadow: 1.5px 1.5px 0 #ff6a00; margin: 0 0 4mm; }}
 .illus img {{ display: block; width: 100%; max-height: 64mm; object-fit: contain; margin: 0 auto 4mm; }}
 
+.serre2 .illus img {{ max-height: 30mm; }}
+.serre .illus img {{ max-height: 40mm; }}
+.serre .separateur {{ margin: 2mm 0 2mm; }}
+.serre .elan {{ margin-top: 1.5mm; }}
+
 /* Séparateur, choix, fins */
 .separateur {{ text-align: center; margin: 4mm 0 3mm; break-after: avoid; }}
 .separateur svg {{ width: 50mm; height: auto; }}
@@ -130,18 +135,21 @@ def avec_page(texte, pages):
 
 def chapitre(ch, pages):
     cle = 0 if ch["nom"] == "Prologue" else int(ch["nom"].split()[-1])
-    morceaux = [f'<section class="page-seule"><span class="marque">@@CH{cle}@@</span>']
+    classe = "page-seule" + (" serre" if cle in SERRES else "") + (" serre2" if cle in SERRES2 else "")
+    morceaux = [f'<section class="{classe}"><span class="marque">@@CH{cle}@@</span>']
     image = RACINE / "images" / "chapitres" / f"{illustration(ch['nom'])}.jpg"
     if image.exists():
         morceaux.append(f'<div class="illus"><img src="{image.as_uri()}" alt=""></div>')
     morceaux.append(f'<span class="numero">{e(ch["numero"])}</span><h1>{e(ch["titre"])}</h1>')
 
     corps, consigne, choix, fin, appel = [], None, [], False, False
+    cibles = []
     for p in ch["paragraphes"]:
         if p.startswith("- "):
             for ligne in p.split("\n"):
-                texte, _ = ligne[2:].rsplit(" -> ", 1)
+                texte, cible = ligne[2:].rsplit(" -> ", 1)
                 choix.append(texte)
+                cibles.append(int(cible))
         elif p == "FIN":
             fin = True
         elif p.startswith("**") and p.endswith("**"):
@@ -156,7 +164,9 @@ def chapitre(ch, pages):
     morceaux += corps
 
     # Le bouton du prologue n'existe que sur le site : dans le livret, on tourne simplement la page
-    if ch["nom"] == "Prologue":
+    # Dans un livre, inutile d'écrire « Poursuis au chapitre suivant » : on tourne simplement la page.
+    # Le renvoi reste quand il saute des chapitres (6 → 8, par exemple)
+    if not consigne and len(choix) == 1 and cibles[0] == cle + 1:
         choix = []
     suite = [] if appel else [SEPARATEUR]
     if consigne:
@@ -225,19 +235,64 @@ def reperer_pages(pdf):
     return pages, total
 
 
+# Une page de fin de chapitre qui ne porte que quelques lignes paraît coupée bizarrement : ces chapitres
+# sont resserrés (image moins haute, séparateur plus proche) pour tenir sur une page de moins
+SEUIL_QUEUE = 8
+SERRES = set()        # premier resserrement
+SERRES2 = set()       # second, si le premier ne suffit pas
+
+
+def queues_courtes(pdf, pages):
+    """Chapitres sur plusieurs pages dont la dernière page ne porte que quelques lignes."""
+    debuts = sorted((page, cle) for cle, page in pages.items())
+    courtes = set()
+    for (debut, cle), (suivant, _) in zip(debuts, debuts[1:]):
+        fin = suivant - 1
+        if fin <= debut:
+            continue
+        texte = subprocess.run(["pdftotext", "-f", str(fin), "-l", str(fin), str(pdf), "-"],
+                               capture_output=True, text=True, check=True).stdout
+        lignes = [l for l in texte.splitlines() if l.strip() and not l.strip().isdigit()]
+        if len(lignes) <= SEUIL_QUEUE:
+            courtes.add(cle)
+    return courtes
+
+
 def composer(dossier):
     source = Path(dossier) / "livret.html"
     pdf = Path(dossier) / "livret.pdf"
     pages = {}
-    for _ in range(4):
-        source.write_text(document(pages), encoding="utf-8")
-        imprimer(source, pdf)
-        nouvelles, total = reperer_pages(pdf)
-        if nouvelles == pages:
+    for _ in range(6):
+        for _ in range(4):
+            source.write_text(document(pages), encoding="utf-8")
+            imprimer(source, pdf)
+            nouvelles, total = reperer_pages(pdf)
+            if nouvelles == pages:
+                break
+            pages = nouvelles
+        else:
+            raise SystemExit("Les numéros de page ne se stabilisent pas.")
+        courtes = queues_courtes(pdf, pages)
+        nouvelles = (courtes - SERRES) | {c for c in courtes & SERRES if c not in SERRES2}
+        if not nouvelles:
             break
-        pages = nouvelles
-    else:
-        raise SystemExit("Les numéros de page ne se stabilisent pas.")
+        SERRES2.update(courtes & SERRES)
+        SERRES.update(courtes)
+        pages = {}
+    # Là où même le second resserrement ne suffit pas, la fin du chapitre est longue par nature
+    # (dernier paragraphe et choix) : on rend à l'image sa taille normale plutôt que de la réduire pour rien
+    inutiles = queues_courtes(pdf, pages) & SERRES2
+    if inutiles:
+        SERRES.difference_update(inutiles)
+        SERRES2.difference_update(inutiles)
+        pages = {}
+        for _ in range(5):
+            source.write_text(document(pages), encoding="utf-8")
+            imprimer(source, pdf)
+            nouvelles, total = reperer_pages(pdf)
+            if nouvelles == pages:
+                break
+            pages = nouvelles
     # Pages blanches avant le dos pour arriver à un multiple de 4 (cahier plié)
     blanches = (-total) % 4
     if blanches:
@@ -303,6 +358,9 @@ def construire():
         imposer(lecture, traits, IMPRESSION / f"{NOM}_Livret_A4_bord_long.pdf", bord_long=True)
     total = len(PdfReader(str(lecture)).pages)
     print(f"{lecture} : {total} pages, soit {total // 4} feuilles A4 recto verso")
+    print("Chapitres resserrés :", ", ".join(("P" if c == 0 else str(c)) + ("+" if c in SERRES2 else "") for c in sorted(SERRES)) or "aucun")
+    restantes = queues_courtes(lecture, pages)
+    print("Fins de chapitre encore courtes :", ", ".join("P" if c == 0 else str(c) for c in sorted(restantes)) or "aucune")
     print("Pages des chapitres :", ", ".join(f"{'P' if k == 0 else k}→{v}" for k, v in sorted(pages.items())))
 
 
