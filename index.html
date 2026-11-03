@@ -27,6 +27,8 @@
 
 
 
+
+
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <title>Violette et Patate</title>
@@ -459,6 +461,14 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   margin: 0.3em 0 0.2em;
 }
 .contexte-texte { max-width: 38em; margin: 0 auto; }
+.portraits { display: flex; justify-content: center; align-items: flex-end; gap: 2em; margin-bottom: 0.2em; }
+.portraits figure { margin: 0; }
+.portraits img { display: block; height: 10em; width: auto; margin: 0 auto; }
+.portraits figcaption { font-family: "Gochi Hand", cursive; font-size: 1.15em; color: var(--orange); }
+@media (max-width: 600px) {
+  .portraits { gap: 0.5em; }
+  .portraits img { height: 5.5em; }
+}
 .citation {
   max-width: 30em;
   margin: 2em auto;
@@ -494,7 +504,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
-  gap: 2.4em;
+  gap: 1.8em;
 }
 .miniatures figure { margin: 0; }
 .miniatures figcaption {
@@ -506,7 +516,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .miniature { display: block; padding: 0; border: none; background: none; cursor: zoom-in; }
 .miniature img {
   display: block;
-  height: 16em;
+  height: 12.5em;  /* quatre fiches sur une ligne */
   width: auto;
   border-radius: 4px;
   box-shadow: 0 3px 12px rgba(43, 47, 58, 0.22);
@@ -515,6 +525,7 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 .miniatures figure:nth-child(1) img { transform: rotate(-3deg); }
 .miniatures figure:nth-child(2) img { transform: rotate(1deg); }
 .miniatures figure:nth-child(3) img { transform: rotate(3deg); }
+.miniatures figure:nth-child(4) img { transform: rotate(-1.5deg); }
 .miniatures .miniature:hover img { transform: rotate(0) scale(1.05); box-shadow: 0 0 0 3px var(--orange), 0 8px 20px rgba(43, 47, 58, 0.28); }
 .contexte .credits { display: block; margin-top: 1.6em; font-size: 0.92em; color: var(--gris); }
 .contexte .secondaires { display: flex; justify-content: center; margin-top: 1.4em; }
@@ -620,13 +631,13 @@ document.addEventListener('keydown', function (evenement) {
 </script><tw-passagedata pid="1" name="Bouton couverture" tags="header" position="150,0" size="100,100">(unless: (a: &quot;Page de garde&quot;, &quot;L&#x27;arbre de l&#x27;histoire&quot;, &quot;Comment est née cette histoire&quot;) contains (passage:)&#x27;s name)[&lt;div class=&quot;retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/div&gt;]</tw-passagedata><tw-passagedata pid="2" name="Page de garde" tags="" position="300,0" size="100,100">&lt;div class=&quot;garde&quot;&gt;&lt;div class=&quot;garde-entete&quot;&gt;&lt;span class=&quot;surtitre&quot;&gt;Une histoire dont le lecteur est le héros&lt;/span&gt;&lt;div class=&quot;grand-titre&quot;&gt;Violette et Patate&lt;/div&gt;&lt;span class=&quot;nom-auteur&quot;&gt;Eva et Brune&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;garde-corps&quot;&gt;&lt;div class=&quot;garde-image&quot;&gt;&lt;img src=&quot;images/couverture.jpg&quot; alt=&quot;Violette part vers la forêt, sous une étoile filante, pendant que le corbeau l&#x27;attend&quot;&gt;&lt;/div&gt;&lt;div class=&quot;garde-texte&quot;&gt;&lt;div class=&quot;synopsis&quot;&gt;Violette a dix ans, deux tresses et des lunettes qui arrêtent le temps. Son passe-temps préféré ? Faire des bêtises, évidemment !
 
 Mais quand elle rencontre un corbeau grincheux et Patate, un bébé venu de la Lune, l&#x27;aventure prend un drôle de tournant… Entre diamants volés, tartes brûlées et sucette extraordinaire, une chose est sûre : le calme n&#x27;est pas près de revenir !&lt;/div&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;commencer&quot;&gt;[[Commencer l&#x27;histoire-&gt;Prologue]]&lt;/div&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Comment est née cette histoire-&gt;Comment est née cette histoire]] [[L&#x27;arbre de l&#x27;histoire-&gt;L&#x27;arbre de l&#x27;histoire]]&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="3" name="Comment est née cette histoire" tags="" position="450,0" size="100,100">&lt;div class=&quot;contexte&quot;&gt;&lt;span class=&quot;lien-retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/span&gt;
-&lt;h1&gt;Comment est née cette histoire&lt;/h1&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;contexte-texte&quot;&gt;En octobre 2026, le L.A.B a animé l’atelier « La quête du curry, une histoire dont tu es le héros » dans les bibliothèques Méjanes d’Aix-en-Provence. Les enfants ont été accompagnés dans la création d’un récit complet, depuis l’invention des personnages jusqu’à la construction d’une intrigue reliant les différentes étapes de leur aventure.
+&lt;div class=&quot;portraits&quot;&gt;&lt;figure&gt;&lt;img src=&quot;images/portraits/violette.png&quot; alt=&quot;Violette, dessiné par Eva et Brune&quot;&gt;&lt;figcaption&gt;Violette&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;img src=&quot;images/portraits/patate.png&quot; alt=&quot;Patate, dessiné par Eva et Brune&quot;&gt;&lt;figcaption&gt;Patate&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;img src=&quot;images/portraits/corbeau.png&quot; alt=&quot;Le corbeau, dessiné par Eva et Brune&quot;&gt;&lt;figcaption&gt;Le corbeau&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;img src=&quot;images/portraits/mirette.png&quot; alt=&quot;Mirette, dessiné par Eva et Brune&quot;&gt;&lt;figcaption&gt;Mirette&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;&lt;h1&gt;Comment est née cette histoire&lt;/h1&gt;&lt;div class=&quot;separateur&quot;&gt;&lt;span class=&quot;lunettes&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;div class=&quot;contexte-texte&quot;&gt;En octobre 2026, le L.A.B a animé l’atelier « La quête du curry, une histoire dont tu es le héros » dans les bibliothèques Méjanes d’Aix-en-Provence. Les enfants ont été accompagnés dans la création d’un récit complet, depuis l’invention des personnages jusqu’à la construction d’une intrigue reliant les différentes étapes de leur aventure.
 
 Nous leur avons proposé d’introduire une part de hasard dans leur récit. Le résultat d’un lancer de dé pouvait modifier le déroulement de certains passages et conduire le lecteur vers un chapitre ou un autre.
 
 Les enfants ont ainsi exploré, sans écran, des notions liées à la pensée computationnelle, une manière de décomposer un problème et d’organiser les étapes pour le résoudre. Ils ont formulé des règles de type « si… alors… », créé des embranchements et réfléchi à la façon dont les chemins se rejoignent pour former une histoire cohérente.
 
-Eva et Brune ont choisi d’inventer une histoire drôle. Un défi pour une histoire à embranchements, puisque les gags doivent rester drôles et les chutes tomber juste, quel que soit le chemin emprunté.&lt;div class=&quot;citation&quot;&gt;« Le corbeau a un pouvoir et quand Violette arrête le temps, il bouge encore pour protéger ses diamants. »&lt;span class=&quot;source&quot;&gt;Eva et Brune, sur leur fiche récit&lt;/span&gt;&lt;/div&gt;L’atelier ne durait que deux heures, mais nous tenions à offrir à chaque enfant un livre complet. Le L.A.B a donc prolongé et mis en forme leur récit à l’aide d’outils numériques, et l’intelligence artificielle a notamment permis d’aboutir à une histoire achevée et agréable à lire. À son origine, il y a avant tout les idées et les personnages d’Eva et de Brune.&lt;/div&gt;&lt;div class=&quot;table-fiches&quot;&gt;&lt;span class=&quot;titre-table&quot;&gt;Les fiches de l’atelier&lt;/span&gt;&lt;div class=&quot;miniatures&quot;&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche récit, par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;la fiche récit, par Eva et Brune&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Le récit&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche personnage de Patate&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_patate.jpg&quot; alt=&quot;la fiche personnage de Patate&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche personnage&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;img src=&quot;images/fiches/fiche_situation_4.jpg&quot; alt=&quot;la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche à embranchement&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;credits&quot;&gt;Une histoire d’Eva et de Brune.
+Eva et Brune ont choisi d’inventer une histoire drôle. Un défi pour une histoire à embranchements, puisque les gags doivent rester drôles et les chutes tomber juste, quel que soit le chemin emprunté.&lt;div class=&quot;citation&quot;&gt;« Le corbeau a un pouvoir et quand Violette arrête le temps, il bouge encore pour protéger ses diamants. »&lt;span class=&quot;source&quot;&gt;Eva et Brune, sur leur fiche récit&lt;/span&gt;&lt;/div&gt;L’atelier ne durait que deux heures, mais nous tenions à offrir à chaque enfant un livre complet. Le L.A.B a donc prolongé et mis en forme leur récit à l’aide d’outils numériques, et l’intelligence artificielle a notamment permis d’aboutir à une histoire achevée et agréable à lire. À son origine, il y a avant tout les idées et les personnages d’Eva et de Brune.&lt;/div&gt;&lt;div class=&quot;table-fiches&quot;&gt;&lt;span class=&quot;titre-table&quot;&gt;Les fiches de l’atelier&lt;/span&gt;&lt;div class=&quot;miniatures&quot;&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche récit, par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_recit.jpg&quot; alt=&quot;la fiche récit, par Eva et Brune&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Le récit&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche personnage de Patate&quot;&gt;&lt;img src=&quot;images/fiches/fiche_personnage_patate.jpg&quot; alt=&quot;la fiche personnage de Patate&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche personnage&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;img src=&quot;images/fiches/fiche_situation_4.jpg&quot; alt=&quot;la fiche situation n° 4, avec ses choix au dé&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;Une fiche à embranchement&lt;/figcaption&gt;&lt;/figure&gt;&lt;figure&gt;&lt;button class=&quot;miniature&quot; type=&quot;button&quot; aria-label=&quot;Agrandir la fiche illustration, avec les personnages dessinés par Eva et Brune&quot;&gt;&lt;img src=&quot;images/fiches/fiche_illustration.jpg&quot; alt=&quot;la fiche illustration, avec les personnages dessinés par Eva et Brune&quot;&gt;&lt;/button&gt;&lt;figcaption&gt;La fiche illustration&lt;/figcaption&gt;&lt;/figure&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class=&quot;credits&quot;&gt;Une histoire d’Eva et de Brune.
 Réalisation du livre : Laboratoire d’Aix-périmentation et de Bidouille.&lt;/span&gt;&lt;div class=&quot;secondaires&quot;&gt;[[Commencer le livre-&gt;Prologue]]&lt;/div&gt;
 &lt;/div&gt;</tw-passagedata><tw-passagedata pid="4" name="L&#x27;arbre de l&#x27;histoire" tags="" position="600,0" size="100,100">&lt;div class=&quot;arbre&quot;&gt;&lt;span class=&quot;lien-retour&quot;&gt;[[Couverture-&gt;Page de garde]]&lt;/span&gt;&lt;div class=&quot;arbre-tete&quot;&gt;&lt;h1&gt;Violette et Patate&lt;/h1&gt;&lt;span class=&quot;arbre-sous-titre&quot;&gt;Tous les chemins de l&#x27;histoire imaginée par Eva et Brune&lt;/span&gt;&lt;/div&gt;&lt;img src=&quot;images/arbre.svg&quot; alt=&quot;L&#x27;arbre de toutes les branches de l&#x27;histoire&quot;&gt;&lt;/div&gt;</tw-passagedata><tw-passagedata pid="5" name="Prologue" tags="" position="750,0" size="100,100">&lt;div class=&quot;page&quot;&gt;&lt;div class=&quot;texte&quot;&gt;&lt;h1 class=&quot;chapitre&quot;&gt;&lt;span class=&quot;numero&quot;&gt;Prologue&lt;/span&gt;&lt;span class=&quot;titre&quot;&gt;Moi, Violette, apprentie farceuse&lt;/span&gt;&lt;/h1&gt;Bonjour, moi c&#x27;est Violette.
 
