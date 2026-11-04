@@ -56,8 +56,11 @@ def languette(x, y, cote):
 
 
 def patron():
-    ox, oy = LANGUETTE, LANGUETTE
-    largeur, hauteur = 3 * FACE + 2 * LANGUETTE, 4 * FACE + 2 * LANGUETTE
+    # Une marge de 1 mm tout autour : sans elle, les traits extérieurs des languettes, posés sur le bord du
+    # dessin, sont coupés à l'impression
+    marge = 1
+    ox, oy = LANGUETTE + marge, LANGUETTE + marge
+    largeur, hauteur = 3 * FACE + 2 * LANGUETTE + 2 * marge, 4 * FACE + 2 * LANGUETTE + 2 * marge
     dessin = []
     for nom, cote in LANGUETTES:
         (c, li), _ = FACES[nom]
