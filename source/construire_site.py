@@ -403,14 +403,15 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   50% { transform: rotate(12deg) translateY(-6px); }
 }
 .de-virtuel i { display: none; }
-/* « ? » au repos, puis le nombre tiré, que le script inscrit dans data-face ; posé sur le devant de la couche */
+/* « ? » au repos, puis le nombre tiré, que le script inscrit dans data-face ; centré sur le devant de la
+   couche (entre le bord gauche et l'ouverture de la jambe, sous les attaches), pas sur tout le dessin */
 .de-virtuel::after {
   content: attr(data-face);
   position: absolute;
-  left: 8%;
-  right: 22%;
-  top: 34%;
-  bottom: 12%;
+  left: 3%;
+  right: 37%;
+  top: 44%;
+  bottom: 20%;
   display: flex;
   align-items: center;
   justify-content: center;
