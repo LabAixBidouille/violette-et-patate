@@ -376,59 +376,52 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   position: relative;
   display: flex;
 }
+/* Le dé du site est la couche de Patate, dessinée par Manon (talkie-walkie dans la poche) : elle sautille
+   pour qu'on la repère, gigote au clic puis affiche le nombre tiré en grand au milieu */
 .de-virtuel {
-  width: 4.6em;
-  height: 4.6em;
-  padding: 0.5em;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  background: #ffffff;
-  border: 3px solid var(--violet);
-  border-radius: 0.8em;
-  box-shadow: 0 4px 0 var(--orange);
+  position: relative;
+  width: 6.8em;
+  height: 6.8em;
+  padding: 0;
+  font-size: inherit;
+  background: url("images/couche-patate.png") no-repeat center / contain;
+  border: none;
   cursor: pointer;
-  transform: rotate(-5deg);
+  filter: drop-shadow(0 4px 0 rgba(255, 106, 0, 0.35));
+  transform: rotate(-4deg);
   transition: transform 0.15s ease;
 }
-.de-virtuel:hover { transform: rotate(5deg); }
-.de-virtuel.roule { animation: roule 0.3s linear infinite; }
-@keyframes roule {
-  0% { transform: rotate(0deg) translateY(0); }
-  50% { transform: rotate(180deg) translateY(-3px); }
-  100% { transform: rotate(360deg) translateY(0); }
+.de-virtuel[data-face="0"] { animation: sautille 1.6s ease-in-out infinite; }
+@keyframes sautille {
+  0%, 60%, 100% { transform: rotate(-4deg) translateY(0); }
+  30% { transform: rotate(3deg) translateY(-5px); }
 }
-.de-virtuel i {
-  width: 0.8em;
-  height: 0.8em;
-  border-radius: 50%;
-  background: var(--orange);
-  place-self: center;
-  visibility: hidden;
+.de-virtuel:hover { transform: rotate(5deg) scale(1.05); }
+.de-virtuel.roule { animation: gigote 0.25s ease-in-out infinite; }
+@keyframes gigote {
+  0%, 100% { transform: rotate(-12deg) translateY(0); }
+  50% { transform: rotate(12deg) translateY(-6px); }
 }
-/* Avant le premier lancer : un point d'interrogation orange, centré comme les points */
-.de-virtuel { position: relative; }
-.de-virtuel[data-face="0"]::after {
-  content: "?";
+.de-virtuel i { display: none; }
+/* « ? » au repos, puis le nombre tiré, que le script inscrit dans data-face ; posé sur le devant de la couche */
+.de-virtuel::after {
+  content: attr(data-face);
   position: absolute;
-  inset: 0;
+  left: 8%;
+  right: 22%;
+  top: 34%;
+  bottom: 12%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 0.15em;
+  padding-top: 0.12em;
   font-family: "Luckiest Guy", "Impact", sans-serif;
-  font-size: 2.6em;
+  font-size: 2.9em;
   line-height: 1;
   color: var(--orange);
+  text-shadow: 2px 2px 0 var(--violet), 0 0 6px #ffffff;
 }
-.de-virtuel[data-face="1"] i:nth-child(5),
-.de-virtuel[data-face="2"] i:is(:nth-child(1), :nth-child(9)),
-.de-virtuel[data-face="3"] i:is(:nth-child(1), :nth-child(5), :nth-child(9)),
-.de-virtuel[data-face="4"] i:is(:nth-child(1), :nth-child(3), :nth-child(7), :nth-child(9)),
-.de-virtuel[data-face="5"] i:is(:nth-child(1), :nth-child(3), :nth-child(5), :nth-child(7), :nth-child(9)),
-.de-virtuel[data-face="6"] i:is(:nth-child(1), :nth-child(3), :nth-child(4), :nth-child(6), :nth-child(7), :nth-child(9)) {
-  visibility: visible;
-}
+.de-virtuel[data-face="0"]::after { content: "?"; }
 .resultat {
   position: absolute;
   top: calc(100% + 0.6em);
@@ -443,9 +436,8 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
 @media (max-width: 600px) {
   .de { gap: 0.6em; }
   .fleche-de { width: 2.2em; }
-  .de-virtuel { width: 3.6em; height: 3.6em; padding: 0.4em; }
-  .de-virtuel i { width: 0.6em; height: 0.6em; }
-  .de-virtuel[data-face="0"]::after { font-size: 2em; }
+  .de-virtuel { width: 4.6em; height: 4.6em; }
+  .de-virtuel::after { font-size: 2em; }
 }
 
 /* Fins */
@@ -659,7 +651,7 @@ document.addEventListener('click', function (evenement) {
       clearInterval(minuterie);
       de.setAttribute('data-face', face);
       de.classList.remove('roule');
-      resultat.textContent = 'Le dé affiche ' + face + '.';
+      resultat.textContent = 'La couche affiche ' + face + '.';
     }
   }, 75);
 });
@@ -720,7 +712,7 @@ def passage_chapitre(ch):
         lancer = DE_VIRTUEL if tirage else ""
         if tirage:
             # Sur le site, on lance le dé en cliquant dessus : la consigne le dit, une flèche le montre
-            consigne = consigne.replace("Lance le dé", "Clique sur le dé", 1)
+            consigne = consigne.replace("Lance le dé", "Clique sur la couche de Patate", 1)
         suite.append(f'<div class="de"><div class="de-texte"><span class="consigne">{consigne}</span>'
                      f'<div class="choix">{"".join(choix)}</div></div>{lancer}</div>')
     elif choix:
