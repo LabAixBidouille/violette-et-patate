@@ -56,7 +56,11 @@ p {{ margin: 0 0 0.6em; orphans: 2; widows: 2; }}
 .marque {{ font-size: 1pt; color: #ffffff; }}
 
 /* Couverture */
-.couverture {{ text-align: center; }}
+/* Page de garde : une page sans marge, contenu centré dans toute la hauteur (même blanc en haut et en bas) */
+@page couverture {{ margin: 0; @bottom-center {{ content: none; }} }}
+.couverture {{ page: couverture; height: 184mm; margin-top: 1mm; overflow: hidden; padding: 2.5mm 12mm 0; text-align: center;
+  display: flex; flex-direction: column; justify-content: center;
+  /* les 2.5 mm en haut compensent la place réservée aux jambages de la dernière ligne : le blanc est le même en haut et en bas */ }}
 .couverture .surtitre {{ font-family: "Gochi Hand"; font-size: 12pt; color: #5b6272; }}
 .couverture .titre-livre {{ font-family: "Luckiest Guy"; font-size: 30pt; line-height: 1; color: #7b4fb0;
   text-shadow: 2.5px 2.5px 0 #ff6a00; margin: 2mm 0 1mm; }}
