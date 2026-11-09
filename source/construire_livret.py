@@ -193,12 +193,13 @@ def chapitre(ch, pages):
 
 
 def document(pages, blanches=0):
+    # Couverture pleine page dans le style du livre, le résumé seul sur la page suivante
     couverture = (
-        '<section class="couverture sans-numero">'
-        '<div class="surtitre">Une histoire dont le lecteur est le héros</div>'
-        f'<div class="titre-livre">{e(TITRE)}</div><div class="autrices">{e(AUTRICES)}</div>'
-        f'<img src="{(RACINE / "images/couverture.jpg").as_uri()}" alt="">'
-        '<div class="resume">' + "".join(f"<p>{e(p)}</p>" for p in SYNOPSIS.split("\n\n")) + "</div></section>"
+        '<style>.cv { page: couverture; position: relative; height: 185.5mm; overflow: hidden; }.cv .cv-entete { position: absolute; left: 0; right: 0; text-align: center; padding: 0 8mm; z-index: 2; }.cv .cv-image { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; }.cv .cv-image img { display: block; height: 100%; width: auto; position: absolute; top: 0; margin: 0; border: 0; border-radius: 0; }.cv-resume { display: flex; flex-direction: column; justify-content: center; height: 156mm; text-align: center; }.cv .cv-entete { top: 16mm; } .cv .surtitre { font-family: "Gochi Hand"; font-size: 13pt; color: #5b6272; }.cv .titre { font-family: "Luckiest Guy"; font-size: 40pt; line-height: 0.95; color: #7b4fb0; margin: 2mm 0; text-shadow: 1.2mm 1.2mm 0 #ffd23f; }.cv .auteur { font-family: "Gochi Hand"; font-size: 21pt; color: #ff6a00; }.cv .cv-image { height: 118mm; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 100%); } .cv .cv-image img { right: -6mm; }.cv-resume p { font-size: 11.5pt; line-height: 1.5; }</style>'
+        '<section class="cv sans-numero"><div class="cv-entete"><div class="surtitre">Une histoire dont le lecteur est le héros</div><div class="titre">' + e(TITRE) + '</div><div class="auteur">' + e(AUTRICES) + '</div></div>'
+        f'<div class="cv-image"><img src="{(RACINE / "images/couverture.jpg").as_uri()}" alt=""></div>'
+        '</section><section class="page-seule sans-numero"><div class="cv-resume">'
+        + "".join(f"<p>{e(p)}</p>" for p in SYNOPSIS.split("\n\n")) + '' + "</div></section>"
     )
     fiches = RACINE / "images" / "fiches"
     # Texte de Manon, commun aux livres de l'atelier ; seule la phrase finale est en gras
