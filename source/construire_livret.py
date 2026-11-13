@@ -75,10 +75,13 @@ h1 {{ font-family: "Luckiest Guy"; font-weight: 400; font-size: 17pt; line-heigh
   text-shadow: 1.5px 1.5px 0 #ff6a00; margin: 0 0 4mm; }}
 .illus img {{ display: block; width: 100%; max-height: 64mm; object-fit: contain; margin: 0 auto 4mm; }}
 
-.serre2 .illus img {{ max-height: 30mm; }}
 .serre .illus img {{ max-height: 40mm; }}
 .serre .separateur {{ margin: 2mm 0 2mm; }}
 .serre .elan {{ margin-top: 1.5mm; }}
+.serre2 .illus img {{ max-height: 24mm; }}
+/* Dernier cran : interligne un peu plus serré, le corps reste à 11 pt minimum */
+.serre2 {{ line-height: 1.28; }}
+.serre2 p {{ margin-bottom: 0.45em; }}
 
 /* Séparateur, choix, fins */
 .separateur {{ text-align: center; margin: 4mm 0 3mm; break-after: avoid; }}
@@ -227,7 +230,7 @@ def document(pages, blanches=0):
            "<p>Réalisation du livre : Laboratoire d’Aix-périmentation et de Bidouille.</p>"
            "</div></section>")
     return (f'<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>{CSS}</style></head>'
-            f"<body>{couverture}{contexte}{chapitres}{arbre}{vides}{dos}</body></html>")
+            f"<body>{couverture}{chapitres}{arbre}{contexte}{vides}{dos}</body></html>")
 
 
 def imprimer(source_html, pdf):
