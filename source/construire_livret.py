@@ -51,7 +51,17 @@ CSS = f"""
 html {{ font-family: "Nunito", sans-serif; font-size: 11pt; line-height: 1.4; color: #2b2f3a; }}
 body {{ margin: 0; }}
 p {{ margin: 0 0 0.6em; orphans: 2; widows: 2; }}
+/* Quatrième de couverture : le QR code vers le site du livre */
+.qr {{ text-align: center; margin: 0 0 9mm; }}
+.qr img {{ display: block; width: 24mm; height: 24mm; margin: 0 auto 2mm; }}
+.qr p {{ margin: 0; font-size: 9.5pt; }}
+.qr .adresse {{ font-size: 7.5pt; opacity: 0.7; }}
 .page-seule {{ break-before: page; }}
+/* Illustration de chapitre en pleine page, sans texte : la vignette sur fond blanc, tournée en paysage et
+   agrandie autant que la page le permet (ses bords fondus se perdent dans le blanc de la page) */
+@page plein {{ margin: 0; @bottom-center {{ content: none; }} }}
+.pleine-image {{ page: plein; break-before: page; position: relative; height: 185.5mm; overflow: hidden; }}
+.pleine-image img {{ position: absolute; inset: 5mm; width: calc(100% - 10mm); height: calc(100% - 10mm); object-fit: contain; }}
 .sans-numero {{ page: sans-numero; }}
 .marque {{ font-size: 1pt; color: #ffffff; }}
 
@@ -75,13 +85,15 @@ h1 {{ font-family: "Luckiest Guy"; font-weight: 400; font-size: 17pt; line-heigh
   text-shadow: 1.5px 1.5px 0 #ff6a00; margin: 0 0 4mm; }}
 .illus img {{ display: block; width: 100%; max-height: 64mm; object-fit: contain; margin: 0 auto 4mm; }}
 
-.serre .illus img {{ max-height: 40mm; }}
+/* Chapitres resserrés : seul le texte se resserre (interligne, espaces entre paragraphes), jamais sous 11 pt ;
+   les images gardent toutes la même taille */
+.serre {{ line-height: 1.34; }}
 .serre .separateur {{ margin: 2mm 0 2mm; }}
 .serre .elan {{ margin-top: 1.5mm; }}
-.serre2 .illus img {{ max-height: 24mm; }}
-/* Dernier cran : interligne un peu plus serré, le corps reste à 11 pt minimum */
-.serre2 {{ line-height: 1.28; }}
-.serre2 p {{ margin-bottom: 0.45em; }}
+/* Second cran : si resserrer ne suffit pas, le chapitre est aéré (plus d'interligne et d'espace entre
+   paragraphes) pour que davantage de lignes passent sur sa dernière page, qui se remplit */
+.serre2 {{ line-height: 1.52; }}
+.serre2 p {{ margin-bottom: 0.95em; }}
 
 /* Séparateur, choix, fins */
 .separateur {{ text-align: center; margin: 4mm 0 3mm; break-after: avoid; }}
@@ -149,9 +161,14 @@ def avec_page(texte, pages):
 def chapitre(ch, pages):
     cle = 0 if ch["nom"] == "Prologue" else int(ch["nom"].split()[-1])
     classe = "page-seule" + (" serre" if cle in SERRES else "") + (" serre2" if cle in SERRES2 else "")
-    morceaux = [f'<section class="{classe}"><span class="marque">@@CH{cle}@@</span>']
     image = RACINE / "images" / "chapitres" / f"{illustration(ch['nom'])}.jpg"
-    if image.exists():
+    if cle in ACTIVES:
+        # L'illustration passe en pleine page avant le chapitre (c'est la page des renvois)
+        morceaux = [f'<section class="pleine-image"><span class="marque">@@CH{cle}@@</span><img src="{image_pleine(ch).as_uri()}" alt=""></section>',
+                    f'<section class="{classe}">']
+    else:
+        morceaux = [f'<section class="{classe}"><span class="marque">@@CH{cle}@@</span>']
+    if image.exists() and cle not in ACTIVES:
         morceaux.append(f'<div class="illus"><img src="{image.as_uri()}" alt=""></div>')
     morceaux.append(f'<span class="numero">{e(ch["numero"])}</span><h1>{e(ch["titre"])}</h1>')
 
@@ -196,6 +213,8 @@ def chapitre(ch, pages):
 
 
 def document(pages, blanches=0):
+    global BLANCHES
+    BLANCHES = blanches
     # Couverture pleine page dans le style du livre, le résumé seul sur la page suivante
     couverture = (
         '<style>.cv { page: couverture; position: relative; height: 185.5mm; overflow: hidden; }.cv .cv-entete { position: absolute; left: 0; right: 0; text-align: center; padding: 0 8mm; z-index: 2; }.cv .cv-image { position: absolute; left: 0; right: 0; bottom: 0; overflow: hidden; }.cv .cv-image img { display: block; height: 100%; width: auto; position: absolute; top: 0; margin: 0; border: 0; border-radius: 0; }.cv-resume { display: flex; flex-direction: column; justify-content: center; height: 156mm; text-align: center; }.cv .cv-entete { top: 16mm; } .cv .surtitre { font-family: "Gochi Hand"; font-size: 13pt; color: #5b6272; }.cv .titre { font-family: "Luckiest Guy"; font-size: 40pt; line-height: 0.95; color: #7b4fb0; margin: 2mm 0; text-shadow: 1.2mm 1.2mm 0 #ffd23f; }.cv .auteur { font-family: "Gochi Hand"; font-size: 21pt; color: #ff6a00; }.cv .cv-image { height: 118mm; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18%, #000 100%); } .cv .cv-image img { right: -6mm; }.cv-resume p { font-size: 11.5pt; line-height: 1.5; }</style>'
@@ -212,18 +231,13 @@ def document(pages, blanches=0):
         + "".join(f"<p>{italique(p).replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>')}</p>" for p in paragraphes)
         + '<p class="credits">Une histoire librement inspirée du récit d’Eva et de Brune.<br>Réalisation du livre : '
           "Laboratoire d’Aix-périmentation et de Bidouille.</p></section>"
-        '<section class="page-seule contexte"><h2>Les fiches de l’atelier</h2><div class="fiches">'
-        f'<img src="{(fiches / "fiche_recit.jpg").as_uri()}" alt="">'
-        f'<img src="{(fiches / "fiche_personnage_patate.jpg").as_uri()}" alt="">'
-        f'<img src="{(fiches / "fiche_illustration.jpg").as_uri()}" alt="">'
-        f'<img src="{(fiches / "fiche_situation_4.jpg").as_uri()}" alt="">'
-        "</div></section>"
     )
     chapitres = "".join(chapitre(ch, pages) for ch in lire_chapitres())
     arbre = ('<section class="page-seule contexte arbre sans-numero"><h2>L’arbre de l’histoire</h2>'
              f'<img src="{(RACINE / "images/arbre.svg").as_uri()}" alt=""></section>')
     vides = '<section class="page-seule sans-numero">&nbsp;</section>' * blanches
     dos = ('<section class="page-seule sans-numero"><div class="dos">'
+           f'<div class="qr"><img src="{(RACINE / "images" / "qr.svg").as_uri()}" alt=""><p>Lis cette histoire en ligne</p><p class="adresse">labaixbidouille.github.io/violette-et-patate</p></div>'
            f"<p><b>{e(TITRE)}</b>, une histoire librement inspirée du récit imaginé par Eva et Brune pendant l’atelier "
            "« La quête du curry, une histoire dont tu es le héros », à la bibliothèque des Deux Ormes "
            "(bibliothèques Méjanes, Aix-en-Provence), en octobre 2026.</p>"
@@ -272,6 +286,35 @@ def queues_courtes(pdf, pages):
         if len(lignes) <= SEUIL_QUEUE:
             courtes.add(cle)
     return courtes
+
+
+# Illustrations de chapitre en pleine page (tournées en paysage) : on en ajoute, dans l'ordre de PLEINES,
+# juste assez pour que le livret tombe sur un multiple de 4 sans page blanche. L'illustration n'est alors
+# plus répétée dans le texte du chapitre.
+PLEINES = [10, 5, 15, 2, 18, 7, 13, 3, 17, 12]
+ACTIVES = []
+BLANCHES = 0
+
+
+def image_pleine(ch):
+    return RACINE / "images" / "pleines" / f"{illustration(ch['nom'])}.jpg"
+
+
+def composer_avec_pleines(dossier):
+    essais = []
+    for n in range(len(PLEINES) + 1):
+        ACTIVES[:] = PLEINES[:n]
+        SERRES.clear()
+        SERRES2.clear()
+        pdf, pages = composer(dossier)
+        essais.append((BLANCHES, n))
+        if BLANCHES == 0:
+            return pdf, pages
+    _, n = min(essais)
+    ACTIVES[:] = PLEINES[:n]
+    SERRES.clear()
+    SERRES2.clear()
+    return composer(dossier)
 
 
 def composer(dossier):
@@ -366,7 +409,8 @@ def imposer(lecture, traits, sortie, bord_long):
 def construire():
     IMPRESSION.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory() as dossier:
-        pdf, pages = composer(dossier)
+        pdf, pages = composer_avec_pleines(dossier)
+        print("Illustrations en pleine page :", ", ".join(str(c) for c in ACTIVES) or "aucune")
         lecture = IMPRESSION / f"{NOM}_Livret_lecture.pdf"
         lecture.write_bytes(pdf.read_bytes())
         traits = traits_de_coupe(dossier)
