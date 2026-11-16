@@ -262,14 +262,14 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   margin: 0 auto 1.2em;
   text-align: left;
 }
-.retour tw-link, .retour .enchantment-link,
+.autres-livres, .retour tw-link, .retour .enchantment-link,
 .lien-retour tw-link, .lien-retour .enchantment-link {
   font-size: 0.9em;
   font-weight: 600;
   color: var(--gris);
 }
 .retour tw-link::before, .lien-retour tw-link::before { content: "← "; }
-.retour tw-link:hover, .retour .enchantment-link:hover,
+.autres-livres:hover, .retour tw-link:hover, .retour .enchantment-link:hover,
 .lien-retour tw-link:hover, .lien-retour .enchantment-link:hover { color: var(--violet); }
 .contexte .lien-retour { display: block; margin-bottom: 1em; }
 
@@ -603,6 +603,14 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   .garde-texte { gap: 0.85em; }
   .garde-image img { max-height: 54vh; }
 }
+
+/* Lien discret vers la page qui réunit tous les livres de l'atelier, en bas à droite de la page de garde */
+.garde { position: relative; }
+.autres-livres { position: absolute; right: 0.4em; bottom: 0.6em; z-index: 3; text-decoration: none; }
+.autres-livres::after { content: " →"; }
+@media (max-width: 760px) {
+  .autres-livres { position: static; order: 99; align-self: center; display: block; text-align: center; margin: 1.2em auto 0.4em; }
+}
 """
 
 
@@ -743,7 +751,7 @@ def illustration(nom):
 def passage_garde():
     return (
         # En haut, centrés : surtitre, titre et autrices ; dessous, l'image à gauche et le texte à droite
-        '<div class="garde"><div class="garde-entete">'
+        '<div class="garde"><a class="autres-livres" href="https://labaixbidouille.github.io/la-quete-du-curry/" target="_top">Découvrir les autres livres</a><div class="garde-entete">'
         '<span class="surtitre">Une histoire dont le lecteur est le héros</span>'
         f'<div class="grand-titre">{TITRE}</div>'
         f'<span class="nom-auteur">{AUTRICES}</span></div>'
