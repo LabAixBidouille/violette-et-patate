@@ -262,14 +262,14 @@ tw-story:has(.garde) { padding-top: 1em; padding-bottom: 1em; }
   margin: 0 auto 1.2em;
   text-align: left;
 }
-.retour tw-link, .retour .enchantment-link,
+.autres-livres, .retour tw-link, .retour .enchantment-link,
 .lien-retour tw-link, .lien-retour .enchantment-link {
   font-size: 0.9em;
   font-weight: 600;
   color: var(--gris);
 }
 .retour tw-link::before, .lien-retour tw-link::before { content: "← "; }
-.retour tw-link:hover, .retour .enchantment-link:hover,
+.autres-livres:hover, .retour tw-link:hover, .retour .enchantment-link:hover,
 .lien-retour tw-link:hover, .lien-retour .enchantment-link:hover { color: var(--violet); }
 .contexte .lien-retour { display: block; margin-bottom: 1em; }
 
@@ -604,6 +604,16 @@ tw-link:hover, .enchantment-link:hover { color: var(--violet-fonce); }
   .garde-image img { max-height: 54vh; }
 }
 
+
+/* Lien discret vers la page qui réunit tous les livres de l'atelier, fixé dans le coin en haut à droite de l'écran, sur la page de garde
+   (même police et même couleur que le lien « ← Couverture » des chapitres, en plus petit) */
+.garde { position: relative; }
+.garde .autres-livres { position: fixed; top: 0.9em; right: 1.2em; z-index: 3; font-size: 0.78em; text-decoration: none; letter-spacing: normal; }
+.garde .autres-livres::after { content: " →"; }
+@media (max-width: 760px) {
+  .garde { padding-top: 2.2em !important; }
+  .garde .autres-livres { position: absolute; top: 0.5em; right: 0.4em; }
+}
 """
 
 
@@ -744,7 +754,7 @@ def illustration(nom):
 def passage_garde():
     return (
         # En haut, centrés : surtitre, titre et autrices ; dessous, l'image à gauche et le texte à droite
-        '<div class="garde"><div class="garde-entete">'
+        '<div class="garde"><a class="autres-livres" href="https://labaixbidouille.github.io/la-quete-du-curry/" target="_top">Découvrir les autres livres</a><div class="garde-entete">'
         '<span class="surtitre">Une histoire dont le lecteur est le héros</span>'
         f'<div class="grand-titre">{TITRE}</div>'
         f'<span class="nom-auteur">{AUTRICES}</span></div>'
@@ -753,7 +763,7 @@ def passage_garde():
         f'<div class="garde-texte"><div class="synopsis">{SYNOPSIS}</div>{SEPARATEUR}'
         f'<div class="commencer">{lien("Commencer l'histoire", "Prologue")}</div>'
         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")} '
-        f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")} (link: "Les autres livres")[(goto-url: "https://labaixbidouille.github.io/la-quete-du-curry/")]</div>'
+        f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")}</div>'
         "</div></div></div>"
     )
 
