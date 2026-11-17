@@ -751,6 +751,7 @@ def illustration(nom):
     return "prologue" if nom == "Prologue" else f"chapitre-{int(nom.split()[-1]):02d}"
 
 
+# Le patron du dé du livret, à télécharger si on l'a perdu (outils/)
 def passage_garde():
     return (
         # En haut, centrés : surtitre, titre et autrices ; dessous, l'image à gauche et le texte à droite
@@ -763,7 +764,7 @@ def passage_garde():
         f'<div class="garde-texte"><div class="synopsis">{SYNOPSIS}</div>{SEPARATEUR}'
         f'<div class="commencer">{lien("Commencer l'histoire", "Prologue")}</div>'
         f'<div class="secondaires">{lien("Comment est née cette histoire", "Comment est née cette histoire")} '
-        f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")}</div>'
+        f'{lien("L\'arbre de l\'histoire", "L\'arbre de l\'histoire")} (link-repeat: "Le dé à fabriquer")[(open-url: "outils/Violette_et_Patate_de_a_fabriquer.pdf")]</div>'
         "</div></div></div>"
     )
 
